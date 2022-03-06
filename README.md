@@ -30,7 +30,7 @@ Professeur(s) encadrant(s) :\
 
 L'équipe du MOE :
 | Membre            | Rôle                  |
-|:---|:---|
+|---|---|
 | TAMRABET Meriem       | Responsable projet & développeur   |
 | ANTZ Aurélia          | Développeur           |
 | DIBRA Edona           | Développeur           |
