@@ -8,20 +8,21 @@
 
     *  Ce projet concerne ...
     *  Le projet est réalisé dans le cadre d'un projet scolaire en L3 MIAGE à l'Université de Haute Alsace (UHA).
- Le projet
+    
+## Le projet
  
  Ce projet consiste à ...
  
- Structure du projet
- 
- Laser_Game
+## Structure du projet
+
+```
 ├── Headers
 |   ├──
 |   └──
 └── Sources
     ├──
     └──
-    
+    ```
 Contributions au projet
 
 Professeur(s) encadrant(s) :
