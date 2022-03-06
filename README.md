@@ -1,4 +1,9 @@
-                              <img align="right" src="https://www.fst.uha.fr/wp-content/uploads/2018/06/cropped-logo-site-V3.png" title="Logo de la Faculté des Sciences et Techniques (FST) de Mulhouse - Université de Haute Alsace (UHA)">
+<img align="right" src="https://www.fst.uha.fr/wp-content/uploads/2018/06/cropped-logo-site-V3.png" title="Logo de la Faculté des Sciences et Techniques (FST) de Mulhouse - Université de Haute Alsace (UHA)">
+                              
+[![License Apach-2.0](https://img.shields.io/github/license/Dieupix/Laser_Game?color=dark&style=for-the-badge)](https://github.com/Dieupix/Laser_Game/blob/main/LICENSE.md)
+[![Faculté FST](https://img.shields.io/badge/Faculté-FST-blue?style=for-the-badge)](https://www.fst.uha.fr)
+[![Université UHA](https://img.shields.io/badge/Université-UHA-darkblue?style=for-the-badge)](https://www.uha.fr)
+
 # Graph-Project!       
 
     *  Ce projet concerne ...
