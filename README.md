@@ -22,7 +22,7 @@
 └── Sources
     ├──
     └──
-    ```
+```
 Contributions au projet
 
 Professeur(s) encadrant(s) :\
