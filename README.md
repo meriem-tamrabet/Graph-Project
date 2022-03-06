@@ -1,5 +1,5 @@
-# Graph-Project!                                      [image](https://user-images.githubusercontent.com/81298244/156928523-7f890ed4-7f5e-4e70-b2aa-0b806df4e05b.png)
-
+                              <img align="right" src="https://www.fst.uha.fr/wp-content/uploads/2018/06/cropped-logo-site-V3.png" title="Logo de la Faculté des Sciences et Techniques (FST) de Mulhouse - Université de Haute Alsace (UHA)">
+# Graph-Project!       
 
     *  Ce projet concerne ...
     *  Le projet est réalisé dans le cadre d'un projet scolaire en L3 MIAGE à l'Université de Haute Alsace (UHA).
