@@ -25,14 +25,16 @@
     ```
 Contributions au projet
 
-Professeur(s) encadrant(s) :
-- M. ELBAZ Elmounir
+Professeur(s) encadrant(s) :\
+\- M. ELBAZ Elmounir
 
 L'équipe du MOE :
-Membre 	Rôle
-TAMRABET Meriem 	Responsable projet & développeur
-ANTZ Aurélia 	Développeur
- 	Développeur
+| Membre            | Rôle                  |
+|:---|:---|
+| TAMRABET Meriem       | Responsable projet & développeur   |
+| ANTZ Aurélia          | Développeur           |
+| DIBRA Edona           | Développeur           |
+| RAKOTOMAMONJY Andrea  | Développeur           |
 
 Merci à Discord pour la communication au sein du groupe.
 Merci à GanttProject pour son application GanttProject.
@@ -41,4 +43,3 @@ Merci à shields.io pour la création des badges.
 
 Un grand merci à GitHub pour l'hébergement du projet.
 
- https://img.shields.io/badge/universit%C3%A9-UHA-blue
