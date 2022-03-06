@@ -29,12 +29,12 @@ Professeur(s) encadrant(s) :\
 \- M. ELBAZ Elmounir
 
 L'équipe du MOE :
-| Membre            | Rôle                  |
-|---|---|
+| Membre                | Rôle                               |
+|-----------------------|------------------------------------|
 | TAMRABET Meriem       | Responsable projet & développeur   |
-| ANTZ Aurélia          | Développeur           |
-| DIBRA Edona           | Développeur           |
-| RAKOTOMAMONJY Andrea  | Développeur           |
+| ANTZ Aurélia          | Développeur                        |
+| DIBRA Edona           | Développeur                        |
+| RAKOTOMAMONJY Andrea  | Développeur                        |
 
 Merci à Discord pour la communication au sein du groupe.
 Merci à GanttProject pour son application GanttProject.
