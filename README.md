@@ -5,11 +5,8 @@
 [![Université UHA](https://img.shields.io/badge/Université-UHA-darkblue?style=for-the-badge)](https://www.uha.fr)
 
 ## Graph-Project!       
-
-     Ce projet concerne ...
-     Le projet est réalisé dans le cadre d'un projet scolaire en
-     L3 MIAGE à l'Université de Haute Alsace (UHA).
-    
+Ce projet consiste à créer 
+<a id="user-content-structure" class="anchor" href="#structure" aria-hidden="true"></a>
 ## Le projet
  
  Ce projet consiste à ...
