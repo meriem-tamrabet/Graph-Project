@@ -27,7 +27,7 @@ Contributions au projet
 
 Professeur(s) encadrant(s) :\
 \- M. ELBAZ Mounir
-```
+
 L'équipe du MOE :
 | Membre                | Rôle                               |
 |-----------------------|------------------------------------|
@@ -35,7 +35,7 @@ L'équipe du MOE :
 | ANTZ Aurélia          | Développeur                        |
 | DIBRA Edona           | Développeur                        |
 | RAKOTOMAMONJY Andrea  | Développeur                        |
-```
+
 Merci à Discord pour la communication au sein du groupe.<br>
 Merci à GanttProject pour son application GanttProject.<br>
 Merci à Google pour ses applications telles que Doc, Drive, etc.<br>
