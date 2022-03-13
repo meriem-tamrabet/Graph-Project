@@ -4,10 +4,10 @@
 [![Faculté FST](https://img.shields.io/badge/Faculté-FST-blue?style=for-the-badge)](https://www.fst.uha.fr)
 [![Université UHA](https://img.shields.io/badge/Université-UHA-darkblue?style=for-the-badge)](https://www.uha.fr)
 
-# Graph-Project!       
+## Graph-Project!       
 
-    *  Ce projet concerne ...
-    *  Le projet est réalisé dans le cadre d'un projet scolaire en L3 MIAGE à l'Université de Haute Alsace (UHA).
+     Ce projet concerne ...
+     Le projet est réalisé dans le cadre d'un projet scolaire en L3 MIAGE à l'Université de Haute Alsace (UHA).
     
 ## Le projet
  
