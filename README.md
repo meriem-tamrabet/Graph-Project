@@ -22,7 +22,7 @@
 └── Sources
     ├──
     └──
-```
+
 Contributions au projet
 
 Professeur(s) encadrant(s) :\
@@ -39,7 +39,7 @@ L'équipe du MOE :
 Merci à Discord pour la communication au sein du groupe.<br>
 Merci à GanttProject pour son application GanttProject.<br>
 Merci à Google pour ses applications telles que Doc, Drive, etc.<br>
-Merci à shields.io pour la création des badges.<br>
+
 
 Un grand merci à GitHub pour l'hébergement du projet.
 
