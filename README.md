@@ -4,7 +4,7 @@
 [![Faculté FST](https://img.shields.io/badge/Faculté-FST-blue?style=for-the-badge)](https://www.fst.uha.fr)
 [![Université UHA](https://img.shields.io/badge/Université-UHA-darkblue?style=for-the-badge)](https://www.uha.fr)
 
-## Graph-Project!       
+## Graph-Project      
 Ce projet consiste à créer 
 <a id="user-content-structure" class="anchor" href="#structure" aria-hidden="true"></a>
 ## Le projet
