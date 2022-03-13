@@ -6,8 +6,6 @@
 
 ## Graph-Project!       
 
-     Ce projet concerne ...
-     Le projet est réalisé dans le cadre d'un projet scolaire en L3 MIAGE à l'Université de Haute Alsace (UHA).
     
 ## Le projet
  
