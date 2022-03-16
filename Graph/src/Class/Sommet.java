@@ -17,9 +17,11 @@ public Sommet(int cle, Object contenu, Point position) {
 public int getCle() {
 	return cle;
 }
-public void setCle(int cle) {
-	this.cle = cle;
+
+public Point getPosition() {
+	return position;
 }
+
 public Object getContenu() {
 	return contenu;
 }
@@ -30,9 +32,11 @@ public Object getContenu() {
 public void setContenu(Object contenu) {
 	this.contenu = contenu;
 }
-public Point getPosition() {
-	return position;
+
+public void setCle(int cle) {
+	this.cle = cle;
 }
+
 public void setPosition(Point position) {
 	this.position = position;
 } 
