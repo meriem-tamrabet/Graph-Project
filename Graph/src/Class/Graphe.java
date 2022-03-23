@@ -12,9 +12,13 @@ public class Graphe {
 
     public void scan(){}
     public void affiche(){}
-    public int[][] calcul_distnace(){}
+    public int[][] calcul_distnace(){
+    	return null ; 
+    }
     public void rang(){}
-    public Graphe Tarjan(){}
+    public Graphe Tarjan(){
+     	return null ; 
+    }
     public void ordonnacement(){}
     public void Dijkstra(){}
     public void Dantzig(){}
