@@ -9,7 +9,7 @@ public class Graphe {
     private int[] aps[];
     
     public Graphe(){}
-
+// pour tester 
     public void scan(){}
     public void affiche(){}
     public int[][] calcul_distnace(){
