@@ -1,10 +1,13 @@
 package Class;
 
-public class Sommet {
+import java.util.ArrayList;
+
+public class Sommet<Int> {
 	
  private int cle ; 
  private  Object contenu ; 
  private Point position ;
+ private ArrayList<Int> listPoids = new ArrayList<Int>();
 //---------- Constructors------------------------------
 public Sommet(int cle, Object contenu, Point position) {
 	super();
