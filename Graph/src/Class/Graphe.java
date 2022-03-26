@@ -106,10 +106,133 @@ public class Graphe {
 
 
     public void affiche(){}
-    public int[][] calcul_distnace(){
-    	return null ; 
+
+    public int[] descente(int r,int[] aps,int[] fs,int[] dist){
+        
+        int nb_som = aps[0];
+        int i = 0,j = 1,k = 0,ifin,s,t,it;
+
+        int[] fil = new int[nb_som+1];
+        fil[0] = nb_som;
+        fil[1] = r;
+
+        dist = new int[nb_som + 1];
+        dist[0] = nb_som;
+
+        for(int h = 1;h <= nb_som;h++)
+            dist[h] = -1;
+        
+        dist[r] = 0;
+        while(i < j){
+            k++;
+            ifin = j;
+
+            while(i < ifin){
+                i++;
+                s = fil[i];
+                it = aps[s];
+                t = fs[it];
+
+                while(t > 0){
+                    if(dist[t] == -1){
+                        j++;
+                        fil[j] = t;
+                        dist[t] = k;
+                    }
+                    t = fs[++it];
+                }
+            }
+        }
+        return dist;
     }
-    public void rang(){}
+
+    // Regarder comment on peut l'adapter à la matrice d'adjacence
+    public int[][] calcul_distnace(int[] fs,int[] aps,int[][] dist){
+
+        int n = aps[0];
+        dist = new int[n+1][n+1];
+
+        for(int i = 1;i <= n;i++){
+            descente(i,fs,aps,dist[i]);
+        }
+
+        dist[0] = new int[1];
+        dist[0][0] = n;
+
+    	return dist; 
+    }
+
+    public void det_ddi(int[] aps,int[] fs,int[] ddi){
+        int n = aps[0];
+
+        ddi[0] = n;
+
+        for(int i = 1;i <= n;i++)
+            ddi[i] = 0;
+        
+        for(int i = 1;i < fs[0];i++){
+            if(fs[i] != 0){
+                ddi[fs[i]]++;
+            }
+        }
+    }
+
+    public void empiler(int x,int[] pilch){
+        pilch[x] = pilch[0];
+        pilch[0] = x;
+    }
+
+    public void ddiNul(int[] ddi,int x,int[] pilch){
+        if(ddi[x] == 0)
+            empiler(x,pilch);
+    }
+
+    //Regarder comment calculer le rang avec la matrice d'adjacence
+    public int[] rang(int[] rang,int[] fs,int[] aps){
+        
+        int n = aps[0];
+        int s,k,h,t;
+
+        int[] pilch = new int[n+1];
+        int[] prem = new int[n+1];
+        int[] ddi = new int[n+1];
+
+        det_ddi(aps, fs, ddi);
+
+        pilch[0] = 0;
+        for(s = 1;s <= n;s++){
+            rang[s] = -1;
+            ddiNul(ddi, s, pilch);
+        }
+
+        k = -1;
+        s = pilch[0];
+        prem[0] = s;
+
+        while(pilch[0] > 0){
+            k++;
+            pilch[0] = 0;
+
+            while(s > 0){
+                rang[s] = k;
+                h = aps[s];
+                t = fs[h];
+
+                while(t > 0){
+                    ddi[t]--;
+                    ddiNul(ddi, t, pilch);
+                    h++;
+                    t = fs[h];
+                }
+                s = pilch[s];
+            }
+            s = pilch[0];
+            prem[k+1] = s;
+        }
+
+        return rang;
+    }
+
     public Graphe Tarjan(){
      	return null ; 
     }
