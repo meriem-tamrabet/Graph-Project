@@ -64,7 +64,7 @@ public boolean equals( Object o) {
 	
 	return s.contenu == this.contenu ; 
 }
-//TODO to string
+
 
 public String toString(  ) {
 	return contenu+ " " ; 

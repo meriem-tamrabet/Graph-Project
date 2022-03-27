@@ -3,8 +3,17 @@ import java.util.ArrayList;
 
 
 
-public class Graphe {
-
+public abstract   class Graphe {
+	
+	public abstract int taille();
+	
+	public abstract void ajouterSommet(Sommet s);
+	public abstract boolean existeArc(Sommet s, Sommet t);
+	public abstract void ajouterArc(Sommet s, Sommet t, int val);
+	public abstract int valeurArc(Sommet s, Sommet t);
+	public abstract void enleverArc(Sommet s, Sommet t);
+	
+/*
     private ArrayList<Sommet> listeSommet = new ArrayList<Sommet>();
 
     private int[][] matriceAdjacente;
@@ -117,5 +126,5 @@ public class Graphe {
     public void Dijkstra(){}
     public void Dantzig(){}
     public void Prufer(){}
-    
+    */
 }
