@@ -66,6 +66,20 @@ public class Point {
 
 		System.out.println(toString());
 	}
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		Point p = (Point) obj ; 
+		return p.x ==this.x && p.y ==this.y;
+	}
  
 
 }
+

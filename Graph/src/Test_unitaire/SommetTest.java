@@ -1,69 +1,89 @@
 package Test_unitaire;
-
+import Class.*; 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.lang.module.ModuleDescriptor.Requires;
 
 import org.junit.jupiter.api.Test;
 
+import Class.Point;
+
 class SommetTest {
-//TODO  SommetTest 
-	@Test
-	void testSommetIntStringPointInt() {
-		fail("Not yet implemented"); 
+/*
+ * 
+ * 
+ private  String contenu ; 
+ private Point position ;
+ private int marquee ; */
+	
+ 
+	void ConstructeurTest()
+	{
+		Point P = new Point(3,5) ;
+		Sommet s = new  Sommet ("meriem" ,P  , 0 ) ; 
+		assertEquals(s.getContenu() , "meriem");
+		assertEquals(s.getMarquee() , 0);
+		assertEquals(true, s.getPosition().equals(P) ) ; 
+	
 	}
 
-	@Test
-	void testSommetInt() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testGetCle() {
-		fail("Not yet implemented"); 
-	}
 
 	@Test
 	void testGetPosition() {
-		fail("Not yet implemented"); 
+		Point P = new Point(3,5) ;
+		Sommet s = new  Sommet ("meriem" ,P  , 0 ) ; 
+		assertEquals(true, s.getPosition().equals(P) ) ; 
 	}
 
 	@Test
 	void testGetContenu() {
-		fail("Not yet implemented"); 
+		Point P = new Point(3,5) ;
+		Sommet s = new  Sommet ("meriem" ,P  , 0 ) ; 
+		assertEquals(s.getContenu() , "meriem");
+	
 	}
 
 	@Test
 	void testGetMarquee() {
-		fail("Not yet implemented"); 
+		Point P = new Point(3,5) ;
+		Sommet s = new  Sommet ("meriem" ,P  , 0 ) ; 
+		assertEquals(s.getMarquee() , 0);
+	
 	}
 
 	@Test
 	void testSetContenu() {
-		fail("Not yet implemented"); 
-	}
-
-	@Test
-	void testSetCle() {
-		fail("Not yet implemented"); 
+		Point P = new Point(3,5) ;
+		Sommet s = new  Sommet ("meriem" ,P  , 0 ) ; 
+		s.setContenu("hello");
+		assertEquals(s.getContenu() , "hello");
 	}
 
 	@Test
 	void testChangePosition() {
-		fail("Not yet implemented"); 
+		Point P = new Point(3,5) ;
+		Sommet s = new  Sommet ("meriem" ,P  , 0 ) ; 
+		Point NP = new Point(13,15) ;
+		s.ChangePosition(NP);
+		assertEquals(true, s.getPosition().equals(NP) ) ; 
 	}
 
 	@Test
 	void testSetMarquee() {
-		fail("Not yet implemented"); 
+		Point P = new Point(3,5) ;
+		Sommet s = new  Sommet ("meriem" ,P  , 0 ) ; 
+		s.setMarquee(2);
+		assertEquals(s.getMarquee() , 2);
+	
 	}
 
-	@Test
-	void testEqualsObject() {
-		fail("Not yet implemented"); 
-	}
 
 	@Test
 	void testToString() {
-		fail("Not yet implemented");
+		Point P = new Point(3,5) ;
+		Sommet s = new  Sommet ("meriem" ,P  , 0 ) ; 
+		
+		assertEquals(s.toString() , "meriem"+ " ");
 	}
 
 }
