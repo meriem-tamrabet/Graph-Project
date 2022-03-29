@@ -1,6 +1,6 @@
 package Class;
 
-import Class.Sommet;
+import java.util.Objects;
 
 public class Arc {
 	
@@ -78,6 +78,43 @@ public class Arc {
 	}
 	public void setOriente(boolean oriente) {
 		this.oriente = oriente;
+	}
+	
+	/*
+	 * -----------------------------------------------------
+	 * -----------------------------------------------------
+	 */
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(oriente, poids, s1, s2);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Arc other = (Arc) obj;
+		return oriente == other.oriente && poids == other.poids && s1.equals(other.s1)
+				&& s2.equals(other.s2);
+	}
+	public String toString()
+	{
+		StringBuilder str = new StringBuilder();
+		str.append('['+ s1.toString() + ','+ s2.toString()+ "] : "+ poids);
+		if(oriente == true)
+		{
+			str.append(", oriente");
+		}
+		else 
+		{
+			str.append(", non oriente");
+		}
+		return str.toString();
+		
 	}
 
 }
