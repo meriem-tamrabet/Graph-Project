@@ -18,6 +18,10 @@ public Sommet( String contenu, Point position, int marquee  ) {
 	this.marquee = marquee ; 
 	
 }
+public Sommet( String contenu,  int marquee  ) {
+	this(contenu,null, marquee);
+	
+}
 public Sommet( ) {
 	this("",null, 0);
 }
