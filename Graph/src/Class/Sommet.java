@@ -5,17 +5,22 @@ import java.util.ArrayList;
 public class Sommet {
 	
  
- private  String contenu ; 
- private Point position ;
- private int marquee ; 
+ private  String contenu ;  //peut etre le nom du sommets ex ville , taches .... 
+ private Point position ; //pour le dessin apres 
+ private int marquee ; // pour savoir le rang 
+ private int id ; // le numero de sommets 
+ private static int compteur = 0 ; 
  //private ArrayList<Int> listPoids = new ArrayList<Int>();
 //---------- Constructors------------------------------
 public Sommet( String contenu, Point position, int marquee  ) {
 	super();
 	
-	this.contenu = contenu;
+	this.contenu = contenu; 
 	this.position = position;
 	this.marquee = marquee ; 
+	this.id = compteur; 
+	compteur++ ; 
+	
 	
 }
 public Sommet( String contenu,  int marquee  ) {
@@ -40,7 +45,9 @@ public String getContenu() {
 public int getMarquee() {
 	return marquee;
 }
-
+public int getId() {
+	return id;
+}
 //public ArrayList<Int> getListPoids() { return listPoids; }
 
 //---------- End of GETTER-----------------------

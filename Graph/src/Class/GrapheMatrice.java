@@ -6,72 +6,84 @@ public class GrapheMatrice extends Graphe {
 
 	
 	
-	private Vector<Vector<Arc>> mat;
-	private Cle_Sommets idantifiant;
+	private int[][] matrice;
+	private boolean avec_Poids ; 
+	private int valeur_interdite = 999 ; 
+	
 //------------constructeur ------------------
-	public GrapheMatrice(int n ) {
-		
-		idantifiant = new Cle_Sommets(n);
-		mat = new Vector<Vector<Arc>>(n);
-		mat.setSize(n);
-	}
-//-----------------Methods ------------------------------
+	public GrapheMatrice(int n , boolean avec_Poids ) {
+		this.avec_Poids = avec_Poids ; 
+	this.matrice = new int[n][n] ; 
+	int val ; 
+	//cas de matrice des cout initialiser a 
+	if( this.avec_Poids)
+		val = valeur_interdite ; 
+	else //cas matrice adjacente 
+		val = 0 ; 
 	
-	public  int taille() {
-	return mat.size() ; 
-	}
-	
-	public  void ajouterSommet(Sommet s) {
-		
-		if(idantifiant.ajouterElement(s))
+	for( int i = 0 ; i< n ; i++ ) {
+		for(int j = 0 ; j< n ; j++)
 		{
-			// ici on a pu ajouter un sommet avec un nv identifiant 
-			int taille_ligne= taille() ; 
-			// on cree une ligne 
-			Vector<Arc> vecteur_sommets = new Vector<Arc> (taille_ligne) ; 
-			vecteur_sommets.setSize(taille_ligne);
-			//on insert dans la matrice 
-			mat.set(idantifiant.numero(s), vecteur_sommets) ; 
-			
+			this.matrice[i][j] = val ; 
 		}
 	}
 	
+	}
+//-----------------Methods ------------------------------
+	
+	public  int nombre_sommets() {
+	return  matrice.length ; 
+	}
+	
+	public  void ajouterSommet(Sommet s) {
+		int n = nombre_sommets() ; 
+		int[][] N_matrice = new int[n+1][n+1] ; 
+		//recopier 
+		for( int i = 0 ; i< n ; i++ ) {
+			for(int j = 0 ; j< n ; j++)
+			{
+				 N_matrice [i][j] = matrice[i][j] ; 
+			}
+		}
+		//je l'affecte 
+		matrice =N_matrice ; 
+	}
+	
 	public  boolean existeArc(Sommet s, Sommet t) {
-		int numS = idantifiant.numero(s);
-		int numT = idantifiant.numero(t);
-		return mat.get(numS).get(numT) != null; 
+		if( this.avec_Poids)
+			
+			return ( matrice[s.getId()][t.getId()] != valeur_interdite) ; 
+		else 
+			return (matrice[s.getId()][t.getId()] != 0 )  ; 
 	}
 	
 	
 	public  void ajouterArc(Sommet s, Sommet t, int val) {
-		ajouterSommet(s);
-		ajouterSommet(t);
-		int numS = idantifiant.numero(s);
-		int numT = idantifiant.numero(t);
-		mat.get(numS).set(numT, new Arc(s,t,val)); //mat[numS][numT] = new Arc(s,t,val);
+		if( this.avec_Poids)
+		 matrice[s.getId()][t.getId()]  = val ; 
+		else
+			 matrice[s.getId()][t.getId()]  = 1 ; 
 	}
 	
 	
 
 	public  int valeurArc(Sommet s, Sommet t) {
-		int numS = idantifiant.numero(s);
-		int numT = idantifiant.numero(t);
-		return mat.get(numS).get(numT).getPoids(); //return mat[numS][numT].getPoids();
+	 return  matrice[s.getId()][t.getId()]  ; 
 	}
 	
 
 	public  void enleverArc(Sommet s, Sommet t) {
-		int numS = idantifiant.numero(s);
-		int numT = idantifiant.numero(t);
-		mat.get(numS).remove(numT); //mat[numS][numT].pop_back();
+if( this.avec_Poids)
+			
+			 matrice[s.getId()][t.getId()] = valeur_interdite ; 
+		else 
+			matrice[s.getId()][t.getId()] = 0   ; 
 	}
 	//--------------------affichage --------------------
 	public void affiche_matrice() {
 		
-				System.out.println(mat.toString()); 
 		
-			
-	
+	System.out.print(this.toString()  ); 
 	}
 
 	@Override
@@ -88,15 +100,18 @@ public class GrapheMatrice extends Graphe {
 
 	@Override
 	public String toString() {
-		String matrice = "[ " ; 
-		for(int i = 0 ; i< mat.size() ; i++) {
-			for(int j = 0 ; j< mat.elementAt(i).size() ;j++) {
-				matrice +=  mat.elementAt(i).elementAt(j) +" ";
+		String Smatrice = "" ; 
+		int n = nombre_sommets() ; 
+		for( int i = 0 ; i< n ; i++ ) {
+			Smatrice += "|" ; 
+			for(int j = 0 ; j< n ; j++)
+			{
+				Smatrice += this.matrice[i][j] +" " ; 
 			}
-			matrice += "\n" ; 
+			Smatrice += "|\n " ; 
 		}
 		
-		return matrice ; 
+		return Smatrice ; 
 	}
 	
 	

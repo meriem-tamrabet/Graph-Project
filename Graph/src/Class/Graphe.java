@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public abstract   class Graphe {
 	
-	public abstract int taille();
+	public abstract int nombre_sommets();
 	
 	public abstract void ajouterSommet(Sommet s);
 	public abstract boolean existeArc(Sommet s, Sommet t);
