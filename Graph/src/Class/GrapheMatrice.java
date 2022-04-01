@@ -1,5 +1,7 @@
 package Class;
 
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Vector;
 
 public class GrapheMatrice extends Graphe {
@@ -31,11 +33,11 @@ public class GrapheMatrice extends Graphe {
 	}
 //-----------------Methods ------------------------------
 	
-	public  int nombre_sommets() {
+	public int nombre_sommets() {
 	return  matrice.length ; 
 	}
 	
-	public  void ajouterSommet(Sommet s) {
+	public void ajouterSommet(Sommet s) {
 		int n = nombre_sommets() ; 
 		int[][] N_matrice = new int[n+1][n+1] ; 
 		//recopier 
@@ -49,10 +51,40 @@ public class GrapheMatrice extends Graphe {
 		matrice =N_matrice ; 
 	}
 	
-	public  boolean existeArc(Sommet s, Sommet t) {
+	public void supprimerSommet(Sommet s)
+	{
+		int id = s.getId();
+		int n = nombre_sommets();
+		int[][] mat = new int[n-1][n-1];
+		for(int i=0; i<id; ++i)
+		{
+			for(int j=0; j<id; ++j)
+			{
+				mat[i][j] = matrice[i][j];
+			}
+			for(int j=id+1; j<n; ++j)
+			{
+				mat[i][j] = matrice[i][j];
+			}
+		}
+		for(int i=id+1; i<n; ++i)
+		{
+			for(int j=id+1; j<id; ++j)
+			{
+				mat[i-1][j-1] = matrice[i][j];
+			}
+			for(int j=id+1; j<n; ++j)
+			{
+				mat[i-1][j-1] = matrice[i][j];
+			}
+		}
+		matrice = mat;
+	}
+	
+	public boolean existeArc(Sommet s, Sommet t) {
 		if( this.avec_Poids)
-			
 			return ( matrice[s.getId()][t.getId()] != valeur_interdite) ; 
+		
 		else 
 			return (matrice[s.getId()][t.getId()] != 0 )  ; 
 	}
@@ -61,6 +93,7 @@ public class GrapheMatrice extends Graphe {
 	public  void ajouterArc(Sommet s, Sommet t, int val) {
 		if( this.avec_Poids)
 		 matrice[s.getId()][t.getId()]  = val ; 
+		
 		else
 			 matrice[s.getId()][t.getId()]  = 1 ; 
 	}
@@ -73,29 +106,41 @@ public class GrapheMatrice extends Graphe {
 	
 
 	public  void enleverArc(Sommet s, Sommet t) {
-if( this.avec_Poids)
-			
+		if( this.avec_Poids)	
 			 matrice[s.getId()][t.getId()] = valeur_interdite ; 
+		
 		else 
 			matrice[s.getId()][t.getId()] = 0   ; 
 	}
 	//--------------------affichage --------------------
 	public void affiche_matrice() {
-		
-		
-	System.out.print(this.toString()  ); 
+		System.out.print(this.toString()  ); 
 	}
 
 	@Override
 	public int hashCode() {
-		
-		return super.hashCode();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.deepHashCode(matrice);
+		result = prime * result + Objects.hash(avec_Poids, valeur_interdite);
+		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		
-		return super.equals(obj);
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GrapheMatrice other = (GrapheMatrice) obj;
+		if(this.nombre_sommets() != other.nombre_sommets())
+		{
+			return false;
+		}
+		return avec_Poids == other.avec_Poids && Arrays.deepEquals(matrice, other.matrice)
+				&& valeur_interdite == other.valeur_interdite;
 	}
 
 	@Override
