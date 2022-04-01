@@ -17,11 +17,10 @@ public Sommet( String contenu, Point position, int marquee  ) {
 	
 	this.contenu = contenu; 
 	this.position = position;
-	this.marquee = marquee ; 
-	this.id = compteur; 
+	this.marquee = marquee ;
 	compteur++ ; 
-	
-	
+	this.id = compteur;  
+
 }
 public Sommet( String contenu,  int marquee  ) {
 	this(contenu,null, marquee);

@@ -14,54 +14,53 @@ public class GrapheListe extends Graphe{
     private int[] aps;
 
 //------------------------CONSTRUCTEUR------------------------
-    public GrapheListe(int nbSommets){
-        fs = new int[nbSommets+1];
-        aps = new int[nbSommets+1];
+    public GrapheListe(Sommet...sommets){
+        fs = new int[sommets.length+1];
+        aps = new int[sommets.length+1];
 
-        fs[0] = nbSommets;
-        aps[0] = nbSommets;
+        fs[0] = sommets.length;
+        aps[0] = sommets.length;
 
-        for(int i = 1;i < fs.length;i++){
+        for(int i = 1;i <= sommets.length;i++){
             fs[i] = 0;
-            aps[i] = 0;
+            aps[i] = sommets[i-1].getId();
         }
     }
 
     //------------------------METHODES------------------------
 
-    public int taille(){
-        return aps.length;
+    public int nombre_sommets(){
+        return aps[0];
     }
 
-    public void aujouterSommet(Sommet s){
+    public void ajouterSommet(Sommet s){
         
-        int[] copyfs = new int[taille()+1];
-        int[] copyaps = new int[taille()+1];
+        int[] copyfs = new int[fs.length+1];
+        int[] copyaps = new int[aps.length+1];
         
         copyfs[0] = fs[0]++;
         copyaps[0] = aps[0]++;
 
-        int i = 1;
-        while(i++ != s.getMarquee()){
-            copyfs[i] = fs[i];
+        for(int i = 1; i < aps.length;i++){
             copyaps[i] = aps[i];
         }
+        copyaps[aps.length] = s.getId();
 
-        copyfs[i] = s.getMarquee();
-        copyaps[i] = s.getMarquee();
-
-        while(i++ < taille()+1){
-            copyaps[i] = aps[i];
+        for(int i = 1; i < fs.length;i++){
             copyfs[i] = fs[i];
         }
+        copyfs[fs.length] = 0;
+
+        aps = copyaps;
+        fs = copyfs;
 
     }
 
     public boolean existeArc(Sommet s,Sommet t){
-        int i = aps[s.getMarquee()];
+        int i = aps[s.getId()];
 
         while(fs[i] != 0){
-            if(fs[i] == t.getMarquee())
+            if(fs[i] == t.getId())
                 return true;
             i++;
         }
@@ -72,98 +71,126 @@ public class GrapheListe extends Graphe{
 
     public void ajouterArc(Sommet s,Sommet t,int val){
 
+        int[] copyfs = new int[fs.length+1];
+
+        copyfs[0] = fs[0]++;
+
+        for(int i = 1;i < copyfs.length;i++){
+            copyfs[i] = 0;
+        }
+
+        int i = 1;
+        int n = 1;
+        while(i != s.getId()) i++;
+
+        for(n = 1;n < fs[aps[i]];n++)
+            copyfs[n] = fs[n];
+        
+
+        //le sommet n'est pas dans la liste des successeurs
+        boolean in = false;
+        int j = aps[i];
+        
+
+
+        if(fs[j] != 0){
+            System.out.println("fs[j]!=0");
+            for(;in == false;j++){
+                if(t.getId() < fs[j] || fs[j] == 0){
+                    System.out.println("Youhou on l'ajoute");
+                    copyfs[j] = t.getId();
+                    in = true;
+                }
+                else{
+                    System.out.println("Ah bah non");
+                    copyfs[j] = fs[j];
+                }
+            }
+        }
+
+        else{
+            System.out.println("fs[j]==0");
+            copyfs[j] = t.getId();
+        }
+
+        for(i = i+1;i < aps.length;i++){
+            aps[i]++;
+        }
+
+        int k = j;
+        for(j = j+1;j < copyfs.length;j++){
+            copyfs[j] = fs[k];
+            k++;
+        }
+
+        fs = copyfs;
+
+        System.out.println("----------TEST-------");
+        System.out.println(this.toString());
+        System.out.println("--------------------");
+
     }
 
     public int valeurArc(Sommet s, Sommet t){
-
+        return 0;
     }
 
 	public void enleverArc(Sommet s, Sommet t){
 
-    }
+        int[] copyfs = new int[nombre_sommets()+fs.length];
 
-    /*public  int taille(){
-        return liste.size();
-    }
+        copyfs[0] = fs[0]--;
 
-    public void ajouterSommet(Sommet s){
-        if(identifiant.ajouterElement(s)){
-            liste.set(identifiant.numero(s), new LinkedList<Arc>());
-        }
-    }
+        int i = 1;
+        while(i != s.getId());
 
+        for(int n = 1;n < fs[aps[i]];n++)
+            copyfs[n] = fs[n];
 
-    public boolean existeArc(Sommet s, Sommet t){
+        //l'arc n'existe plus
+        boolean out = false;
+        int j = aps[i];
 
-        for(Arc a: liste.get(identifiant.numero(s))){
-            if((a.getS2()).equals(t))
-                return true;
-        }
-        return false;
-    }
-
-
-    public void ajouterArc(Sommet s, Sommet t, int val){
-        ajouterSommet(s);
-        ajouterSommet(t);
-        int numS = identifiant.numero(s);
-        liste.get(numS).addLast(new Arc(s,t,val));
-    }
-
-    /*public void ajouterArc(int i, int j, int val){
-        liste.get(i).addLast(new Arc(identifiant.elementAt(i),
-                identifiant.elementAt(j),val));
-    }*/
-
-    public  int valeurArc(Sommet s, Sommet t){
-        for(Arc a: liste.get(identifiant.numero(s))){
-            if(a.getS2().equals(t)){
-                return a.getPoids();
+        for(j = aps[i];fs[j] != 0 && out == false;j++){
+            if(t.getId() == fs[j]){
+                copyfs[j] = fs[j+1];
+                out = true;
+            }
+            else{
+                copyfs[j] = fs[j];
             }
         }
-        return -1;
+
+        for(;i < aps.length;i++){
+            aps[i]--;
+        }
+        
+        int k = j+1;
+        for(;j < copyfs.length;j++){
+            copyfs[j] = fs[k];
+            k++;
+        }
+
+        fs = copyfs;
+
     }
 
-    /*public int valeurArc(int i, int j){
-        Sommet t = identifiant.elementAt(j);
-        for(Arc a : liste.get(i)) {
-            if (a.getS2().equals(t)) {
-                return a.getPoids();
-            }
-        }
-        return -1; // convention
-    }*/
-    public void enleverArc(Sommet s, Sommet t){
-        int numS= identifiant.numero(s);
-        Arc arc= null;
-        for(Arc a : liste.get(identifiant.numero(s))){
-            if(a.getS2().equals(t)){
-                arc=a;
-                break;
-            }
-        }
-        if(arc!=null)
-            liste.get(identifiant.numero(s)).remove(arc);
-    }
-
-
-    public void afficherListe(){
-        for(int i=0; i<liste.size(); i++){
-            System.out.println(+i +":");
-
-            for(int j=0; j<liste.get(i).size(); j++){
-                System.out.println("->"+ liste.get(i).get(j));
-            }
-            System.out.println();
-
-        }
-    }
     @Override
-    public String toString() {
-        return "GrapheListe{" +
-                "liste=" + liste +
-                ", identifiant=" + identifiant +
-                '}';
+    public String toString(){
+        String str = "";
+
+        str += "FS : |";
+        for(int i = 1;i < fs.length;i++){
+            str += fs[i] + "|";
+        }
+        
+        str += "\nAPS : |";
+
+        for(int i = 1;i < aps.length;i++){
+            str += aps[i] + "|";
+        }
+
+        return str;
     }
 
     @Override
