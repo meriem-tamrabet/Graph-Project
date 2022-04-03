@@ -47,11 +47,21 @@ public class main {
 		System.out.println("-------------------Ajout sommet--------------------");
 		System.out.println(l.toString());
 
+		l.supprimerSommet(w);
+
+		System.out.println("-------------------Retire sommet--------------------");
+		System.out.println(l.toString());
+
 		l.ajouterArc(s, t, 5);
 		l.ajouterArc(s, w, 5);
-		l.ajouterArc(w, t, 5);
+		//l.ajouterArc(w, t, 5);
 
 		System.out.println("-------------------Ajout arcs--------------------");
+		System.out.println(l.toString());
+
+		l.enleverArc(s, t);
+
+		System.out.println("-------------------Retire arcs--------------------");
 		System.out.println(l.toString());
 	
 	}

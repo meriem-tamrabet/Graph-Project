@@ -56,6 +56,46 @@ public class GrapheListe extends Graphe{
 
     }
 
+    public void supprimerSommet(Sommet s){
+
+        int[] copyaps = new int[aps.length-1];
+
+        int i = s.getId();
+
+        int nbFS = fs.length-1;
+
+        for(int j = aps[i];fs[j] != 0;j++){
+            nbFS--;
+        }
+
+        int[] copyfs = new int[nbFS];
+
+        int n = 1;
+        for(;n < fs[aps[i]];n++){
+            copyfs[n] = fs[n];
+        }
+
+        int j = aps[i];
+        for(;fs[j] != 0;j++);
+
+        for(int k = j+1;k < copyfs.length;k++){
+            copyfs[n] = fs[k];
+        }
+
+        int a = 1;
+        for(;a != s.getId();a++){
+            copyaps[a] = aps[a];
+        }
+
+        for(int k = i;k < copyaps.length;k++){
+            copyaps[k] = aps[k];
+        }
+
+        aps = copyaps;
+        fs = copyfs;
+        
+    }
+
     public boolean existeArc(Sommet s,Sommet t){
         int i = aps[s.getId()];
 
@@ -137,12 +177,12 @@ public class GrapheListe extends Graphe{
 
 	public void enleverArc(Sommet s, Sommet t){
 
-        int[] copyfs = new int[nombre_sommets()+fs.length];
+        int[] copyfs = new int[fs.length-1];
 
         copyfs[0] = fs[0]--;
 
         int i = 1;
-        while(i != s.getId());
+        while(i != s.getId()) i++;
 
         for(int n = 1;n < fs[aps[i]];n++)
             copyfs[n] = fs[n];
@@ -153,15 +193,17 @@ public class GrapheListe extends Graphe{
 
         for(j = aps[i];fs[j] != 0 && out == false;j++){
             if(t.getId() == fs[j]){
+                System.out.println("-1 successeur !");
                 copyfs[j] = fs[j+1];
                 out = true;
             }
             else{
+                System.out.println("Pas encore atteint...");
                 copyfs[j] = fs[j];
             }
         }
 
-        for(;i < aps.length;i++){
+        for(i = s.getId()+1;i < aps.length;i++){
             aps[i]--;
         }
         
@@ -201,5 +243,32 @@ public class GrapheListe extends Graphe{
     @Override
     public int hashCode() {
         return super.hashCode();
+    }
+
+    public int[][] fs_apsToMatrice(){
+        int n = aps[0];
+        int[][] mat = new int[n+1][n+1];
+
+        //Nombre de sommets
+        mat[0][0] = n;
+
+        //Nombre d'arcs
+        mat[0][1] = fs[0] - n;
+
+        //Matrice initialisée à 0
+        for(int i = 1;i <= n;i++){
+            for(int j = 1;j <= n;j++){
+                mat[i][j] = 0;
+            }
+        }
+
+        for(int i = 1;i <= n;i++){
+            for(int k = aps[i];fs[k]!=0;k++){
+                mat[i][fs[k]] = 1;
+            }
+        }
+
+
+        return mat;
     }
 }
