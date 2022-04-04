@@ -27,6 +27,25 @@ public class GrapheListe extends Graphe{
         }
     }
 
+
+//-------------------GETTERS ET SETTERS------------------------
+
+    public int[] getFs(){
+        return this.fs;
+    }
+
+    public int[] getAps(){
+        return this.aps;
+    }
+
+    public void setFs(int[] fs){
+        this.fs = fs;
+    }
+
+    public void setAps(int[] aps){
+        this.aps = aps;
+    }
+
     //------------------------METHODES------------------------
 
     public int nombre_sommets(){
