@@ -6,7 +6,25 @@ public class GrapheOriente extends Graphe{
 
     private GrapheListe l;
     private GrapheMatrice m;
-
+    
+	
+	public  void ajouterSommet(Sommet s) {
+		
+	}
+	public  boolean existeArc(Sommet s, Sommet t) {
+		return true ; 
+	}
+	public  void ajouterArc(Sommet s, Sommet t, int val) {
+		
+	}
+	public  int valeurArc(Sommet s, Sommet t)
+	{
+		return 0 ; 
+	}
+	public  void enleverArc(Sommet s, Sommet t)
+	{
+		
+	}
 //------------------------CONSTRUCTEUR------------------------
 
     public GrapheOriente(int[] fs,int[] aps){
@@ -16,7 +34,7 @@ public class GrapheOriente extends Graphe{
     }
 
     public GrapheOriente(int[][] matrice){
-        m = matrice;
+       // m = matrice;
         //l = fs et aps générer ==> à faire
     }
 
@@ -43,7 +61,7 @@ public class GrapheOriente extends Graphe{
     public int nombre_sommets(){
         return m.nombre_sommets(); // ou return l.nombre_sommets(); ça en revient exactement au même
     }
-        
+ /*       
     public void ajouterSommet(Sommet s){
         if(this.isInstance(GrapheListe)){
             l.ajouterSommet(s);
@@ -94,7 +112,7 @@ public class GrapheOriente extends Graphe{
             m.enleverArc(s,t);
         }
     }
-
+*/
 //--------------------------ALGORITHMES-----------------------------
 
     public boolean Dantzig(double[][] c){

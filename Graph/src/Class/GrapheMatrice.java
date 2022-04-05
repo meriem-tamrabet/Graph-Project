@@ -1,5 +1,6 @@
 package Class;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Vector;
@@ -14,18 +15,28 @@ public class GrapheMatrice extends Graphe {
 	
 //------------constructeur ------------------
 	public GrapheMatrice(int n , boolean avec_Poids ) {
-		this.avec_Poids = avec_Poids ; 
-	this.matrice = new int[n][n] ; 
+	
+	this.avec_Poids = avec_Poids ;
+	int taille_matrice = n+2 ; 
+	this.matrice = new int[taille_matrice][taille_matrice] ; 
+	this.matrice[0][0] = n ; 
+
 	int val ; 
 	//cas de matrice des cout initialiser a 
 	if( this.avec_Poids)
 		val = valeur_interdite ; 
 	else //cas matrice adjacente 
 		val = 0 ; 
+	if( n> 0 )
+		this.matrice[0][1] = 0 ; 
+	for( int i = 2 ; i< taille_matrice ; i++ )
+		this.matrice[0][i] = val ;
+	for( int i = 1 ; i<taille_matrice ; i++ )
+		this.matrice[i][0] = val ;
 	
-	for( int i = 0 ; i< n ; i++ ) {
-		for(int j = 0 ; j< n ; j++)
-		{
+	for( int i = 1 ; i<taille_matrice ; i++ ) {
+		for(int j = 1 ; j<taille_matrice ; j++)
+		{ 
 			this.matrice[i][j] = val ; 
 		}
 	}
@@ -34,20 +45,24 @@ public class GrapheMatrice extends Graphe {
 //-----------------Methods ------------------------------
 	
 	public int nombre_sommets() {
-	return  matrice.length ; 
+	return matrice[0][0] ; 
 	}
 	
 	public void ajouterSommet(Sommet s) {
-		int n = nombre_sommets() ; 
-		int[][] N_matrice = new int[n+1][n+1] ; 
-		//recopier 
-		for( int i = 0 ; i< n ; i++ ) {
-			for(int j = 0 ; j< n ; j++)
+		int taille = nombre_sommets() +1  ; 
+		taille++ ; 
+	
+		int[][] N_matrice = new int[taille ][taille] ; 
+		//recopier tt 
+		for( int i = 0 ; i< taille -1   ; i++ ) {
+			for(int j = 0 ; j< taille-1  ; j++)
 			{
-				 N_matrice [i][j] = matrice[i][j] ; 
+				 N_matrice [i][j] =  matrice[i][j] ; 
 			}
 		}
-		//je l'affecte 
+		
+		
+		 N_matrice [0][0] ++; 
 		matrice =N_matrice ; 
 	}
 	
@@ -55,19 +70,20 @@ public class GrapheMatrice extends Graphe {
 	{
 		int id = s.getId();
 		int n = nombre_sommets();
-		int[][] mat = new int[n-1][n-1];
+		int taille = n ; 
+		int[][] mat = new int[taille][taille];
 		for(int i=0; i<id; ++i)
 		{
 			for(int j=0; j<id; ++j)
 			{
 				mat[i][j] = matrice[i][j];
 			}
-			for(int j=id+1; j<n; ++j)
+			for(int j=id+1; j<taille ; ++j)
 			{
 				mat[i][j] = matrice[i][j];
 			}
 		}
-		for(int i=id+1; i<n; ++i)
+		for(int i=id+1; i<taille; ++i)
 		{
 			for(int j=id+1; j<id; ++j)
 			{
@@ -78,6 +94,7 @@ public class GrapheMatrice extends Graphe {
 				mat[i-1][j-1] = matrice[i][j];
 			}
 		}
+		mat [0][0] --;
 		matrice = mat;
 	}
 	
@@ -91,11 +108,22 @@ public class GrapheMatrice extends Graphe {
 	
 	
 	public  void ajouterArc(Sommet s, Sommet t, int val) {
-		if( this.avec_Poids)
-		 matrice[s.getId()][t.getId()]  = val ; 
+		System.out.print(	" sommet s = " + s.getId() ) ; 
+		System.out.println(	" -->  sommet t = " +t.getId() ) ;
 		
+		if( s.getId() > nombre_sommets() ||  t.getId() > nombre_sommets() )
+		return ;
+		
+		this.matrice[0][1] ++ ; 
+		if( this.avec_Poids)
+		{
+			
+		 matrice[s.getId()][t.getId()]  = val ; 
+		 
+		}
 		else
 			 matrice[s.getId()][t.getId()]  = 1 ; 
+			 
 	}
 	
 	
@@ -106,6 +134,9 @@ public class GrapheMatrice extends Graphe {
 	
 
 	public  void enleverArc(Sommet s, Sommet t) {
+		System.out.print(	" sommet s = " + s.getId() ) ; 
+		System.out.println(	" -->  sommet t = " +t.getId() ) ;
+		this.matrice[0][1] -- ; 
 		if( this.avec_Poids)	
 			 matrice[s.getId()][t.getId()] = valeur_interdite ; 
 		
@@ -145,11 +176,12 @@ public class GrapheMatrice extends Graphe {
 
 	@Override
 	public String toString() {
-		String Smatrice = "" ; 
+		String Smatrice = " " ; 
 		int n = nombre_sommets() ; 
-		for( int i = 0 ; i< n ; i++ ) {
-			Smatrice += "|" ; 
-			for(int j = 0 ; j< n ; j++)
+		int taille_matrice = n +1 ; 
+		for( int i = 0 ; i< taille_matrice ; i++ ) {
+			Smatrice += "| " ; 
+			for(int j = 0 ; j< taille_matrice ; j++)
 			{
 				Smatrice += this.matrice[i][j] +" " ; 
 			}
@@ -159,7 +191,21 @@ public class GrapheMatrice extends Graphe {
 		return Smatrice ; 
 	}
 	
-	
+	public void Matrice_to_fs_aps(int[] aps , int[] fs ) {
+		
+		int n = nombre_sommets() ;
+		int taille_matrice = n +1 ; 
+		int m = 0 ; 
+		int k = 1 ; 
+		for( int i = 1 ; i <taille_matrice ; i++) {
+			aps[i] = k ; 
+			for( int j = 1 ; j <taille_matrice; j++) {
+				if(matrice[i][j] != 0)
+					fs[k++] = j ;
+				fs[k++] = 0 ; 
+			}
+		}
+	}
 	
 	//TODO  generer FS et APS 
 	
