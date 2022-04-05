@@ -47,6 +47,9 @@ public class GrapheMatrice extends Graphe {
 	public int nombre_sommets() {
 	return matrice[0][0] ; 
 	}
+	public int nombre_de_arc() {
+		return matrice[0][1] ; 
+		}
 	
 	public void ajouterSommet(Sommet s) {
 		int taille = nombre_sommets() +1  ; 
@@ -69,6 +72,8 @@ public class GrapheMatrice extends Graphe {
 	public void supprimerSommet(Sommet s)
 	{
 		int id = s.getId();
+		System.out.println("--------sup-------------") ;
+		System.out.println(s.getId()) ;
 		int n = nombre_sommets();
 		int taille = n ; 
 		int[][] mat = new int[taille][taille];
@@ -191,20 +196,38 @@ public class GrapheMatrice extends Graphe {
 		return Smatrice ; 
 	}
 	
-	public void Matrice_to_fs_aps(int[] aps , int[] fs ) {
+	public int[][]  Matrice_to_fs_aps() {
+		
+		
 		
 		int n = nombre_sommets() ;
-		int taille_matrice = n +1 ; 
-		int m = 0 ; 
+	
+		int m = nombre_de_arc()  ; 
+		
+		int[][] Tab = new int[2][m+n+1]  ;
+		if(n >0 )
+		{
+		Tab[0][0] = n ;// aps 
+		Tab[1][0] = n+m ; //fs
 		int k = 1 ; 
-		for( int i = 1 ; i <taille_matrice ; i++) {
-			aps[i] = k ; 
-			for( int j = 1 ; j <taille_matrice; j++) {
+		for( int i = 1 ; i <= n ; i++) {
+			Tab[0][i] = k ; //aps
+			for( int j = 1 ; j <= n; j++) {
+				
 				if(matrice[i][j] != 0)
-					fs[k++] = j ;
-				fs[k++] = 0 ; 
+					{
+					System.out.print("j " +j +" ") ; 
+					Tab[1][k] = j ;//fs 
+					++k ; 
+					}
+				
 			}
+			
+			Tab[1][k] = 0 ;//fs 
+			++k ;
 		}
+		}
+		return  Tab ; 
 	}
 	
 	//TODO  generer FS et APS 

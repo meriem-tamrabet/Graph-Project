@@ -25,37 +25,68 @@ public class main {
 
 			System.out.println("---------------------") ;
 			m.affiche_matrice();
-			
-		m.ajouterSommet(k);
-		System.out.println("---------------------") ;
-		m.affiche_matrice();
 		
-		// supprimer sommets 
-		m.supprimerSommet(w);
+		m.ajouterSommet(k);
+			System.out.println("---------------------") ;
+			m.affiche_matrice();
+		
+		
 		
 		
 		//ajout arc entre s et t ==> 5 
 		m.ajouterArc(s, t, 5);
+		m.ajouterArc(s, k, 5);
+		m.ajouterArc(t, k, 5);
 		System.out.println("---------------------") ;
 		m.affiche_matrice();
 		
-		m.ajouterArc(s, w, 5);
+		m.ajouterArc(w, t, 5);
+		m.ajouterArc(w, w, 5);
 		System.out.println("---------------------") ;
 		m.affiche_matrice();
 		
-	    m.ajouterArc(w, t, 5);
+	    m.ajouterArc(k, t, 5);
+	    m.ajouterArc(k, k, 5);
 		System.out.println("---------------------") ;
 		m.affiche_matrice();
 		
+		
+		// supprimer sommets 
+				m.supprimerSommet(s); 
+				System.out.println("---------------------") ;
+				m.affiche_matrice();
+				m.supprimerSommet(k); 
+				System.out.println("---------------------") ;
+				m.affiche_matrice();
+				/*		
 		// Supp arc 
 		m.enleverArc(s, w);
 		System.out.println("---------------------") ;
 		m.affiche_matrice();
 		
-	
+		// generer aps / fs apartire de la matrice 
 		
+		/*int[][] tab ; 
+		System.out.println("-------affichage de fs et aps --------------") ;
+		tab = m.Matrice_to_fs_aps(  ) ; 
+		
+		System.out.println("-------affichage de fs et aps --------------") ;
+		  String str = "";
+
+	        str += "FS : |";
+	        for(int i = 0;i <= tab[1][0];i++){
+	            str += tab[1][i]  + "|";
+	        }
+	        
+	        str += "\nAPS : |";
+
+	        for(int i = 0;i <= tab[0][0] ;i++){
+	            str +=tab[0][i] + "|";
+	        }
+	        
+	        System.out.println(str) ;
 	
-	
+	*/
 		
 /*
 
