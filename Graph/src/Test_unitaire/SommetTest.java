@@ -1,10 +1,12 @@
 package Test_unitaire;
-import Class.*; 
-import static org.junit.jupiter.api.Assertions.*;
+import Class.*;
 
-import java.lang.module.ModuleDescriptor.Requires;
+import static junit.framework.Assert.assertEquals;
+import org.junit.Test;
 
-import org.junit.jupiter.api.Test;
+
+
+
 
 import Class.Point;
 

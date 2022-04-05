@@ -1,9 +1,9 @@
 package Test_unitaire;
 import Class.*;
 import junit.framework.*;
-import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
+import static junit.framework.Assert.assertEquals;
+import org.junit.Test;
 
 import Class.Point;
 

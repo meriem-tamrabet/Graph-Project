@@ -1,8 +1,10 @@
 package Test_unitaire;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.Test;
+import static junit.framework.Assert.assertEquals;
+
+
 import Class.*;
+import org.junit.Test;
 
 public class ArcTest {
 	
