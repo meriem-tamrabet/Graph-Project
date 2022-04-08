@@ -30,12 +30,12 @@ public class main {
 			switch (choix){
 				case 1:
 
-					Graphe G = new Graphe( false ) ;
+					Graphe G = new Graphe( true ) ;
 					System.out.println(G.toString() );
-					Sommet s = new Sommet("Paris" , 1) ; //sommets 0 et marqu� 1
-					Sommet t = new Sommet("Paris" , 1) ;  //sommets 1 et marqu� 1
-					Sommet w = new Sommet("Paris" , 1) ;  //sommets 2 et marqu� 1
-					Sommet k = new Sommet("Paris" , 1) ;  //sommets 2 et marqu� 1
+					Sommet s = new Sommet("S" , 1) ; //sommets 0 et marqu� 1
+					Sommet t = new Sommet("T" , 1) ;  //sommets 1 et marqu� 1
+					Sommet w = new Sommet("W" , 1) ;  //sommets 2 et marqu� 1
+					Sommet k = new Sommet("K" , 1) ;  //sommets 2 et marqu� 1
 
 					// ajout des sommets
 					System.out.println("---------Ajout de sommets ------------") ;
@@ -84,35 +84,16 @@ public class main {
 					G.supprimerSommet(k);
 					System.out.println("---------------------") ;
 					G.afficher();
-	/*			
+			
 					// Supp arc
-					m.enleverArc(s, w);
+					System.out.println("---------suppression des arc  ------------") ;
+
+					G.enleverArc(w, w);
 					System.out.println("---------------------") ;
-					m.affiche_matrice();
+					G.afficher() ;
 
 					// generer aps / fs apartire de la matrice
 
-					/*int[][] tab ;
-					System.out.println("-------affichage de fs et aps --------------") ;
-					tab = m.Matrice_to_fs_aps(  ) ;
-
-					System.out.println("-------affichage de fs et aps --------------") ;
-		  			String str = "";
-
-	        		str += "FS : |";
-	        		for(int i = 0;i <= tab[1][0];i++){
-	           			str += tab[1][i]  + "|";
-	        		}
-
-	        		str += "\nAPS : |";
-
-	        		for(int i = 0;i <= tab[0][0] ;i++){
-	            		str +=tab[0][i] + "|";
-	        		}
-
-	        		System.out.println(str) ;
-
-				*/
 
 
 

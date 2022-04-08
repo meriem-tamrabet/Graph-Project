@@ -45,7 +45,7 @@ public  class Graphe {
 	
 	public Graphe( boolean est_oriente ) {
 		this.est_oriente = est_oriente ; 
-		 Generer_matrice(1 , false ); 
+		 Generer_matrice(0 , false ); 
 		 //generer fs 
 		 Matrice_to_fs_aps() ; 
 	}
@@ -53,11 +53,13 @@ public  class Graphe {
 	
 	//-------------------Fin CONSTRUCTEUR------------------------
 	
+	
+	
 	//------- Methods de la matrice  ---------------------------
 	
 	public void  Generer_matrice(int n , boolean avec_Poids ){
 	
-		int taille_matrice = n+1 ; //ligne de  0  
+		int taille_matrice = n+2 ; //ligne de  0  
 		this.matrice = new int[taille_matrice][taille_matrice] ; 
 		this.matrice[0][0] = n ; 
 
@@ -68,7 +70,8 @@ public  class Graphe {
 		else //cas matrice adjacente 
 			val = 0 ; 
 		if( n> 0 )
-			this.matrice[0][1] = 0 ; 
+			this.matrice[0][1] = 0 ;
+		
 		for( int i = 2 ; i< taille_matrice ; i++ )
 			this.matrice[0][i] = val ;
 		for( int i = 1 ; i<taille_matrice ; i++ )
@@ -86,7 +89,12 @@ public  class Graphe {
 	public void ajouterSommet(Sommet s) {
 		int taille = nombre_sommets() +1  ; 
 		taille++ ; 
+		
+	
 		listeSommet.add(s) ; 
+		
+		//System.out.println(listeSommet.get(listeSommet.size()-1).toString()) ;
+
 		int[][] N_matrice = new int[taille ][taille] ; 
 		//recopier tt 
 		for( int i = 0 ; i< taille -1   ; i++ ) {
@@ -99,18 +107,33 @@ public  class Graphe {
 		
 		 N_matrice [0][0] ++; 
 		matrice =N_matrice ; 
+		//TODO METTRE A JOURS FS ET APS 
 	}
+	/**
+	 * PERMET DE SAVOIR LA NUM DE SOMMETS EXEMPLE LE PREMIER LE DEUXIEME ... 
+	 * LE PREMIER SOMMETS EST DANS LA CESE 0, AFIN DE FACILITER LA TACHE ON A FAIT UN +1 POUR AVOIR LA 
+	 * BONNE NUMEROTATION 
+	 * **/
 	public int find_position_sommets(Sommet s)
 	{
 		int i = 0 ; 
 		while (! listeSommet.get(i).equals(s))
 			i++; 
-		return(i<listeSommet.size() ? i : -1 ) ; 
+		
+		return(i<listeSommet.size() ? i+1 : -1 ) ; 
+		// i+1 car on commence a ajouter dans la case 0 et donc 
+		//l'équvalent pou rmes sommets c'est toujours +1 sauf que pour supprimer dans ce tableau faudra fair -1 
 	}
+	/**
+	 * AJOUTER UN ARC 
+	 * ON TESTE SI LES SOMMETS EXISTE  BIEN
+	 *  **/
 	public  void ajouterArc(Sommet s, Sommet t, int val) {
 		
 		System.out.print(	" sommet s = " + s.getId() ) ; 
 		System.out.println(	" -->  sommet t = " +t.getId() ) ;
+		
+		//TODO METHODE SOMMETS EXISTE 
 		int indiceS = find_position_sommets(s) ; 
 		int indiceT = find_position_sommets(t) ; 
 		if( indiceS== -1  ||  indiceT == -1  )
@@ -121,29 +144,31 @@ public  class Graphe {
 		{
 			
 		 matrice[indiceS][indiceT]  = val ; 
-		 if(! est_oriente)
+		 if( est_oriente == false )
 			 matrice[indiceT][indiceS]  = val ; 
 		}
 		else
 		{ matrice[s.getId()][t.getId()]  = 1 ; 
-		 if(! est_oriente)
+		 if(est_oriente == false )
 			 matrice[indiceT][indiceS]  = 1 ; 
 		}	 
 		//TODO mettre a jours fs et aps 
 	}
 	
-	
+	/**
+	 * PERMETS DE SUPPRIMER UN SOMMETS 
+	 * **/
 	public void supprimerSommet(Sommet s)
 	{
 		int indiceS = find_position_sommets(s) ; 
 		System.out.println("position du sommets " +indiceS ) ; 
+		//TODO EXISTE UN SOMMET 
 		if( indiceS== -1   )
 		return ;
+		// attention ici faut le bon indice c'est a dire -1 
+		listeSommet.remove(indiceS-1) ; 
 		
-		
-		
-	 
-		int[][] mat = new int[matrice.length][matrice[0].length];
+		int[][] mat = new int[matrice.length-1][matrice[0].length-1];
 		
 		for(int i=0; i<indiceS; ++i)
 		{
@@ -153,7 +178,7 @@ public  class Graphe {
 			}
 			for(int j=indiceS+1; j<matrice.length ; ++j)
 			{
-				mat[i][j] = matrice[i][j];
+				mat[i][j-1] = matrice[i][j];
 			}
 		}
 		for(int i=indiceS+1; i<matrice.length; ++i)
@@ -168,20 +193,23 @@ public  class Graphe {
 			}
 		}
 		mat [0][0] --;
-		listeSommet.remove(indiceS) ; 
-		//Pensez vous faire plus un clone ? 
+		//TODO mettre ajours le nombre d arc 
+		
+		//Pensez vous faire  un clone ? 
 		matrice = mat;
 	}
+	
 	public int nombre_sommets() {
 		return matrice[0][0] ; 
 		}
-	
-	
+	/**
+	 * nOMBRE D ARC  **/
 	public int nombre_de_arc() {
 		return matrice[0][1] ; 
 		}
-	
-	  public boolean existeArc(Sommet s,Sommet t){
+	/**
+	 * SI UN ARC EXISTE ENTRE S ET T **/
+	 public boolean existeArc(Sommet s,Sommet t){
 		  int indiceS = find_position_sommets(s) ; 
 			int indiceT = find_position_sommets(t) ;
 			
@@ -196,6 +224,10 @@ public  class Graphe {
 	       
 
 	    }
+	 /**
+	  * ENLEVER UN ARC ENTRE S ET T 
+	  * LE CAS OU LE GRAPHE EST PAS ORIENTER EST BIEN TRAITER 
+	  * **/
 	  public  void enleverArc(Sommet s, Sommet t) {
 			System.out.print(	" sommet s = " + s.getId() ) ; 
 			System.out.println(	" -->  sommet t = " +t.getId() ) ;
@@ -217,7 +249,10 @@ public  class Graphe {
 				
 		}
 	//TODO fs et aps to matrice 
-	
+	/**
+	 * GENERER FS ET APS A PARTIRE D4UNE MATRICE 
+	 * 
+	 * **/
 	public void  Matrice_to_fs_aps() {
 		
 		
@@ -253,7 +288,10 @@ public  class Graphe {
 		
 	}
 	//------- Fin Methods ---------------------------
+	
 	//-------  Methods affichage  ---------------------------
+	/**
+	 * AFFICHAGE D4UN GRAPHE A REVOIR POUR SAVOIR QUOI AFFICHER EXACTEMENT **/
 	public void afficher()
 	{
 		if( est_oriente )
@@ -286,7 +324,13 @@ public  class Graphe {
 				}
 				Smatrice += "|\n " ; 
 			}
-	        return str + "\n" + Smatrice ;
+			String ListeSommets = "\n --------Sommets  ---------- \n " ; 
+			for(int i = 0;i < listeSommet.size();i++){
+				ListeSommets += listeSommet.get(i).toString() + "|";
+	        }
+	        
+	       // return str + "\n" + Smatrice ;
+			return Smatrice + ListeSommets; 
 	    }
 	
 	
