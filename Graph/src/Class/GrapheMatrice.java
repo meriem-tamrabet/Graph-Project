@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Vector;
 
-public class GrapheMatrice extends Graphe {
+public class GrapheMatrice  {
 
-	
+	/*
 	
 	private int[][] matrice;
 	private boolean avec_Poids ; 
@@ -231,5 +231,5 @@ public class GrapheMatrice extends Graphe {
 	}
 	
 	//TODO  generer FS et APS 
-	
+	*/
 }

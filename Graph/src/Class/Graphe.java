@@ -3,23 +3,295 @@ import java.util.ArrayList;
 
 
 
-public abstract   class Graphe {
+public  class Graphe {
 	
-	public abstract int nombre_sommets();
+	private int[][] matrice;
+	 private ArrayList<Sommet> listeSommet = new ArrayList<Sommet>();
+	private boolean avec_Poids ; 
+	private ArrayList<Integer> fs = new  ArrayList<Integer>();
+	private ArrayList<Integer> aps =  new  ArrayList<Integer>();
+	private boolean est_oriente ;
+	private int valeur_interdite = 999 ; 
+	//-------------------CONSTRUCTEUR------------------------
+	/*
+	 * on peut constuir un graphe vide et on ajoute des sommets
+	 * on peut avoir deja la matrice 
+	 * on peut avoir fs et aps 
+	 * on peut avoir une liste de sommets 
+	 * */
+	public Graphe(int[][] matrice ,boolean est_oriente, boolean avec_Poids    ) {
+		int ligne = matrice.length ; 
+		int colonne = matrice[0].length ; 
+		this.matrice = new int[ligne][colonne] ; 
+		
+		for( int i = 0 ; i<ligne ; i++ ) {
+			for(int j =0 ; j<colonne ; j++)
+			{ 
+				this.matrice[i][j] = matrice[i][j] ; 
+			}
+		}
+		this.avec_Poids = avec_Poids; 
+		this.est_oriente = est_oriente; 
+		this.listeSommet.add(null) ; // la case 0 vide 
+		// matrcie to fs 
+		
+	}
+
+	public Graphe(ArrayList<Integer> aps ,ArrayList<Integer> fs ) {
+		//this fs ; 
+		//fs to matrice 
+		
+	}
 	
-	public abstract void ajouterSommet(Sommet s);
-	public abstract boolean existeArc(Sommet s, Sommet t);
-	public abstract void ajouterArc(Sommet s, Sommet t, int val);
-	public abstract int valeurArc(Sommet s, Sommet t);
-	public abstract void enleverArc(Sommet s, Sommet t);
+	public Graphe( boolean est_oriente ) {
+		this.est_oriente = est_oriente ; 
+		 Generer_matrice(1 , false ); 
+		 //generer fs 
+		 Matrice_to_fs_aps() ; 
+	}
+	
+	
+	//-------------------Fin CONSTRUCTEUR------------------------
+	
+	//------- Methods de la matrice  ---------------------------
+	
+	public void  Generer_matrice(int n , boolean avec_Poids ){
+	
+		int taille_matrice = n+1 ; //ligne de  0  
+		this.matrice = new int[taille_matrice][taille_matrice] ; 
+		this.matrice[0][0] = n ; 
+
+		int val ; 
+		//cas de matrice des cout initialiser a 
+		if( avec_Poids)
+			val = valeur_interdite ; 
+		else //cas matrice adjacente 
+			val = 0 ; 
+		if( n> 0 )
+			this.matrice[0][1] = 0 ; 
+		for( int i = 2 ; i< taille_matrice ; i++ )
+			this.matrice[0][i] = val ;
+		for( int i = 1 ; i<taille_matrice ; i++ )
+			this.matrice[i][0] = val ;
+		
+		for( int i = 1 ; i<taille_matrice ; i++ ) {
+			for(int j = 1 ; j<taille_matrice ; j++)
+			{ 
+				this.matrice[i][j] = val ; 
+			}
+		}
+		
+	}
+	
+	public void ajouterSommet(Sommet s) {
+		int taille = nombre_sommets() +1  ; 
+		taille++ ; 
+		listeSommet.add(s) ; 
+		int[][] N_matrice = new int[taille ][taille] ; 
+		//recopier tt 
+		for( int i = 0 ; i< taille -1   ; i++ ) {
+			for(int j = 0 ; j< taille-1  ; j++)
+			{
+				 N_matrice [i][j] =  matrice[i][j] ; 
+			}
+		}
+		
+		
+		 N_matrice [0][0] ++; 
+		matrice =N_matrice ; 
+	}
+	public int find_position_sommets(Sommet s)
+	{
+		int i = 0 ; 
+		while (! listeSommet.get(i).equals(s))
+			i++; 
+		return(i<listeSommet.size() ? i : -1 ) ; 
+	}
+	public  void ajouterArc(Sommet s, Sommet t, int val) {
+		
+		System.out.print(	" sommet s = " + s.getId() ) ; 
+		System.out.println(	" -->  sommet t = " +t.getId() ) ;
+		int indiceS = find_position_sommets(s) ; 
+		int indiceT = find_position_sommets(t) ; 
+		if( indiceS== -1  ||  indiceT == -1  )
+		return ;
+		
+		this.matrice[0][1] ++ ; 
+		if( this.avec_Poids)
+		{
+			
+		 matrice[indiceS][indiceT]  = val ; 
+		 if(! est_oriente)
+			 matrice[indiceT][indiceS]  = val ; 
+		}
+		else
+		{ matrice[s.getId()][t.getId()]  = 1 ; 
+		 if(! est_oriente)
+			 matrice[indiceT][indiceS]  = 1 ; 
+		}	 
+		//TODO mettre a jours fs et aps 
+	}
+	
+	
+	public void supprimerSommet(Sommet s)
+	{
+		int indiceS = find_position_sommets(s) ; 
+		System.out.println("position du sommets " +indiceS ) ; 
+		if( indiceS== -1   )
+		return ;
+		
+		
+		
+	 
+		int[][] mat = new int[matrice.length][matrice[0].length];
+		
+		for(int i=0; i<indiceS; ++i)
+		{
+			for(int j=0; j<indiceS; ++j)
+			{
+				mat[i][j] = matrice[i][j];
+			}
+			for(int j=indiceS+1; j<matrice.length ; ++j)
+			{
+				mat[i][j] = matrice[i][j];
+			}
+		}
+		for(int i=indiceS+1; i<matrice.length; ++i)
+		{
+			for(int j=indiceS+1; j<indiceS; ++j)
+			{
+				mat[i-1][j-1] = matrice[i][j];
+			}
+			for(int j=indiceS+1; j<matrice.length; ++j)
+			{
+				mat[i-1][j-1] = matrice[i][j];
+			}
+		}
+		mat [0][0] --;
+		listeSommet.remove(indiceS) ; 
+		//Pensez vous faire plus un clone ? 
+		matrice = mat;
+	}
+	public int nombre_sommets() {
+		return matrice[0][0] ; 
+		}
+	
+	
+	public int nombre_de_arc() {
+		return matrice[0][1] ; 
+		}
+	
+	  public boolean existeArc(Sommet s,Sommet t){
+		  int indiceS = find_position_sommets(s) ; 
+			int indiceT = find_position_sommets(t) ;
+			
+			if( indiceS== -1  ||  indiceT == -1  )
+				return false ; 
+			
+				if( this.avec_Poids)
+					return ( matrice[indiceS][indiceT] != valeur_interdite) ; 
+				
+				else 
+					return (matrice[indiceS][indiceT] != 0 )  ; 
+	       
+
+	    }
+	  public  void enleverArc(Sommet s, Sommet t) {
+			System.out.print(	" sommet s = " + s.getId() ) ; 
+			System.out.println(	" -->  sommet t = " +t.getId() ) ;
+			
+			  int indiceS = find_position_sommets(s) ; 
+				int indiceT = find_position_sommets(t) ;
+				
+				if( indiceS== -1  ||  indiceT == -1  )
+					{return  ;
+					}
+				else 
+				{	this.matrice[0][1] -- ; 
+			if( this.avec_Poids)	
+				 matrice[indiceS][indiceT] = valeur_interdite ; 
+			
+			else 
+				matrice[indiceS][indiceT] = 0   ; 
+				}
+				
+		}
+	//TODO fs et aps to matrice 
+	
+	public void  Matrice_to_fs_aps() {
+		
+		
+		
+		int n = nombre_sommets() ;
+	
+		int m = nombre_de_arc()  ; 
+		
+		fs = new ArrayList<Integer>(n+m+1) ; 
+		aps = new ArrayList<Integer>(n+1) ; 
+		
+		if(n >0 )
+		{
+			aps.add(0,n); // aps 
+			fs.add(0,n+m) ; //fs
+		int k = 1 ; 
+		for( int i = 1 ; i <= n ; i++) {
+			aps.add(i, k ); //aps
+			for( int j = 1 ; j <= n; j++) {
+				
+				if(matrice[i][j] != 0)
+					{
+					fs.add(k,j) ;  // fs[k] = j ;
+					++k ; 
+					}
+				
+			}
+			
+			fs.add(k,0) ; ;//fs 
+			++k ;
+		}
+		}
+		
+	}
+	//------- Fin Methods ---------------------------
+	//-------  Methods affichage  ---------------------------
+	public void afficher()
+	{
+		if( est_oriente )
+		System.out.print(" votre graphe est orienté \n "  ); 
+		System.out.print(this.toString()  ); 
+		
+	}
+	  public String toString(){
+	        String str = "--------fs & aps ---------- \n";
+
+	        str += "FS : |";
+	        for(int i = 1;i < fs.size();i++){
+	            str += fs.get(i) + "|";
+	        }
+	        
+	        str += "\nAPS : |";
+
+	        for(int i = 1;i < aps.size();i++){
+	            str += aps.get(i) + "|";
+	        }
+	        
+	    	String Smatrice = "--------matrice  ---------- \n " ; 
+			 
+			
+			for( int i = 0 ; i< matrice.length ; i++ ) {
+				Smatrice += "| " ; 
+				for(int j = 0 ; j< matrice[i].length ; j++)
+				{
+					Smatrice += this.matrice[i][j] +" " ; 
+				}
+				Smatrice += "|\n " ; 
+			}
+	        return str + "\n" + Smatrice ;
+	    }
+	
 	
 /*
-    private ArrayList<Sommet> listeSommet = new ArrayList<Sommet>();
-
-    private int[][] matriceAdjacente;
-    private int[] fs;
-    private int[] aps;
-
+ 
     public Graphe(int[][] matriceAdjacente){
 
         for(int i=0; i< matriceAdjacente.length;i++){

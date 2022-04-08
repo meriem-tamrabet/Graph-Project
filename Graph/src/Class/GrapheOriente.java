@@ -2,8 +2,8 @@ package Class;
 
 import java.util.*;
 
-public class GrapheOriente extends Graphe{
-
+public class GrapheOriente{
+/*
     private GrapheListe l;
     private GrapheMatrice m;
     
@@ -112,7 +112,7 @@ public class GrapheOriente extends Graphe{
             m.enleverArc(s,t);
         }
     }
-*/
+
 //--------------------------ALGORITHMES-----------------------------
 
     public boolean Dantzig(double[][] c){
@@ -280,5 +280,5 @@ public class GrapheOriente extends Graphe{
 
         return rang;
     }
-
+*/
 }

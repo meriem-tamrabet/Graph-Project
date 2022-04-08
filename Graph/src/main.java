@@ -15,8 +15,8 @@ public class main {
 		// avant la saisie du choix de l'utilisateur.
 		do{
 			System.out.println("--------------------------------MENU---------------------------------------");
-			System.out.println("1. Matrice");
-			System.out.println("2. Liste ");
+			System.out.println("1. graphe avec matrice ");
+			System.out.println("2. bla bla  ");
 			System.out.println("3. Sortir");
 			System.out.println("4. Utilisation");
 			System.out.println("---------------------------------------------------------------------------");
@@ -30,58 +30,61 @@ public class main {
 			switch (choix){
 				case 1:
 
-					GrapheMatrice m = new GrapheMatrice(0, false ) ;
-					System.out.println(m.toString() );
+					Graphe G = new Graphe( false ) ;
+					System.out.println(G.toString() );
 					Sommet s = new Sommet("Paris" , 1) ; //sommets 0 et marqu� 1
 					Sommet t = new Sommet("Paris" , 1) ;  //sommets 1 et marqu� 1
 					Sommet w = new Sommet("Paris" , 1) ;  //sommets 2 et marqu� 1
 					Sommet k = new Sommet("Paris" , 1) ;  //sommets 2 et marqu� 1
 
 					// ajout des sommets
-					m.ajouterSommet(s);
-
+					System.out.println("---------Ajout de sommets ------------") ;
+					G.ajouterSommet(s);
 					System.out.println("---------------------") ;
-					m.affiche_matrice();
-					m.ajouterSommet(t);
-
+					G.afficher();
+					
+					G.ajouterSommet(t);
 					System.out.println("---------------------") ;
-					m.affiche_matrice();
-					m.ajouterSommet(w);
-
+					G.afficher();
+					
+					G.ajouterSommet(w);
 					System.out.println("---------------------") ;
-					m.affiche_matrice();
+					G.afficher();
 
-					m.ajouterSommet(k);
+					G.ajouterSommet(k);
 					System.out.println("---------------------") ;
-					m.affiche_matrice();
+					G.afficher();
+					
+					System.out.println("---------Ajout de arc  ------------") ;
 
 
 					//ajout arc entre s et t ==> 5
-					m.ajouterArc(s, t, 5);
-					m.ajouterArc(s, k, 5);
-					m.ajouterArc(t, k, 5);
+					G.ajouterArc(s, t, 5);
+					G.ajouterArc(s, k, 5);
+					G.ajouterArc(t, k, 5);
 					System.out.println("---------------------") ;
-					m.affiche_matrice();
+					G.afficher();
 
-					m.ajouterArc(w, t, 5);
-					m.ajouterArc(w, w, 5);
+					G.ajouterArc(w, t, 5);
+					G.ajouterArc(w, w, 5);
 					System.out.println("---------------------") ;
-					m.affiche_matrice();
+					G.afficher();
 
-					m.ajouterArc(k, t, 5);
-					m.ajouterArc(k, k, 5);
+					G.ajouterArc(k, t, 5);
+					G.ajouterArc(k, k, 5);
 					System.out.println("---------------------") ;
-					m.affiche_matrice();
+					G.afficher();
 
 
 					// supprimer sommets
-					m.supprimerSommet(s);
+					System.out.println("---------suppression de sommets ------------") ;
+					G.supprimerSommet(s);
 					System.out.println("---------------------") ;
-					m.affiche_matrice();
-					m.supprimerSommet(k);
+					G.afficher();
+					G.supprimerSommet(k);
 					System.out.println("---------------------") ;
-					m.affiche_matrice();
-				/*
+					G.afficher();
+	/*			
 					// Supp arc
 					m.enleverArc(s, w);
 					System.out.println("---------------------") ;
@@ -120,7 +123,7 @@ public class main {
 					Sommet Paris = new Sommet("Paris" , 1) ;
 					Sommet Mulhouse = new Sommet("Mulhouse" , 1) ;
 					Sommet Strasbourg = new Sommet("Strasbourg" , 1) ;
-
+/*
 					GrapheListe l = new GrapheListe(Paris,Mulhouse,Strasbourg);
 					System.out.println("-------------FS et APS vide-----------");
 					System.out.println(l.toString());
@@ -147,7 +150,7 @@ public class main {
 
 					System.out.println("-------------------Retire arcs--------------------");
 					System.out.println(l.toString());
-
+*/
 				break;
 
 				case 3:

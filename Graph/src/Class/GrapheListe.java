@@ -5,11 +5,11 @@ import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Vector;
 
-public class GrapheListe extends Graphe{
+public class GrapheListe {
 
     //private Vector<LinkedList<Arc>> liste;
     //private Cle_Sommets identifiant;
-
+/*
     private int[] fs;
     private int[] aps;
 
@@ -290,4 +290,5 @@ public class GrapheListe extends Graphe{
 
         return mat;
     }
+    */
 }
