@@ -291,4 +291,32 @@ public class GrapheListe {
         return mat;
     }
     */
+
+    /*public void  Matrice_to_fs_aps() {
+		int n = nombre_sommets() ;
+		int m = nombre_de_arc()  ;
+
+		fs = new ArrayList<Integer>(n+m+1) ;
+		aps = new ArrayList<Integer>(n+1) ;
+
+		if(n >0 )
+		{
+			aps.add(0,n); // aps
+			fs.add(0,n+m) ; //fs
+			int k = 1 ;
+			for( int i = 1 ; i <= n ; i++) {
+				aps.add(i, k ); //aps
+				for( int j = 1 ; j <= n; j++) {
+					if(matrice[i][j] != 0)
+					{
+						fs.add(k,j) ;  // fs[k] = j ;
+						++k ;
+					}
+				}
+				fs.add(k,0) ; ;//fs
+				++k ;
+			}
+		}
+
+	}*/
 }

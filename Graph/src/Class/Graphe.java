@@ -1,8 +1,6 @@
 package Class;
 import java.util.ArrayList;
 
-
-
 public  class Graphe {
 	
 	private int[][] matrice;
@@ -37,17 +35,39 @@ public  class Graphe {
 		
 	}
 
-	public Graphe(ArrayList<Integer> aps ,ArrayList<Integer> fs ) {
+	public Graphe(ArrayList<Integer> aps ,ArrayList<Integer> fs, boolean est_oriente) {
 		//this fs ; 
-		//fs to matrice 
-		
+		//fs to matrice
+		int tailleFs = fs.size();
+		int tailleAps = aps.size();
+
+		this.aps = new ArrayList<Integer>(tailleAps);
+		this.fs = new ArrayList<Integer>(tailleFs);
+
+		for(int i=0; i<tailleFs; i++){
+			this.fs.add(i,fs.get(i));
+		}
+
+		for(int i=0; i<tailleAps; i++){
+			this.aps.add(i,aps.get(i));
+		}
+
+		this.listeSommet.add(null);// la premiere case (0) est vide,
+		//la taille de fs y est stockÃ©
+
+		this.est_oriente = est_oriente;
+		this.avec_Poids=false;
+
+		fs_apsToMatrice();
+
 	}
-	
+
+
+	//constructeur par defaut a ne pas toucher !
 	public Graphe( boolean est_oriente ) {
 		this.est_oriente = est_oriente ; 
-		 Generer_matrice(0 , false ); 
-		 //generer fs 
-		 Matrice_to_fs_aps() ; 
+		 Generer_matrice(0 , false );
+		 Matrice_to_fs_aps() ;
 	}
 	
 	
@@ -85,12 +105,31 @@ public  class Graphe {
 		}
 		
 	}
+
+	public void genere_fsAps(int n){
+
+		int tailleFs= n+1; // +1 pour la case 0
+		int tailleAps= n+1;
+		this.fs = new ArrayList<Integer>(tailleFs);
+		this.aps = new ArrayList<Integer>(tailleAps);
+
+		this.fs.add(0,n); // n+m mais m =0
+		this.aps.add(0,n);
+
+		int val =0;
+		for(int i=1; i<tailleFs;i++){
+			this.fs.add(i,val);
+		}
+
+		for(int i=1; i<tailleAps;i++){
+			this.aps.add(i,val);
+		}
+
+	}
 	
 	public void ajouterSommet(Sommet s) {
 		int taille = nombre_sommets() +1  ; 
-		taille++ ; 
-		
-	
+		taille++ ;
 		listeSommet.add(s) ; 
 		
 		//System.out.println(listeSommet.get(listeSommet.size()-1).toString()) ;
@@ -103,15 +142,16 @@ public  class Graphe {
 				 N_matrice [i][j] =  matrice[i][j] ; 
 			}
 		}
-		
-		
 		 N_matrice [0][0] ++; 
 		matrice =N_matrice ; 
-		//TODO METTRE A JOURS FS ET APS 
+		//TODO METTRE A JOURS FS ET APS
+
+		Matrice_to_fs_aps();
+
 	}
 	/**
 	 * PERMET DE SAVOIR LA NUM DE SOMMETS EXEMPLE LE PREMIER LE DEUXIEME ... 
-	 * LE PREMIER SOMMETS EST DANS LA CESE 0, AFIN DE FACILITER LA TACHE ON A FAIT UN +1 POUR AVOIR LA 
+	 * LE PREMIER SOMMETS EST DANS LA CASE 0, AFIN DE FACILITER LA TACHE ON A FAIT UN +1 POUR AVOIR LA
 	 * BONNE NUMEROTATION 
 	 * **/
 	public int find_position_sommets(Sommet s)
@@ -122,7 +162,7 @@ public  class Graphe {
 		
 		return(i<listeSommet.size() ? i+1 : -1 ) ; 
 		// i+1 car on commence a ajouter dans la case 0 et donc 
-		//l'équvalent pou rmes sommets c'est toujours +1 sauf que pour supprimer dans ce tableau faudra fair -1 
+		//l'ï¿½quvalent pou rmes sommets c'est toujours +1 sauf que pour supprimer dans ce tableau faudra fair -1 
 	}
 	/**
 	 * AJOUTER UN ARC 
@@ -152,7 +192,8 @@ public  class Graphe {
 		 if(est_oriente == false )
 			 matrice[indiceT][indiceS]  = 1 ; 
 		}	 
-		//TODO mettre a jours fs et aps 
+		//TODO mettre a jours fs et aps
+		Matrice_to_fs_aps();
 	}
 	
 	/**
@@ -161,7 +202,7 @@ public  class Graphe {
 	public void supprimerSommet(Sommet s)
 	{
 		int indiceS = find_position_sommets(s) ; 
-		System.out.println("position du sommets " +indiceS ) ; 
+		System.out.println("position du sommets : " +indiceS ) ;
 		//TODO EXISTE UN SOMMET 
 		if( indiceS== -1   )
 		return ;
@@ -197,11 +238,22 @@ public  class Graphe {
 		
 		//Pensez vous faire  un clone ? 
 		matrice = mat;
+
+		Matrice_to_fs_aps();
 	}
 	
 	public int nombre_sommets() {
 		return matrice[0][0] ; 
-		}
+	}
+
+
+	public int nombreSommetsAps(){
+		return aps.get(0);
+	}
+
+	public int nombreArcFs(){
+		return fs.get(0)-nombreSommetsAps();
+	}
 	/**
 	 * nOMBRE D ARC  **/
 	public int nombre_de_arc() {
@@ -246,19 +298,15 @@ public  class Graphe {
 			else 
 				matrice[indiceS][indiceT] = 0   ; 
 				}
-				
+			Matrice_to_fs_aps();
 		}
 	//TODO fs et aps to matrice 
 	/**
-	 * GENERER FS ET APS A PARTIRE D4UNE MATRICE 
+	 * GENERER FS ET APS A PARTIR D4UNE MATRICE
 	 * 
 	 * **/
 	public void  Matrice_to_fs_aps() {
-		
-		
-		
 		int n = nombre_sommets() ;
-	
 		int m = nombre_de_arc()  ; 
 		
 		fs = new ArrayList<Integer>(n+m+1) ; 
@@ -268,24 +316,47 @@ public  class Graphe {
 		{
 			aps.add(0,n); // aps 
 			fs.add(0,n+m) ; //fs
-		int k = 1 ; 
-		for( int i = 1 ; i <= n ; i++) {
-			aps.add(i, k ); //aps
-			for( int j = 1 ; j <= n; j++) {
-				
-				if(matrice[i][j] != 0)
+			int k = 1 ;
+			for( int i = 1 ; i <= n ; i++) {
+				aps.add(i, k ); //aps
+				for( int j = 1 ; j <= n; j++) {
+					if(matrice[i][j] != 0)
 					{
-					fs.add(k,j) ;  // fs[k] = j ;
-					++k ; 
+						fs.add(k,j) ;  // fs[k] = j ;
+						++k ;
 					}
-				
+				}
+				fs.add(k,0) ; ;//fs
+				++k ;
 			}
-			
-			fs.add(k,0) ; ;//fs 
-			++k ;
-		}
 		}
 		
+	}
+
+	public void fs_apsToMatrice(){
+		int n = nombreSommetsAps();
+		this.matrice = new int[n+1][n+1];
+
+		//Nombre de sommets
+		this.matrice[0][0] = n; // premiere case de la matrice= nb sommets
+
+		//Nombre d'arcs
+		this.matrice[0][1] = nombreArcFs(); // premiere ligne colone 1= nb arc
+
+		//Matrice initialisÃ©e Ã  0
+		for(int i = 1;i <= n;i++){
+			for(int j = 1;j <= n;j++){
+				this.matrice[i][j] = 0;
+			}
+		}
+
+		for(int i = 1;i <= n;i++){
+			for(int k = aps.get(i); fs.get(k)!=0; k++){
+				this.matrice[i][fs.get(k)] = 1;
+			}
+		}
+
+
 	}
 	//------- Fin Methods ---------------------------
 	
@@ -295,7 +366,7 @@ public  class Graphe {
 	public void afficher()
 	{
 		if( est_oriente )
-		System.out.print(" votre graphe est orienté \n "  ); 
+		System.out.print(" votre graphe est orientï¿½ \n "  ); 
 		System.out.print(this.toString()  ); 
 		
 	}
@@ -313,7 +384,7 @@ public  class Graphe {
 	            str += aps.get(i) + "|";
 	        }
 	        
-	    	String Smatrice = "--------matrice  ---------- \n " ; 
+	    	String Smatrice = "--------matrice ---------- \n " ;
 			 
 			
 			for( int i = 0 ; i< matrice.length ; i++ ) {
@@ -324,13 +395,13 @@ public  class Graphe {
 				}
 				Smatrice += "|\n " ; 
 			}
-			String ListeSommets = "\n --------Sommets  ---------- \n " ; 
-			for(int i = 0;i < listeSommet.size();i++){
+			String ListeSommets = "\n ------Liste des sommets------ \n " ;
+			/*for(int i = 0;i < listeSommet.size();i++){
 				ListeSommets += listeSommet.get(i).toString() + "|";
-	        }
+	        }*/
 	        
-	       // return str + "\n" + Smatrice ;
-			return Smatrice + ListeSommets; 
+	       return str + "\n" + Smatrice ;
+			//return Smatrice + ListeSommets+".|.|\n";
 	    }
 	
 	

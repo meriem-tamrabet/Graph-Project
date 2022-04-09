@@ -1,5 +1,6 @@
 import Class.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class main {
@@ -16,7 +17,7 @@ public class main {
 		do{
 			System.out.println("--------------------------------MENU---------------------------------------");
 			System.out.println("1. graphe avec matrice ");
-			System.out.println("2. bla bla  ");
+			System.out.println("2. fs et aps ");
 			System.out.println("3. Sortir");
 			System.out.println("4. Utilisation");
 			System.out.println("---------------------------------------------------------------------------");
@@ -97,6 +98,8 @@ public class main {
 
 
 
+
+
 				break;
 
 
@@ -104,6 +107,36 @@ public class main {
 					Sommet Paris = new Sommet("Paris" , 1) ;
 					Sommet Mulhouse = new Sommet("Mulhouse" , 1) ;
 					Sommet Strasbourg = new Sommet("Strasbourg" , 1) ;
+
+					ArrayList<Integer> copyFs = new ArrayList<Integer>();
+					ArrayList<Integer> copyAps = new ArrayList<Integer>(4);
+
+					copyFs.add(9);
+					copyFs.add(2);
+					copyFs.add(3);
+					copyFs.add(0);
+					copyFs.add(1);
+					copyFs.add(3);
+					copyFs.add(0);
+					copyFs.add(1);
+					copyFs.add(0);
+					copyFs.add(0);
+
+					copyAps.add(4);
+					copyAps.add(1);
+					copyAps.add(4);
+					copyAps.add(7);
+					copyAps.add(9);
+
+					Graphe g = new Graphe(copyAps,copyFs,true);
+					g.afficher();
+
+					System.out.println("-------------------Ajout sommet--------------------");
+					g.ajouterSommet(Paris);
+					g.afficher();
+
+					System.out.println("-------------------supprimer sommet--------------------");
+
 /*
 					GrapheListe l = new GrapheListe(Paris,Mulhouse,Strasbourg);
 					System.out.println("-------------FS et APS vide-----------");
