@@ -13,6 +13,10 @@ public class main {
 
 
 		Scanner lectureClavier= new Scanner(System.in);
+		Sommet s = new Sommet("S" , 1) ; //sommets 0 et marqu� 1
+		Sommet t = new Sommet("T" , 1) ;  //sommets 1 et marqu� 1
+		Sommet w = new Sommet("W" , 1) ;  //sommets 2 et marqu� 1
+		Sommet k = new Sommet("K" , 1) ;  //sommets 2 et marqu� 1
 		byte choix=0; // on choisit le type byte pour utiliser moins d'espace memoire
 
 
@@ -24,6 +28,7 @@ public class main {
 			System.out.println("2. fs et aps ");
 			System.out.println("3. Sortir");
 			System.out.println("4. Graphique ");
+			System.out.println("5. cout  ");
 			System.out.println("---------------------------------------------------------------------------");
 
 			System.out.println();
@@ -35,12 +40,9 @@ public class main {
 			switch (choix){
 				case 1:
 
-					Graphe G = new Graphe( true ) ;
+					Graphe G = new Graphe( true , true  ) ;
 					System.out.println(G.toString() );
-					Sommet s = new Sommet("S" , 1) ; //sommets 0 et marqu� 1
-					Sommet t = new Sommet("T" , 1) ;  //sommets 1 et marqu� 1
-					Sommet w = new Sommet("W" , 1) ;  //sommets 2 et marqu� 1
-					Sommet k = new Sommet("K" , 1) ;  //sommets 2 et marqu� 1
+					
 
 					// ajout des sommets
 					System.out.println("---------Ajout de sommets ------------") ;
@@ -64,8 +66,8 @@ public class main {
 
 
 					//ajout arc entre s et t ==> 5
-					G.ajouterArc(s, t, 5);
-					G.ajouterArc(s, k, 5);
+					G.ajouterArc(s, t, 1);
+					G.ajouterArc(s, k, 55555 );
 					G.ajouterArc(t, k, 5);
 					System.out.println("---------------------") ;
 					G.afficher();
@@ -145,27 +147,18 @@ public class main {
 					GrapheListe l = new GrapheListe(Paris,Mulhouse,Strasbourg);
 					System.out.println("-------------FS et APS vide-----------");
 					System.out.println(l.toString());
-
-
 					l.ajouterSommet(new Sommet("Paris", 1));
-
 					System.out.println("-------------------Ajout sommet--------------------");
 					System.out.println(l.toString());
-
 					l.supprimerSommet(Strasbourg);
-
 					System.out.println("-------------------Retire sommet--------------------");
 					System.out.println(l.toString());
-
 					l.ajouterArc(Paris, Mulhouse, 5);
 					l.ajouterArc(Paris, Strasbourg, 5);
 					//l.ajouterArc(w, t, 5);
-
 					System.out.println("-------------------Ajout arcs--------------------");
 					System.out.println(l.toString());
-
 					l.enleverArc(Paris, Mulhouse);
-
 					System.out.println("-------------------Retire arcs--------------------");
 					System.out.println(l.toString());
 */
@@ -192,6 +185,47 @@ public class main {
 					MyWindow Fenetre = new MyWindow() ; 
 					Fenetre.setVisible(true) ;
 				break;
+				case 5 : 
+					
+					Graphe G_poids = new Graphe( true , true ) ;
+					
+					
+					G_poids.ajouterSommet(s);
+					// ajout des sommets
+					System.out.println("---------Ajout de sommets ------------") ;
+					G_poids.ajouterSommet(s);
+					System.out.println("---------------------") ;
+					G_poids.afficher();
+					
+					G_poids.ajouterSommet(t);
+					System.out.println("---------------------") ;
+					G_poids.afficher();
+					
+					G_poids.ajouterSommet(w);
+					System.out.println("---------------------") ;
+					G_poids.afficher();
+
+					G_poids.ajouterSommet(k);
+					System.out.println("---------------------") ;
+					G_poids.afficher();
+					
+					System.out.println("---------Ajout de arc  ------------") ;
+
+
+					//ajout arc entre s et t ==> 5
+					G_poids.ajouterArc(s, t, 5);
+					G_poids.ajouterArc(s, k, 5);
+					G_poids.ajouterArc(t, k, 5);
+					System.out.println("---------------------") ;
+					G_poids.afficher();
+
+					G_poids.ajouterArc(w, t, 5);
+					G_poids.ajouterArc(w, w, 5);
+					System.out.println("---------------------") ;
+					G_poids.afficher();
+					
+					G_poids.afficher_cout();
+					break;
 
 				default:
 					System.out.println("Cette option n'existe pas");
