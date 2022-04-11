@@ -3,6 +3,10 @@ import Class.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+
 public class main {
 
 	public static void main(String[] args) {
@@ -19,7 +23,7 @@ public class main {
 			System.out.println("1. graphe avec matrice ");
 			System.out.println("2. fs et aps ");
 			System.out.println("3. Sortir");
-			System.out.println("4. Utilisation");
+			System.out.println("4. Graphique ");
 			System.out.println("---------------------------------------------------------------------------");
 
 			System.out.println();
@@ -176,8 +180,17 @@ public class main {
 				break;
 
 				case 4:
-					System.out.println("1. ecrire conseil d'utilisatio si besoin");
-					System.out.println();
+					//apply a look n feel marche pas sur mac faut enlever le look 
+				try {
+					UIManager.setLookAndFeel(new NimbusLookAndFeel());
+				} catch (UnsupportedLookAndFeelException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+					
+					//Start my window 
+					MyWindow Fenetre = new MyWindow() ; 
+					Fenetre.setVisible(true) ;
 				break;
 
 				default:
