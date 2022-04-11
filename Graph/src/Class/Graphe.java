@@ -164,7 +164,6 @@ public  class Graphe {
 		taille++ ;
 		listeSommet.add(s) ; 
 		
-		//System.out.println(listeSommet.get(listeSommet.size()-1).toString()) ;
 
 		int[][] N_matrice = new int[taille ][taille] ; 
 		//recopier tt 
@@ -476,7 +475,7 @@ public  class Graphe {
 			Smatrice += "| " ; 
 			for(int j = 0 ; j< matrice_cout[i].length ; j++)
 			{
-				Smatrice += this.matrice_cout[i][j] +" " ; 
+				Smatrice += this.matrice_cout[i][j] + "\t" ;
 			}
 			Smatrice += "|\n " ; 
 			
@@ -501,10 +500,10 @@ public  class Graphe {
 			 
 			
 			for( int i = 0 ; i< matrice.length ; i++ ) {
-				Smatrice += "| " ; 
+				Smatrice += "|" + "\t" ; 
 				for(int j = 0 ; j< matrice[i].length ; j++)
 				{
-					Smatrice += this.matrice[i][j] +" " ; 
+					Smatrice += this.matrice[i][j]  + "\t"  ; 
 				}
 				Smatrice += "|\n " ; 
 			}
@@ -541,6 +540,8 @@ public  class Graphe {
 			 N_matrice [indice][j] = valeur_interdite ; 
 			 N_matrice [j][indice] = valeur_interdite ; 
 		}
+		if (indice > 0 )
+			 N_matrice [0][1] =  this.matrice_cout[0][1] ; 
 		 N_matrice [0][0] ++; 
 		 this.matrice_cout =N_matrice ; 
 	}

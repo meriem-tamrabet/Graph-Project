@@ -24,6 +24,7 @@ public class main {
 		// avant la saisie du choix de l'utilisateur.
 		do{
 			System.out.println("--------------------------------MENU---------------------------------------");
+			System.out.println("check la magie que j'ai fait #meriem_tamrabet" );
 			System.out.println("1. graphe avec matrice ");
 			System.out.println("2. fs et aps ");
 			System.out.println("3. Sortir");
@@ -67,8 +68,8 @@ public class main {
 
 					//ajout arc entre s et t ==> 5
 					G.ajouterArc(s, t, 1);
-					G.ajouterArc(s, k, 55555 );
-					G.ajouterArc(t, k, 5);
+					G.ajouterArc(s, k, 2 );
+					G.ajouterArc(t, k, 3);
 					System.out.println("---------------------") ;
 					G.afficher();
 
@@ -188,18 +189,21 @@ public class main {
 				case 5 : 
 					
 					Graphe G_poids = new Graphe( true , true ) ;
+					G_poids.afficher_cout() ; //good
 					
-					
-					G_poids.ajouterSommet(s);
+				
 					// ajout des sommets
 					System.out.println("---------Ajout de sommets ------------") ;
 					G_poids.ajouterSommet(s);
+					G_poids.afficher_cout();
 					System.out.println("---------------------") ;
 					G_poids.afficher();
+					G_poids.afficher_cout();
 					
 					G_poids.ajouterSommet(t);
 					System.out.println("---------------------") ;
 					G_poids.afficher();
+					G_poids.afficher_cout();
 					
 					G_poids.ajouterSommet(w);
 					System.out.println("---------------------") ;
@@ -208,19 +212,21 @@ public class main {
 					G_poids.ajouterSommet(k);
 					System.out.println("---------------------") ;
 					G_poids.afficher();
+					G_poids.afficher_cout();
 					
 					System.out.println("---------Ajout de arc  ------------") ;
 
 
 					//ajout arc entre s et t ==> 5
 					G_poids.ajouterArc(s, t, 5);
-					G_poids.ajouterArc(s, k, 5);
-					G_poids.ajouterArc(t, k, 5);
+					G_poids.afficher_cout();
+					G_poids.ajouterArc(s, k, 2);
+					G_poids.ajouterArc(t, k, 3);
 					System.out.println("---------------------") ;
 					G_poids.afficher();
 
 					G_poids.ajouterArc(w, t, 5);
-					G_poids.ajouterArc(w, w, 5);
+					G_poids.ajouterArc(w, w, 8);
 					System.out.println("---------------------") ;
 					G_poids.afficher();
 					
