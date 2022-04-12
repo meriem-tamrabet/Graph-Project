@@ -1,9 +1,9 @@
 package Test_unitaire;
 
-import static junit.framework.Assert.assertEquals;
-
-
 import Class.*;
+import junit.framework.*;
+
+import static junit.framework.Assert.assertEquals;
 import org.junit.Test;
 
 public class ArcTest {
