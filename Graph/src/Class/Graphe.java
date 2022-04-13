@@ -114,7 +114,8 @@ public  class Graphe {
 		
 		int taille_matrice = n+2 ; //ligne de  0  
 		
-		this.matrice_cout = new int[taille_matrice][taille_matrice] ; 
+		this.matrice_cout = new int[taille_matrice][taille_matrice] ;
+		
 		this.matrice_cout[0][0] = n ; 
 
 		
@@ -179,7 +180,7 @@ public  class Graphe {
 		
 		
 		if(this.avec_Poids == true )
-			{update_cout();
+			{update_ajout_s_cout();
 			
 			}
 		
@@ -240,15 +241,21 @@ public  class Graphe {
 	public void supprimerSommet(Sommet s)
 	{
 		int indiceS = find_position_sommets(s) ; 
+		
+		
+		
+		int[][] mat = new int[matrice.length-1][matrice[0].length-1];
+		
 		System.out.println("position du sommets : " +indiceS ) ;
 		//TODO EXISTE UN SOMMET 
 		if( indiceS== -1   )
 		return ;
-		
+		//mettre d'abords la matrice des cout a jours 
+		 update_supp_s_cout(indiceS) ;
 		// attention ici faut le bon indice c'est a dire -1 
 		listeSommet.remove(indiceS-1) ; 
 		
-		int[][] mat = new int[matrice.length-1][matrice[0].length-1];
+		
 		
 		for(int i=0; i<indiceS; ++i)
 		{
@@ -273,15 +280,19 @@ public  class Graphe {
 			}
 		}
 		mat [0][0] --;
-		
-		//TODO mettre a jours le nombre d'arc 
+		//colone ? 
+		matrice = mat;
+		matrice[0][1]  = update_arc() ; 
+		matrice_cout[0][1] = matrice[0][1]  ; 
 		
 		//TODO mettre ajours si le graphe est orienter faut enlever de sommet t a sommets s 
-		//TODO METTRE A JOURS MATRICE COUT
-		//Pensez vous faire  un clone ? 
-		matrice = mat;
+		
+		
 
 		Matrice_to_fs_aps();
+		// mettre a jours le nombre d'arc 
+	
+		//TODO METTRE A JOURS MATRICE COUT
 	}
 	
 	
@@ -324,6 +335,7 @@ public  class Graphe {
 				matrice[indiceS][indiceT] = 0   ; 
 				if (this.avec_Poids)
 					matrice_cout[indiceS][indiceT] = valeur_interdite   ; 
+					this.matrice_cout[0][1] -- ; 
 				}
 			Matrice_to_fs_aps();
 		}
@@ -404,16 +416,29 @@ public  class Graphe {
 	public  int cout_Get(int i,int j) {
 		return matrice_cout[i][j] ; 
 	}
+	public  Sommet liste_sommets_Get(int i) {
+		return listeSommet.get(i) ; 
+	}
 	
 	public int nb_successeur(Sommet s) {
 		int indiceS = find_position_sommets(s) ; 
-		int num ; 
-		if(indiceS == aps.get(0) )
-			num = fs.size() -1 -  fs.get(indiceS)  ; 
-		else 
-			num = fs.get(indiceS+1 ) -  fs.get(indiceS)  ; 
-		return num ; 
+		int co = 0  ; 
+		int i = aps.get(indiceS) ; 
+		while(i < fs.size() && fs.get(i)!=0 ) {
+			i++ ; 
+			co++ ; 
+		}
+		return co ; 
 		
+	}
+	public int update_arc() {
+		int co = 0 ; 
+		for(int i = 0 ; i < matrice[0].length ; i++) {
+			for(int j = 0 ; j < matrice[0].length ; j++) 
+				if(matrice[i][j] == 1 )
+					co++ ; 
+		}
+		return co ; 
 	}
 	
 	public int nombre_sommets() {
@@ -518,14 +543,14 @@ public  class Graphe {
 			//return Smatrice + ListeSommets+".|.|\n";
 	    }
 	 // --------------------------- methode cout ----------------------------- 
-	public void update_cout() {
+	public void update_ajout_s_cout() {
 		
 		
 		int taille = nombre_sommets()   ; 
 		taille++ ;
 		
 		int[][] N_matrice = new int[taille ][taille] ; 
-		System.out.println("création matrice vide ");
+		
 		//recopier tt 
 		for( int i = 0 ; i< taille -1   ; i++ ) {
 			for(int j = 0 ; j< taille-1  ; j++)
@@ -547,189 +572,39 @@ public  class Graphe {
 	}
 	
 	
-/*
- 
-    public Graphe(int[][] matriceAdjacente){
-        for(int i=0; i< matriceAdjacente.length;i++){
-            for(int j=0; j<matriceAdjacente.length; j++){
-                this.matriceAdjacente[i][j]= matriceAdjacente[i][j];
-            }
-        }
-        int n = matriceAdjacente[0][0];
-        int m = matriceAdjacente[0][1];
-         int fs[] = new int[n+m];
-         int aps[] = new int[n];
-         matrineToFs(fs,aps,matriceAdjacente);
-    }
-    public Graphe(int []fs, int[] aps){
-      for(int i=0; i<fs.length;i++){
-          this.fs[i]=fs[i];
-      }
-        for(int i=0; i<aps.length;i++){
-            this.aps[i]=aps[i];
-        }
-        int matriceAdjacente [][]= new int[aps[0]+1][aps[0]+1];
-        fsToAps(fs,aps,matriceAdjacente);
-    }
-    public Graphe(){
-        this.aps=null;
-        this.fs=null;
-        this.matriceAdjacente=null;
-    }
-    public void scan(){
-    }
-    public void fsToAps(int[] fs, int aps[], int[][] matrice){
-        int k;
-        int nbSommet = aps[0];
-        int nbArc = fs[0] - nbSommet;
-        matrice = new int[nbSommet + 1][];
-        for(int i = 0; i<= nbSommet; i++){
-            matrice[i]= new int[nbSommet+1];
-        }
-        matrice[0][0] = nbSommet;
-        matrice[0][1] = nbArc;
-        for(int i =1; i<=nbSommet; i++){
-            for(int j=1; j<=nbSommet; j++){
-                matrice[i][j] =0;
-            }
-        }
-        for(int i=1; i<=nbSommet; i++){
-            //for(k= aps[i]; (j=fs[k] )!= 0; k++){
-                //matrice[i][j] = 1;}
-            k= aps[i];
-            while(fs[k] != 0){
-                matrice[i][fs[k]] =1;
-                k++;
-            }
-        }
-    }
-    public void matrineToFs(int[] fs, int aps[], int[][] matrice){
-        int nbSommet = matrice[0][0];
-        int nbArc = matrice[0][1];
-        aps = new int[nbSommet+1];
-        aps[0] = nbSommet;
-        fs = new int [nbSommet+nbArc+1];
-        aps[0]=nbSommet;
-        fs[0] = nbSommet+nbArc;
-        int k = 1;
-        for(int i=1; i<= nbSommet; i++){
-            aps[i] =k;
-            for(int j=1; j<=nbSommet; j++){
-                if(matrice[i][j]!=0){
-                    fs[k++] =j;
-                }
-            }
-            fs[k++]=0;
-        }
-    }
-    public void affiche(){}
-    public int[] descente(int r,int[] aps,int[] fs,int[] dist){
-        
-        int nb_som = aps[0];
-        int i = 0,j = 1,k = 0,ifin,s,t,it;
-        int[] fil = new int[nb_som+1];
-        fil[0] = nb_som;
-        fil[1] = r;
-        dist = new int[nb_som + 1];
-        dist[0] = nb_som;
-        for(int h = 1;h <= nb_som;h++)
-            dist[h] = -1;
-        
-        dist[r] = 0;
-        while(i < j){
-            k++;
-            ifin = j;
-            while(i < ifin){
-                i++;
-                s = fil[i];
-                it = aps[s];
-                t = fs[it];
-                while(t > 0){
-                    if(dist[t] == -1){
-                        j++;
-                        fil[j] = t;
-                        dist[t] = k;
-                    }
-                    t = fs[++it];
-                }
-            }
-        }
-        return dist;
-    }
-    // Regarder comment on peut l'adapter à la matrice d'adjacence
-    public int[][] calcul_distnace(int[] fs,int[] aps,int[][] dist){
-        int n = aps[0];
-        dist = new int[n+1][n+1];
-        for(int i = 1;i <= n;i++){
-            descente(i,fs,aps,dist[i]);
-        }
-        dist[0] = new int[1];
-        dist[0][0] = n;
-    	return dist; 
-    }
-    public void det_ddi(int[] aps,int[] fs,int[] ddi){
-        int n = aps[0];
-        ddi[0] = n;
-        for(int i = 1;i <= n;i++)
-            ddi[i] = 0;
-        
-        for(int i = 1;i < fs[0];i++){
-            if(fs[i] != 0){
-                ddi[fs[i]]++;
-            }
-        }
-    }
-    public void empiler(int x,int[] pilch){
-        pilch[x] = pilch[0];
-        pilch[0] = x;
-    }
-    public void ddiNul(int[] ddi,int x,int[] pilch){
-        if(ddi[x] == 0)
-            empiler(x,pilch);
-    }
-    //Regarder comment calculer le rang avec la matrice d'adjacence
-    public int[] rang(int[] rang,int[] fs,int[] aps){
-        
-        int n = aps[0];
-        int s,k,h,t;
-        int[] pilch = new int[n+1];
-        int[] prem = new int[n+1];
-        int[] ddi = new int[n+1];
-        det_ddi(aps, fs, ddi);
-        pilch[0] = 0;
-        for(s = 1;s <= n;s++){
-            rang[s] = -1;
-            ddiNul(ddi, s, pilch);
-        }
-        k = -1;
-        s = pilch[0];
-        prem[0] = s;
-        while(pilch[0] > 0){
-            k++;
-            pilch[0] = 0;
-            while(s > 0){
-                rang[s] = k;
-                h = aps[s];
-                t = fs[h];
-                while(t > 0){
-                    ddi[t]--;
-                    ddiNul(ddi, t, pilch);
-                    h++;
-                    t = fs[h];
-                }
-                s = pilch[s];
-            }
-            s = pilch[0];
-            prem[k+1] = s;
-        }
-        return rang;
-    }
-    public Graphe Tarjan(){
-     	return null ; 
-    }
-    public void ordonnacement(){}
-    public void Dijkstra(){}
-    public void Dantzig(){}
-    public void Prufer(){}
-    */
+	public void update_supp_s_cout( int indiceS ) {
+		int[][] mat = new int[matrice_cout.length-1][matrice_cout[0].length-1];
+		
+		
+		 
+		if( indiceS== -1   )
+		return ;
+		
+		for(int i=0; i<indiceS; ++i)
+		{
+			for(int j=0; j<indiceS; ++j)
+			{
+				mat[i][j] = matrice_cout[i][j];
+			}
+			for(int j=indiceS+1; j<matrice_cout.length ; ++j)
+			{
+				mat[i][j-1] = matrice_cout[i][j];
+			}
+		}
+		for(int i=indiceS+1; i<matrice_cout.length; ++i)
+		{
+			for(int j=indiceS+1; j<indiceS; ++j)
+			{
+				mat[i-1][j-1] = matrice_cout[i][j];
+			}
+			for(int j=indiceS+1; j<matrice_cout.length; ++j)
+			{
+				mat[i-1][j-1] = matrice_cout[i][j];
+			}
+		}
+		mat [0][0] --;
+		matrice_cout =mat ; 
+	}
+	
+
 }

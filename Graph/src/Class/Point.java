@@ -1,11 +1,11 @@
 package Class;
 import java.util.Scanner;
 public class Point {
-	private double x, y ;
+	private int x, y ;
 
 
 //----------  constructors-----------------------
-	public Point(double x, double y) {
+	public Point(int x, int y) {
 		
 		this.x = x;
 		this.y = y;
@@ -13,20 +13,20 @@ public class Point {
 
 //---------- End of constructors-----------------------
 //-------------------------Getter ----------------------------
-	public double getX() {
+	public int getX() {
 		return x;
 	}
 
 
-	public double getY() {
+	public int getY() {
 		return y;
 	}
 	//------------------- End of Getter-----------------------
 //-----------------------Setter--------------------------------
-	public void setY(double y) {
+	public void setY(int y) {
 		this.y = y;
 	}
-	public void setX(double x) {
+	public void setX(int x) {
 		this.x = x;
 	}
 //------------------- End of Setter-----------------------
@@ -36,7 +36,7 @@ public class Point {
 	}
 
 	
-	public void move(double x, double y){
+	public void move(int x, int y){
 		this.x = x;
 		this.y = y;
 	}
@@ -44,7 +44,7 @@ public class Point {
 	
 	
 	
-	public void schift(double x, double y){
+	public void schift(int x, int y){
 		this.x += x;
 		this.y += y;
 	}
@@ -54,10 +54,10 @@ public class Point {
 
 		Scanner scan = s;
 		
-		double nx = scan.nextDouble();
+		int nx = scan.nextInt();
 		this.setX(nx);
 		
-		double ny = scan.nextDouble();
+		int ny = scan.nextInt();
 		this.setY(ny);
 	}
 	

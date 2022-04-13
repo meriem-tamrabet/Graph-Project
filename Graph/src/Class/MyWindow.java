@@ -1,10 +1,14 @@
 package Class;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -22,6 +26,8 @@ public class MyWindow extends JFrame {
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setSize(new Dimension(600,400));
 		this.setLocationRelativeTo(null);
+
+	      this.setTitle("Mon application ");
 		
 		JPanel contentPane  = (JPanel)  this.getContentPane() ;
 		contentPane.setLayout(new FlowLayout());
@@ -32,15 +38,7 @@ public class MyWindow extends JFrame {
 		contentPane.add(new JCheckBox(" orienter ")) ; 
 		contentPane.add(new JCheckBox(" avec poids ")) ; 
 		contentPane.add(new JTextField("sommets")) ; 
-		
-		
-		
-		
-		
-		
-		
-
-		
-	}
-
+			
+}
+	 
 }

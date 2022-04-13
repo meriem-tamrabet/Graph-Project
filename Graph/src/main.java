@@ -13,10 +13,11 @@ public class main {
 
 
 		Scanner lectureClavier= new Scanner(System.in);
-		Sommet s = new Sommet("S" , 1) ; //sommets 0 et marqu� 1
-		Sommet t = new Sommet("T" , 1) ;  //sommets 1 et marqu� 1
-		Sommet w = new Sommet("W" , 1) ;  //sommets 2 et marqu� 1
-		Sommet k = new Sommet("K" , 1) ;  //sommets 2 et marqu� 1
+		
+		Sommet s = new Sommet("S",new Point(100, 200) , 1) ; //sommets 0 et marqu� 1
+		Sommet t = new Sommet("T" , new Point(220, 220) , 1) ;  //sommets 1 et marqu� 1
+		Sommet w = new Sommet("W", new Point(200, 300) , 1) ;  //sommets 2 et marqu� 1
+		Sommet k = new Sommet("K" , new Point(260, 300) , 1) ;  //sommets 2 et marqu� 1
 		byte choix=0; // on choisit le type byte pour utiliser moins d'espace memoire
 
 
@@ -24,7 +25,7 @@ public class main {
 		// avant la saisie du choix de l'utilisateur.
 		do{
 			System.out.println("--------------------------------MENU---------------------------------------");
-			System.out.println("check la magie que j'ai fait #meriem_tamrabet" );
+		
 			System.out.println("1. graphe avec matrice ");
 			System.out.println("2. fs et aps ");
 			System.out.println("3. Sortir");
@@ -195,8 +196,6 @@ public class main {
 					// ajout des sommets
 					System.out.println("---------Ajout de sommets ------------") ;
 					G_poids.ajouterSommet(s);
-					G_poids.afficher_cout();
-					System.out.println("---------------------") ;
 					G_poids.afficher();
 					G_poids.afficher_cout();
 					
@@ -219,20 +218,46 @@ public class main {
 
 					//ajout arc entre s et t ==> 5
 					G_poids.ajouterArc(s, t, 5);
+					G_poids.afficher();
 					G_poids.afficher_cout();
+					
 					G_poids.ajouterArc(s, k, 2);
 					G_poids.ajouterArc(t, k, 3);
 					System.out.println("---------------------") ;
 					G_poids.afficher();
+					G_poids.afficher_cout();
 
 					G_poids.ajouterArc(w, t, 5);
 					G_poids.ajouterArc(w, w, 8);
 					System.out.println("---------------------") ;
 					G_poids.afficher();
-					
 					G_poids.afficher_cout();
-					break;
+					/*
+					// supprimer sommets
+					System.out.println("---------suppression de sommets ------------") ;
+					G_poids.supprimerSommet(s);
+					System.out.println("---------------------") ;
+					G_poids.afficher();
+					G_poids.afficher_cout();
+					
+					G_poids.supprimerSommet(k);
+					System.out.println("---------------------") ;
+					G_poids.afficher();
+					G_poids.afficher_cout();
+			
+					// Supp arc
+					System.out.println("---------suppression des arc  ------------") ;
 
+					G_poids.enleverArc(w, w);
+					//System.out.println("---------------------") ;
+					G_poids.afficher();
+					G_poids.afficher_cout();
+					*/
+					
+					new dessinGraphe(G_poids) ; 
+					break;
+				
+					
 				default:
 					System.out.println("Cette option n'existe pas");
 
