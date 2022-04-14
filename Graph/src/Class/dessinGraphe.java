@@ -6,7 +6,7 @@ public class dessinGraphe  extends JFrame{
 	
 	public dessinGraphe(Graphe G){
 		this.G = G ; 
-        setTitle("Drawing a Circle");
+        setTitle("Drawing a Graph");
         setSize(600, 400);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -21,7 +21,8 @@ public class dessinGraphe  extends JFrame{
         	g2d.drawOval(s.getPosition().getX(), s.getPosition().getY(), 50, 50);
         }
         //dessin des arc par rapport a fs et aps youppi 
-     
+        
+        
 
     }
 }

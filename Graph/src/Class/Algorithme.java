@@ -149,7 +149,25 @@ ArrayList<Integer> Prufer_encode          (int[][] mat){
 	return null  ; 
 }
 
-//void Prufer_decode (ArrayList<Integer> p, int[][]  mat) { } 
+void Prufer_decode (ArrayList<Integer> prf, int[][]  mat) {
+	int n = mat[0][0];
+	prf = new ArrayList<Integer>(n-1) ; 
+    
+	prf.set(0, n-2 ) ;
+
+	int k = 1;
+	while (k <= n-2)
+	{	int i = 1;
+		for (; mat[i][0] != 1; i++);
+		int j=1;
+		for (; mat[i][j] != 1; j++);
+		prf.set(k++, j) ;
+		mat[i][j]=0;
+		mat[j][i]=0;
+		mat[i][0]=0;
+		mat[j][0]--;
+	}
+} 
 
 
 void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , ArrayList<Integer> distance)
@@ -372,6 +390,7 @@ void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , ArrayList<
 		}
 		fsr.set(0, kr-1);
 	}
+	
 	public void base_Greduit(ArrayList<Integer>apsr, ArrayList<Integer>fsr, ArrayList<Integer>br)
 	{
 		int nr = apsr.get(0);

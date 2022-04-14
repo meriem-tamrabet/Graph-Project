@@ -8,10 +8,10 @@ import org.junit.Test;
 import Class.Point;
 
 class PointTest {
-	double x = 3 ; 
-	double y = 5 ; 
+	int x = 3 ; 
+	int y = 5 ; 
 
-	public void les_Coordonne_Sont_Bon(Point p, double x , double y )
+	public void les_Coordonne_Sont_Bon(Point p, int x , int y )
 	{
 		assertEquals(p.getX(), x);
 		assertEquals(p.getY(), y);

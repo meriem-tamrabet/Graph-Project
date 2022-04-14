@@ -222,12 +222,14 @@ public  class Graphe {
 		 
 		 if( est_oriente == false )
 			 matrice[indiceT][indiceS]  = 1 ; 
-		 
+		
 		if( this.avec_Poids)
 		{
 			
 		 //TODO AJOUT LE POIDS 
+			 //System.out.println(" popopopopopopopopopo");
 			 this.matrice_cout[indiceT][indiceS]  = val; 
+			 this.matrice_cout[0][1] = this.matrice[0][1] ; 
 	
 		}
 		 

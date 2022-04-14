@@ -196,17 +196,17 @@ public class main {
 					// ajout des sommets
 					System.out.println("---------Ajout de sommets ------------") ;
 					G_poids.ajouterSommet(s);
-					G_poids.afficher();
-					G_poids.afficher_cout();
+					//G_poids.afficher();
+					//G_poids.afficher_cout();
 					
 					G_poids.ajouterSommet(t);
 					System.out.println("---------------------") ;
-					G_poids.afficher();
-					G_poids.afficher_cout();
+					//G_poids.afficher();
+					//G_poids.afficher_cout();
 					
 					G_poids.ajouterSommet(w);
 					System.out.println("---------------------") ;
-					G_poids.afficher();
+					//G_poids.afficher();
 
 					G_poids.ajouterSommet(k);
 					System.out.println("---------------------") ;
