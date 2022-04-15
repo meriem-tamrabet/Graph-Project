@@ -145,11 +145,41 @@ public ArrayList<Integer> rang(ArrayList<Integer> FS, ArrayList<Integer> APS){
 }
 
 
-ArrayList<Integer> Prufer_encode          (int[][] mat){
-	return null  ; 
+public void Prufer_decode (ArrayList<Integer> t){
+	int m = t.get(0), n = m+2;
+	ArrayList<Integer> s = new ArrayList<Integer>(n+1);
+	for (int i = 1; i <= n; i++) 
+	{
+		s.set(i, 0);
+	}
+	for (int i = 1; i <= m; i++) 
+	{
+		s.set(t.get(i), s.get(t.get(i))+1);
+	}
+	for (int k = 1; k <= m; k++)
+	{
+		for (int i = 1; i <= n; i++)
+		{
+			if (s.get(i) == 0)
+			{
+				System.out.println('['+Integer.valueOf(t.get(k))+' '+Integer.valueOf(i)+']');
+				s.set(t.get(k), s.get(t.get(k))+1);
+				s.set(i, -1);
+				break;
+			}
+		}
+	}
+	System.out.print("[ ");
+	for (int i = 1; i <= n; i++)
+	{
+		if ( s.get(i) == 0 )
+			System.out.print(Integer.valueOf(i) + " ");
+	}
+	System.out.print(" ]");
 }
 
-void Prufer_decode (ArrayList<Integer> prf, int[][]  mat) {
+
+void Prufer_encode (ArrayList<Integer> prf, int[][]  mat) {
 	int n = mat[0][0];
 	prf = new ArrayList<Integer>(n-1) ; 
     
@@ -286,8 +316,10 @@ void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , ArrayList<
 		return t.get(t.lastIndexOf(t)-1);
 	}
 	
-	public void traversee(int s, int p, Graphe g, ArrayList<Integer>num, ArrayList<Integer>ro, ArrayList<Boolean>entarj, ArrayList<Integer>tarj,
-			ArrayList<Integer>pred, ArrayList<Integer>prem, ArrayList<Integer>pilch, ArrayList<Integer>cfc)
+	public void traversee(int s, int p, Graphe g, ArrayList<Integer>num, ArrayList<Integer>ro,
+			ArrayList<Boolean>entarj, ArrayList<Integer>tarj,
+			ArrayList<Integer>pred, ArrayList<Integer>prem,
+			ArrayList<Integer>pilch, ArrayList<Integer>cfc)
 		{
 			 int t;
 			 int k;
@@ -426,7 +458,7 @@ void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , ArrayList<
 		 	 	 	 	 	 //sommets d’une base du graphe initial
 		 	 	 {
 		 	 		String str = "";
-		 			str += "------------Dantzig : Matrice des couts-------------\n";
+		 			str += "------------Tarjan : edition des bases-------------\n";
 		 			str += "| ";
 		 	 		 for(int i=0; i<Base.size(); i++)
 		 	 		 {
