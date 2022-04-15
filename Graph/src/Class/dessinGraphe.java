@@ -1,13 +1,14 @@
 package Class;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 public class dessinGraphe  extends JFrame{
 	private Graphe G ; 
 	
 	public dessinGraphe(Graphe G){
 		this.G = G ; 
         setTitle("Drawing a Graph");
-        setSize(600, 400);
+        setSize(600, 600);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -15,14 +16,48 @@ public class dessinGraphe  extends JFrame{
 
     @Override
     public void paint(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
+    	BufferedImage result;
+    	result = new BufferedImage(600, 600, BufferedImage.TYPE_INT_RGB);
+    //	Graphics2D g2d = (Graphics2D) result.createGraphics(); 
+    	Graphics2D g2d = (Graphics2D) g ; 
+    	/** Définit une épaisseur de 5 pixels */ 
+    	g2d.setStroke(new BasicStroke( 5.0f ));
+    	
+    	//g2d.setFont(new Font("Serif",Font.PLAIN,12)); 
+    	
+    	
         for(int i = 0 ; i < G.nombre_sommets(); i++) {
         	Sommet s = G.liste_sommets_Get(i)  ; 
-        	g2d.drawOval(s.getPosition().getX(), s.getPosition().getY(), 50, 50);
+        	int x = s.getPosition().getX(); 
+        	int y = s.getPosition().getY() ;
+        	g2d.setColor(Color.BLACK); 
+        	g2d.drawOval(x-5, y-5, 50, 50);
+        	g2d.setColor(Color.RED); 
+        	String str = s.getContenu() ; 
+        	g2d.drawString(str, x+20, y+20);
+        	
         }
+        g2d.setColor( Color.blue );
         //dessin des arc par rapport a fs et aps youppi 
         
-        
+       int Num_Sommet = 0 ; 
+       
+       for(int i = 1 ; i < G.Fs_Get(0)+1; i++) {
+    	   Sommet s =  G.liste_sommets_Get(Num_Sommet) ; 
+    	   
+    	   while(G.Fs_Get(i)!= 0 ) {
+    		   //c'est que y'a des successeur 
+    		   Sommet t =  G.liste_sommets_Get(G.Fs_Get(i)-1) ; 
+    		   	int x1 = s.getPosition().getX() +10; 
+           		int y1 = s.getPosition().getY() +10;
+           	 	int x2 = t.getPosition().getX()+10; 
+           		int y2 = t.getPosition().getY()+10 ;
+    		   g2d.drawLine(x1,y1,x2,y2);
+    		   i++; 
+    	   }
+    	   Num_Sommet++ ; 
+       }
+       g2d.dispose();
 
     }
 }

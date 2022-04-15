@@ -491,6 +491,21 @@ public  class Graphe {
 		System.out.print(this.toString()  ); 
 		
 	}
+	public void afficher_fs_aps() {
+		  String str = "--------fs & aps ---------- \n";
+
+	        str += "FS : |";
+	        for(int i = 1;i < fs.size();i++){
+	            str += fs.get(i) + "|";
+	        }
+	        
+	        str += "\nAPS : |";
+
+	        for(int i = 1;i < aps.size();i++){
+	            str += aps.get(i) + "|";
+	        }
+	        System.out.println(str); ; 
+	}
 	public void afficher_cout()
 	{
 		System.out.print(" cout  \n "  ); 

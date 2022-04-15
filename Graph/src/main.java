@@ -15,9 +15,11 @@ public class main {
 		Scanner lectureClavier= new Scanner(System.in);
 		
 		Sommet s = new Sommet("S",new Point(100, 200) , 1) ; //sommets 0 et marqu� 1
-		Sommet t = new Sommet("T" , new Point(220, 220) , 1) ;  //sommets 1 et marqu� 1
-		Sommet w = new Sommet("W", new Point(200, 300) , 1) ;  //sommets 2 et marqu� 1
-		Sommet k = new Sommet("K" , new Point(260, 300) , 1) ;  //sommets 2 et marqu� 1
+		Sommet t = new Sommet("T" , new Point(400, 260) , 1) ;  //sommets 1 et marqu� 1
+		Sommet w = new Sommet("P", new Point(100, 500) , 1) ;  //sommets 2 et marqu� 1
+		Sommet k = new Sommet("K" , new Point(500, 450) , 1) ;  //sommets 2 et marqu� 1
+		Sommet L = new Sommet("L" , new Point(100, 450) , 1) ;  //sommets 2 et marqu� 1
+
 		byte choix=0; // on choisit le type byte pour utiliser moins d'espace memoire
 
 
@@ -30,6 +32,7 @@ public class main {
 			System.out.println("2. fs et aps ");
 			System.out.println("3. Sortir");
 			System.out.println("4. Graphique ");
+			System.out.println("6. dessin  ");
 			System.out.println("5. cout  ");
 			System.out.println("---------------------------------------------------------------------------");
 
@@ -254,10 +257,40 @@ public class main {
 					G_poids.afficher_cout();
 					*/
 					
-					new dessinGraphe(G_poids) ; 
+					
 					break;
 				
+				case 6 : 
 					
+					Graphe MonGraphe = new Graphe( true , true  ) ;
+					
+
+					// ajout des sommets
+					System.out.println("---------Ajout de sommets ------------") ;
+					MonGraphe.ajouterSommet(s);
+					MonGraphe.ajouterSommet(t);
+					MonGraphe.ajouterSommet(w);
+					MonGraphe.ajouterSommet(k);
+					MonGraphe.ajouterSommet(L);
+				
+					System.out.println("---------------------") ;
+					System.out.println("---------Ajout de arc  ------------") ;
+					MonGraphe.ajouterArc(s, t, 1);
+					MonGraphe.ajouterArc(s, k, 2 );
+					MonGraphe.ajouterArc(t, k, 3);
+					MonGraphe.ajouterArc(w, t, 5);
+					MonGraphe.ajouterArc(w, w, 5);
+					MonGraphe.ajouterArc(k, t, 5);
+					MonGraphe.ajouterArc(k, k, 5);
+					
+					System.out.println("---------------------") ;
+				
+					MonGraphe.afficher() ;
+					MonGraphe.afficher_fs_aps() ; 
+					
+					new dessinGraphe(MonGraphe) ; 
+				
+					break ; 
 				default:
 					System.out.println("Cette option n'existe pas");
 
