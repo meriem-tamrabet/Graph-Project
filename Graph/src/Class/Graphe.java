@@ -421,7 +421,11 @@ public  class Graphe {
 	public  Sommet liste_sommets_Get(int i) {
 		return listeSommet.get(i) ; 
 	}
-	
+
+	public ArrayList<Integer> getFs() { return fs;}
+
+	public ArrayList<Integer> getAps() { return aps;}
+
 	public int nb_successeur(Sommet s) {
 		int indiceS = find_position_sommets(s) ; 
 		int co = 0  ; 

@@ -145,6 +145,8 @@ public ArrayList<Integer> rang(ArrayList<Integer> FS, ArrayList<Integer> APS){
 }
 
 
+
+
 public void Prufer_decode (ArrayList<Integer> t){
 	int m = t.get(0), n = m+2;
 	ArrayList<Integer> s = new ArrayList<Integer>(n+1);
@@ -325,11 +327,11 @@ void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , ArrayList<
 			 int k;
 			 p++; 
 			 num.set(s, p); 
-			 ro.set(s, p);	 	 // numérote s et initialise ro[s]
+			 ro.set(s, p);	 	 // numï¿½rote s et initialise ro[s]
 			 empiler(s,tarj); 
 			 entarj.set(s, true);
 			 for (int r=g.Aps_Get(s); (t=g.Fs_Get(r)) != 0 ; r++)
-			 { 	if (num.get(t) == 0)	 	 	 // si t n'est pas encore numéroté
+			 { 	if (num.get(t) == 0)	 	 	 // si t n'est pas encore numï¿½rotï¿½
 			 	{ 	pred.set(t, s);
 			 		traversee(t,p, g, num, ro, entarj, tarj, pred, prem, pilch, cfc);
 			 		if (ro.get(t) < ro.get(s)) 
@@ -440,11 +442,11 @@ void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , ArrayList<
 	}
 	public void edition_bases(ArrayList<Integer>prem, ArrayList<Integer>pilch, ArrayList<Integer>br)
 	{
-		int nb = br.get(0); // Nombre de CFC de l’unique base du graphe réduit
-		ArrayList<Integer>Base = new ArrayList<Integer>(nb+1); // pile qui mémorise les sommets des bases du graphe initial
+		int nb = br.get(0); // Nombre de CFC de lï¿½unique base du graphe rï¿½duit
+		ArrayList<Integer>Base = new ArrayList<Integer>(nb+1); // pile qui mï¿½morise les sommets des bases du graphe initial
 		Base.set(0, nb);
 		int p = 1;
-		int som = prem.get(br.get(1)); // premier sommet de la première CFC
+		int som = prem.get(br.get(1)); // premier sommet de la premiï¿½re CFC
 		while (p >= 1)
 		{
 		 	 if ((p<= nb) && (som != 0))
@@ -455,7 +457,7 @@ void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , ArrayList<
 		 	 	 	 som = prem.get(br.get(p));
 		 	 	 else
 					// Affiche le contenu du tableau Base contenant les
-		 	 	 	 	 	 //sommets d’une base du graphe initial
+		 	 	 	 	 	 //sommets dï¿½une base du graphe initial
 		 	 	 {
 		 	 		String str = "";
 		 			str += "------------Tarjan : edition des bases-------------\n";
@@ -474,7 +476,79 @@ void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , ArrayList<
 		 	 }
 		}
 	}
+	public void ordonnancementt( ArrayList<Integer> fp,ArrayList<Integer> app,ArrayList<Integer> d, ArrayList<Integer> fpc, ArrayList<Integer> appc, ArrayList<Integer> lc ){
+		int n = app.get(0);
+		int m = fp.get(0);
+		fpc = new ArrayList<>(m+1);
+		appc = new ArrayList<>(n+1);
+		appc.add(0,n) ;
+		lc = new ArrayList<>(n+1);
+		lc.set(0,n);
+
+		int kc,t,lg;
+
+		lc.set(1,0);
+		fpc.set(1,0);
+		appc.set(1,1);
+
+		kc=1;
+		for(int s=2; s<=n;s++){
+			lc.set(s,0);
+			appc.set(s,kc+1);
+			for(int k= app.get(s); (t=fp.get(k))!=0; k++){
+				lg= lc.get(t) + d.get(t);
+				if(lg> lc.get(s)){
+					if(lg>lc.get(s)){
+						lc.set(s,lg);
+						kc = appc.get(s);
+						fpc.set(kc,t);
+					}
+					else{
+						kc++;
+						fpc.set(kc,t);
+					}
+				}
+			}kc++;
+			fpc.set(kc,0);
+		}
+		fpc.set(0,kc);
+
+		//faire affichage
+	}
+
+	public void fusionner(int i, int j, ArrayList<Integer> prem, ArrayList<Integer> pilch, ArrayList<Integer> cfc, ArrayList<Integer> nbElem){
+		if(nbElem.get(i)<nbElem.get(j)){
+			int aux = i;
+			i=j;
+			j=aux;
+		}
+
+		int s = prem.get(j);
+		cfc.set(s,i);
+		while(pilch.get(s)!=0){
+			s= pilch.get(s);
+			cfc.set(s,i);
+		}
+
+		pilch.set(s, prem.get(i));
+		prem.set(i,j);
+		nbElem.add(i,j);
+	}
+
+	/*public void kruskal(Graphe g, Graphe t,ArrayList<Integer> prem, ArrayList<Integer> pilch, ArrayList<Integer> cfc, ArrayList<Integer> nbElem){
+		int n= g.nombre_sommets()-1;
+		int x,y;
+		int i=0,j =0;
+		t = new ArrayList<>(n-1);
+	}
 	
+	 */
+
+
+
+	//----------------------------------Kruskal-------------------------------
+
+
 	/*
 	 
     public Graphe(int[][] matriceAdjacente){
@@ -584,7 +658,7 @@ void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , ArrayList<
         }
         return dist;
     }
-    // Regarder comment on peut l'adapter à la matrice d'adjacence
+    // Regarder comment on peut l'adapter ï¿½ la matrice d'adjacence
     public int[][] calcul_distnace(int[] fs,int[] aps,int[][] dist){
         int n = aps[0];
         dist = new int[n+1][n+1];
