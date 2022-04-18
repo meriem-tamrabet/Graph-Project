@@ -34,6 +34,10 @@ public class main {
 			System.out.println("4. Graphique ");
 			System.out.println("6. dessin  ");
 			System.out.println("5. cout  ");
+			System.out.println("7. Rang ");
+			System.out.println("8. Demi degré interieur ");
+			System.out.println("9. Demi degré extérieur ");
+			System.out.println("10. Dantzig ");
 			System.out.println("---------------------------------------------------------------------------");
 
 			System.out.println();
@@ -291,6 +295,128 @@ public class main {
 					new dessinGraphe(MonGraphe) ; 
 				
 					break ; 
+
+				case 7:
+
+					Graphe gRang = new Graphe(true,true);
+
+					System.out.println("---------Ajout de sommets ------------") ;
+					gRang.ajouterSommet(s);
+					gRang.ajouterSommet(t);
+					gRang.ajouterSommet(w);
+					gRang.ajouterSommet(k);
+				
+			
+					System.out.println("---------Ajout de arc  ------------") ;
+					gRang.ajouterArc(s, t, 1);
+					gRang.ajouterArc(s, k, 2 );
+					gRang.ajouterArc(t, w, 3);
+
+					gRang.afficher_fs_aps();
+
+					Algorithme a = new Algorithme();
+
+					ArrayList<Integer> r = a.rang(gRang.getFs(), gRang.getAps());
+
+					String str = new String();
+					str += "-----------Rang------------\n|";
+					for(Integer i:r){
+						str += i + "|";
+					}
+					str += "\n";
+
+					System.out.println(str);
+
+					break;
+
+				case 8:
+				
+					Graphe gDdi = new Graphe(true,true);
+
+					System.out.println("---------Ajout de sommets ------------") ;
+					gDdi.ajouterSommet(s);
+					gDdi.ajouterSommet(t);
+					gDdi.ajouterSommet(w);
+					gDdi.ajouterSommet(k);
+				
+			
+					System.out.println("---------Ajout de arc  ------------") ;
+					gDdi.ajouterArc(s, t, 1);
+					gDdi.ajouterArc(s, k, 2 );
+					gDdi.ajouterArc(t, w, 3);
+
+					gDdi.afficher_fs_aps();
+
+					Algorithme addi = new Algorithme();
+
+					ArrayList<Integer> ddi = addi.demi_degre_interieur(gDdi.getFs(), gDdi.getAps());
+
+					String str1 = new String();
+					str1 += "-----------Demi Degré Intérieur------------\n|";
+					for(Integer i:ddi){
+						str1 += i + "|";
+					}
+					str1 += "\n";
+
+					System.out.println(str1);
+
+					break;
+
+				case 9:
+
+					Graphe gDde = new Graphe(true,true);
+
+					System.out.println("---------Ajout de sommets ------------") ;
+					gDde.ajouterSommet(s);
+					gDde.ajouterSommet(t);
+					gDde.ajouterSommet(w);
+					gDde.ajouterSommet(k);
+				
+			
+					System.out.println("---------Ajout de arc  ------------") ;
+					gDde.ajouterArc(s, t, 1);
+					gDde.ajouterArc(s, k, 2 );
+					gDde.ajouterArc(t, w, 3);
+
+					gDde.afficher_fs_aps();
+
+					Algorithme adde = new Algorithme();
+
+					ArrayList<Integer> dde = adde.demi_degre_exterieur(gDde.getFs(), gDde.getAps());
+
+					String str2 = new String();
+					str2 += "-----------Demi Degré Extérieur-----------\n|";
+					for(Integer i:dde){
+						str2 += i + "|";
+					}
+					str2 += "\n";
+
+					System.out.println(str2);
+
+					break;
+
+				case 10:
+
+					Graphe gDantzig = new Graphe(true,true);
+
+					System.out.println("---------Ajout de sommets ------------") ;
+					gDantzig.ajouterSommet(s);
+					gDantzig.ajouterSommet(t);
+					gDantzig.ajouterSommet(w);
+					gDantzig.ajouterSommet(k);
+				
+			
+					System.out.println("---------Ajout de arc  ------------") ;
+					gDantzig.ajouterArc(s, t, 1);
+					gDantzig.ajouterArc(s, k, 2 );
+					gDantzig.ajouterArc(t, w, 3);
+
+					Algorithme aDantzig = new Algorithme();
+
+					aDantzig.Dantzig(gDantzig.getMatCout());
+
+					break;
+
 				default:
 					System.out.println("Cette option n'existe pas");
 

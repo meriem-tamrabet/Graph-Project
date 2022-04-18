@@ -18,8 +18,7 @@ public  ArrayList<Integer> demi_degre_interieur   (ArrayList<Integer> FS, ArrayL
 
 	for(int k = 1;k < FS.get(0);k++){
 		if(FS.get(k) != 0){
-			int elem = ddi.get(k);
-			ddi.set(FS.get(k),elem++);
+			ddi.set(FS.get(k),ddi.get(FS.get(k))+1); 
 		}
 	}
 
@@ -101,7 +100,10 @@ public ArrayList<Integer> rang(ArrayList<Integer> FS, ArrayList<Integer> APS){
 
 	ArrayList<Integer> ddi = demi_degre_interieur(FS, APS);
 
-	pilch.add(0,0);
+	for(int i = 0;i <= n;i++){
+		pilch.add(i,0);	
+	}
+	rang.add(0,n);
 
 	for(s = 1;s <= n;s++){
 		rang.add(s,-1);
@@ -123,9 +125,7 @@ public ArrayList<Integer> rang(ArrayList<Integer> FS, ArrayList<Integer> APS){
 			t = FS.get(h);
 
 			while(t > 0){
-				int tmp = ddi.get(t);
-				ddi.set(t,tmp--);
-
+				ddi.set(t,ddi.get(t)-1);
 				if(ddi.get(t) == 0){
 					empiler(t, pilch);
 				}
@@ -138,7 +138,7 @@ public ArrayList<Integer> rang(ArrayList<Integer> FS, ArrayList<Integer> APS){
 		}
 
 		s = pilch.get(0);
-		prem.set(k+1,s);
+		prem.add(k+1,s);
 	}
 
 	return rang;
@@ -267,10 +267,10 @@ void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , ArrayList<
 	
 }
 
-	public void Dantzig(double[][] c){
-		int n = (int)(c[0][0]);
+	public void Dantzig(int[][] c){
+		int n = (c[0][0]);
         int i,j,k;
-        double x;
+        int x;
 
         for(k = 1;k < n;k++){
             for(i = 1;i <= k;i++){

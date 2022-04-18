@@ -363,7 +363,7 @@ public  class Graphe {
 			for( int i = 1 ; i <= n ; i++) {
 				aps.add(i, k ); //aps
 				for( int j = 1 ; j <= n; j++) {
-					if(matrice[i][j] != 0)
+					if(matrice[j][i] != 0)
 					{
 						fs.add(k,j) ;  // fs[k] = j ;
 						++k ;
@@ -425,6 +425,10 @@ public  class Graphe {
 	public ArrayList<Integer> getFs() { return fs;}
 
 	public ArrayList<Integer> getAps() { return aps;}
+
+	public int[][] getMatCout(){
+		return this.matrice_cout;
+	}
 
 	public int nb_successeur(Sommet s) {
 		int indiceS = find_position_sommets(s) ; 
