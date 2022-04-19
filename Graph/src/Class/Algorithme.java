@@ -321,7 +321,7 @@ public void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , Arr
 			inS.set(j , true) ;
 			ind--;
 			k = G.Aps_Get(j) ; // k = aps[j];
-			System.out.println("je récuper add du sommets " + k );
+			System.out.println("je rÃ©cuper add du sommets " + k );
 			while(G.Fs_Get(k) != 0)
 			{   
 				G.afficher_fs_aps();

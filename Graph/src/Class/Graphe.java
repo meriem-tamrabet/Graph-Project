@@ -367,7 +367,7 @@ public  class Graphe {
 			for( int i = 1 ; i <= n ; i++) {
 				aps.add(i, k ); //aps
 				for( int j = 1 ; j <= n; j++) {
-					if(matrice[j][i] != 0)
+					if(matrice[i][j] != 0)
 					{
 						fs.add(k,j) ;  // fs[k] = j ;
 						++k ;
@@ -497,14 +497,14 @@ public  class Graphe {
 	public void affiche_successeur(int indiceS)
 	{
 		
-	System.out.print("successeur de "+  indiceS + "|");
-		int i = aps.get(indiceS) ; 
-		while(i < fs.size() && fs.get(i)!=0 ) {
-			System.out.print(fs.get(i)+"|");
-			i++ ; 
-			
-		}
-		System.out.println();
+		System.out.print("successeur de "+  indiceS + "|");
+			int i = aps.get(indiceS) ; 
+			while((i < fs.size()) && (fs.get(i)!=0) ) {
+				System.out.print(fs.get(i)+"|");
+				i++ ; 
+				
+			}
+			System.out.println();
 	
 	}
 	/**
