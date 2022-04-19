@@ -20,7 +20,7 @@ public class dessinGraphe  extends JFrame{
     	result = new BufferedImage(600, 600, BufferedImage.TYPE_INT_RGB);
     //	Graphics2D g2d = (Graphics2D) result.createGraphics(); 
     	Graphics2D g2d = (Graphics2D) g ; 
-    	/** Définit une épaisseur de 5 pixels */ 
+    	/** Definit une epaisseur de 5 pixels */ 
     	g2d.setStroke(new BasicStroke( 5.0f ));
     	
     	//g2d.setFont(new Font("Serif",Font.PLAIN,12)); 
