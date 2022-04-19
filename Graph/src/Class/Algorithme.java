@@ -1,6 +1,7 @@
 package Class;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Algorithme {
  int MAXPOIDS =100 ; 
@@ -311,6 +312,71 @@ void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , ArrayList<
 	}
 	
 	//---------------------------Tarjan-------------------------------------
+	void findSCCS_Tarjan(ArrayList<Integer>aps, ArrayList<Integer>fs ) {
+        int n = aps.get(0);
+        ArrayList<Integer> disc = new ArrayList<Integer>(n + 1);
+        for(int i : disc)
+        {
+        	i = -1;
+        }
+        ArrayList<Integer> low = new ArrayList<Integer>(n+1);
+        for(int i : low)
+        {
+        	i = -1;
+        }
+        ArrayList<Boolean> present = new ArrayList<Boolean>(n + 1);
+        for(boolean i : present)
+        {
+        	i = false;
+        }
+        ArrayList<Integer> mystack = new ArrayList<Integer>(n+1);
+        for (int i = 1; i <= n; ++i) {
+            if (disc.get(i) == -1) {
+                dfs2(i, disc, low, mystack, present, aps, fs);
+            }
+        }
+    }
+    void dfs2(int u, ArrayList<Integer> disc, ArrayList<Integer> low, ArrayList<Integer> mystack,
+    		ArrayList<Boolean> present, ArrayList<Integer>aps, ArrayList<Integer>fs) {
+        /*static*/ int time = 0;
+        disc.set(u, low.set(u, time));
+        time += 1;
+        mystack.add(u);
+        present.set(u, true);
+
+        int t;
+        for (int k = aps.get(u); (t = fs.get(k)) != 0; ++k) {
+            if (disc.get(t) == -1) {
+                dfs2(t, disc, low, mystack, present, aps, fs);
+                if(low.get(u)>low.get(t))
+                {
+                	low.set(u, low.get(t));
+                }
+            }
+            else if(present.get(t)) {
+                if(low.get(u)>disc.get(t))
+                {
+                	low.set(u, disc.get(t));
+                }
+            }
+        }
+
+        if (low.get(u) == disc.get(u)) {
+            System.out.print("SCC : ");
+            int i = 0;
+            while (mystack.get(i) != u) {
+            	
+                System.out.print(mystack.get(i)+' ');
+                present.set(mystack.get(i), false);
+                i++;
+            }
+            System.out.println(mystack.get(i));
+            
+            present.set(mystack.get(i), false);
+            i++;
+        }
+    }
+    /*
 	public int depiler(ArrayList<Integer>t)
 	{
 		return t.get(t.lastIndexOf(t)-1);
@@ -386,7 +452,7 @@ void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , ArrayList<
 			 		traversee(s,p,g,num,ro, entarj, tarj, pred, prem, pilch, cfc);
 			 	 }
 		prem.set(0, k);
-	}
+	}*/
 	public void graph_reduit (ArrayList<Integer>prem,ArrayList<Integer>pilch,ArrayList<Integer>cfc,ArrayList<Integer>fs, 
 			ArrayList<Integer>aps,ArrayList<Integer>fsr, ArrayList<Integer>apsr)
 	{
