@@ -218,18 +218,22 @@ public  class Graphe {
 		return ;
 		
 		this.matrice[0][1] ++ ; 
-		 matrice[indiceT][indiceS]  = 1 ; 
+		 matrice[indiceS][indiceT]  = 1 ; 
 		 
 		 if( est_oriente == false )
-			 matrice[indiceT][indiceS]  = 1 ; 
+		 { matrice[indiceT][indiceS]  = 1 ; 
+		 this.matrice[0][1] ++ ; 
+		 }
 		
 		if( this.avec_Poids)
 		{
 			
 		 //TODO AJOUT LE POIDS 
 			 //System.out.println(" popopopopopopopopopo");
-			 this.matrice_cout[indiceT][indiceS]  = val; 
+			 this.matrice_cout[indiceS][indiceT]  = val; 
 			 this.matrice_cout[0][1] = this.matrice[0][1] ; 
+			 if( est_oriente == false )
+				 matrice_cout[indiceT][indiceS]  = val ; 
 	
 		}
 		 
@@ -490,6 +494,19 @@ public  class Graphe {
 	
 	
 	//-------  Methods affichage  ---------------------------
+	public void affiche_successeur(int indiceS)
+	{
+		
+	System.out.print("successeur de "+  indiceS + "|");
+		int i = aps.get(indiceS) ; 
+		while(i < fs.size() && fs.get(i)!=0 ) {
+			System.out.print(fs.get(i)+"|");
+			i++ ; 
+			
+		}
+		System.out.println();
+	
+	}
 	/**
 	 * AFFICHAGE D UN GRAPHE A REVOIR POUR SAVOIR QUOI AFFICHER EXACTEMENT **/
 	public void afficher()
@@ -512,7 +529,7 @@ public  class Graphe {
 	        for(int i = 1;i < aps.size();i++){
 	            str += aps.get(i) + "|";
 	        }
-	        System.out.println(str); ; 
+	        System.out.println(str); 
 	}
 	public void afficher_cout()
 	{

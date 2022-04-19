@@ -416,6 +416,39 @@ public class main {
 					aDantzig.Dantzig(gDantzig.getMatCout());
 
 					break;
+				case 11:
+
+					Graphe gDikjstra = new Graphe(true,true);
+
+					System.out.println("---------Ajout de sommets ------------") ;
+					gDikjstra.ajouterSommet(s);
+					gDikjstra.ajouterSommet(t);
+					gDikjstra.ajouterSommet(w);
+					gDikjstra.ajouterSommet(L);
+					gDikjstra.ajouterSommet(k);
+				
+			
+					System.out.println("---------Ajout de arc  ------------") ;
+					gDikjstra.ajouterArc(s, t, 1);
+					gDikjstra.ajouterArc(s,w , 2 );
+					
+					gDikjstra.ajouterArc(t, w, 1);
+					gDikjstra.ajouterArc(t, L, 2);
+					gDikjstra.ajouterArc(t, k, 1);
+
+					gDikjstra.ajouterArc(w, L, 2);
+					gDikjstra.ajouterArc( L,k, 2);
+					gDikjstra.ajouterArc(k, L, 5);
+					gDikjstra.afficher();
+					gDikjstra.afficher_cout();
+					Algorithme A_Dikjstra = new Algorithme();
+					int n =gDikjstra.Aps_Get(0) ;
+					int m = gDikjstra.Fs_Get(0)-n  ;
+					 ArrayList<Integer> predecesseur = new ArrayList<>(n+2) ;
+					 ArrayList<Integer> distance = new ArrayList<Integer>(n+2) ;
+					A_Dikjstra.Dikjstra(1,gDikjstra,predecesseur,distance) ; 
+
+					break;
 
 				default:
 					System.out.println("Cette option n'existe pas");
