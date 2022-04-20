@@ -70,7 +70,7 @@ public class main {
 					G.ajouterSommet(k);
 					System.out.println("---------------------") ;
 					G.afficher();
-					
+				
 					System.out.println("---------Ajout de arc  ------------") ;
 
 
@@ -88,10 +88,10 @@ public class main {
 
 					G.ajouterArc(k, t, 5);
 					G.ajouterArc(k, k, 5);
-					System.out.println("---------------------") ;
+					System.out.println("------fs et aps ---------------") ;
 					G.afficher();
 
-
+					G.afficher_fs_aps();
 					// supprimer sommets
 					System.out.println("---------suppression de sommets ------------") ;
 					G.supprimerSommet(s);
@@ -441,13 +441,20 @@ public class main {
 					gDikjstra.ajouterArc(k, L, 5);
 					gDikjstra.afficher();
 					gDikjstra.afficher_cout();
+					gDikjstra.afficher_fs_aps();
 					Algorithme A_Dikjstra = new Algorithme();
 					int n =gDikjstra.Aps_Get(0) ;
 					int m = gDikjstra.Fs_Get(0)-n  ;
 					 ArrayList<Integer> predecesseur = new ArrayList<>(n+2) ;
 					 ArrayList<Integer> distance = new ArrayList<Integer>(n+2) ;
 					A_Dikjstra.Dikjstra(1,gDikjstra,predecesseur,distance) ; 
+					System.out.println("Affichage du pred ");
+					for(int i = 0 ; i < predecesseur.size() ; i++)
+						System.out.print(predecesseur.get(i) +"| ");
 
+					 new dessinGraphe(gDikjstra) ; 
+					 new dijkstra(gDikjstra) ; 
+					
 					break;
 
 				default:

@@ -285,7 +285,7 @@ public void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , Arr
 		ArrayList<Boolean> inS = new ArrayList<Boolean>(n+2) ; 
 		// sert a dire quels sont les sommets qui restent a traiter inS[i] = 0 ou 1
 		for ( i =0 ; i <= n ; i++) {
-			predecesseur.add(-1) ; 
+			predecesseur.add(s) ; 
 			inS.add(false) ; 
 			distance.add(G.cout_Get(s, i) ) ; //d[i] = p[s][i];
 			
@@ -317,28 +317,34 @@ public void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , Arr
 			
 			if (m == MAXPOIDS) return;
 			//je marque le sommets 
-			System.out.println("je marque le sommets" + j );
+			System.out.println("je marque le sommets" + j +" psq c'est le min ");
 			inS.set(j , true) ;
 			ind--;
 			k = G.Aps_Get(j) ; // k = aps[j];
 			System.out.println("je rÃ©cuper add du sommets " + k );
+			
 			while(G.Fs_Get(k) != 0)
 			{   
-				G.afficher_fs_aps();
-				G.affiche_successeur(k);
 				int fs_K = G.Fs_Get(k) ;
 				System.out.println( k + " a successeur  " + fs_K);
 				if ( inS.get(fs_K ) == false )// if (inS[fs[k]] == 1)
-				{ 
-				
+				{ System.out.println("n'est pas marqué " + fs_K );
 					v = distance.get(j) + G.cout_Get(j, fs_K) ; // v = d[j]+p[j][fs[k]];
 					System.out.println(" \n si le successeur n'est pas marquee, son v ==  " + v);
+					System.out.println(" je test " + v +" plus petit que" + distance.get(fs_K));
+
 					if (v < distance.get(fs_K))// if (v < d[fs[k]])
 					{
+						System.out.println(" je l'insere " ) ; 
 						
 						distance.set(fs_K , v) ;  // d[fs[k]] = v;
 					 	predecesseur.set(fs_K, j) ; // pr[fs[k]] = j;
-					 	
+					 	System.out.print("\n distance : ");
+						affiche_tab(distance); 
+						System.out.print("    pred : ");
+						affiche_tab(predecesseur); 
+						System.out.print("     ins : ");
+						affiche_tab_b(inS);
 					}
 				}
 				k++;
