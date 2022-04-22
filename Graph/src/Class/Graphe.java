@@ -580,7 +580,7 @@ public  class Graphe {
 	        }*/
 	        
 			// return str + "\n" + Smatrice ;
-		       return   Smatrice ;
+		       return   str ;
 
 			//return Smatrice + ListeSommets+".|.|\n";
 	    }

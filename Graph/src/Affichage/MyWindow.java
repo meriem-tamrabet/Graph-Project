@@ -1,4 +1,4 @@
-package Class;
+package Affichage;
 
 import java.awt.Color;
 import java.awt.Dimension;

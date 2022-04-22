@@ -1,5 +1,9 @@
-package Class;
+package Affichage;
 import javax.swing.*;
+
+import Class.Graphe;
+import Class.Sommet;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 public class dessinGraphe  extends JFrame{
@@ -21,7 +25,7 @@ public class dessinGraphe  extends JFrame{
     //	Graphics2D g2d = (Graphics2D) result.createGraphics(); 
     	Graphics2D g2d = (Graphics2D) g ; 
     	/** Definit une epaisseur de 5 pixels */ 
-    	g2d.setStroke(new BasicStroke( 5.0f ));
+    	// g2d.setStroke(new BasicStroke( 5.0f ));
     	
     	//g2d.setFont(new Font("Serif",Font.PLAIN,12)); 
     	
