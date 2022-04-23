@@ -3,6 +3,7 @@ package Class;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+
 public class Algorithme {
  int MAXPOIDS =100 ; 
 public  ArrayList<Integer> demi_degre_interieur   (ArrayList<Integer> FS, ArrayList<Integer> APS)
@@ -328,7 +329,7 @@ public void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , Arr
 				int fs_K = G.Fs_Get(k) ;
 				System.out.println( k + " a successeur  " + fs_K);
 				if ( inS.get(fs_K ) == false )// if (inS[fs[k]] == 1)
-				{ System.out.println("n'est pas marqu� " + fs_K );
+				{ System.out.println("n'est pas marqu� " + fs_K );
 					v = distance.get(j) + G.cout_Get(j, fs_K) ; // v = d[j]+p[j][fs[k]];
 					System.out.println(" \n si le successeur n'est pas marquee, son v ==  " + v);
 					System.out.println(" je test " + v +" plus petit que" + distance.get(fs_K));
@@ -429,92 +430,29 @@ public void affiche_tab_b(ArrayList<Boolean> v) {
 	}
 	
 	//---------------------------Tarjan-------------------------------------
-	void findSCCS_Tarjan(ArrayList<Integer>aps, ArrayList<Integer>fs ) {
-        int n = aps.get(0);
-        ArrayList<Integer> disc = new ArrayList<Integer>(n + 1);
-        for(int i : disc)
-        {
-        	i = -1;
-        }
-        ArrayList<Integer> low = new ArrayList<Integer>(n+1);
-        for(int i : low)
-        {
-        	i = -1;
-        }
-        ArrayList<Boolean> present = new ArrayList<Boolean>(n + 1);
-        for(boolean i : present)
-        {
-        	i = false;
-        }
-        ArrayList<Integer> mystack = new ArrayList<Integer>(n+1);
-        for (int i = 1; i <= n; ++i) {
-            if (disc.get(i) == -1) {
-                dfs2(i, disc, low, mystack, present, aps, fs);
-            }
-        }
-    }
-    void dfs2(int u, ArrayList<Integer> disc, ArrayList<Integer> low, ArrayList<Integer> mystack,
-    		ArrayList<Boolean> present, ArrayList<Integer>aps, ArrayList<Integer>fs) {
-        /*static*/ int time = 0;
-        disc.set(u, low.set(u, time));
-        time += 1;
-        mystack.add(u);
-        present.set(u, true);
-
-        int t;
-        for (int k = aps.get(u); (t = fs.get(k)) != 0; ++k) {
-            if (disc.get(t) == -1) {
-                dfs2(t, disc, low, mystack, present, aps, fs);
-                if(low.get(u)>low.get(t))
-                {
-                	low.set(u, low.get(t));
-                }
-            }
-            else if(present.get(t)) {
-                if(low.get(u)>disc.get(t))
-                {
-                	low.set(u, disc.get(t));
-                }
-            }
-        }
-
-        if (low.get(u) == disc.get(u)) {
-            System.out.print("SCC : ");
-            int i = 0;
-            while (mystack.get(i) != u) {
-            	
-                System.out.print(mystack.get(i)+' ');
-                present.set(mystack.get(i), false);
-                i++;
-            }
-            System.out.println(mystack.get(i));
-            
-            present.set(mystack.get(i), false);
-            i++;
-        }
-    }
-    /*
-	public int depiler(ArrayList<Integer>t)
-	{
-		return t.get(t.lastIndexOf(t)-1);
-	}
-	
-	public void traversee(int s, int p, Graphe g, ArrayList<Integer>num, ArrayList<Integer>ro,
+	private int newP;
+	public void traversee(int s, int p,int k, Graphe g, ArrayList<Integer>num, ArrayList<Integer>ro,
 			ArrayList<Boolean>entarj, ArrayList<Integer>tarj,
 			ArrayList<Integer>pred, ArrayList<Integer>prem,
 			ArrayList<Integer>pilch, ArrayList<Integer>cfc)
 		{
 			 int t;
-			 int k;
-			 p++; 
+			p++;
+			 System.out.println("p1 : " + p);
 			 num.set(s, p); 
-			 ro.set(s, p);	 	 // num�rote s et initialise ro[s]
-			 empiler(s,tarj); 
+			 ro.set(s, p);	 	 // numérote s et initialise ro[s]
+			 tarj.add(s);
+			 System.out.println("tarj.add(s) : " + s);
 			 entarj.set(s, true);
 			 for (int r=g.Aps_Get(s); (t=g.Fs_Get(r)) != 0 ; r++)
-			 { 	if (num.get(t) == 0)	 	 	 // si t n'est pas encore num�rot�
+			 { 	//System.out.println("t : " + t);
+				if (num.get(t) == 0)	 	 	 // si t n'est pas encore numéroté
 			 	{ 	pred.set(t, s);
-			 		traversee(t,p, g, num, ro, entarj, tarj, pred, prem, pilch, cfc);
+					System.out.println("traverse bis " + t);
+					System.out.println("p2 : " + p);
+			 		traversee(t,p,k, g, num, ro, entarj, tarj, pred, prem, pilch, cfc);
+					System.out.println("ptrav : " + p);
+					newP = p;
 			 		if (ro.get(t) < ro.get(s)) 
 			 			ro.set(s, ro.get(t)) ;	 	 	 // Z1
 			 	}
@@ -523,53 +461,131 @@ public void affiche_tab_b(ArrayList<Boolean> v) {
 			 		ro.set(s, num.get(t));// Z2
 			 	}
 			}
-			 k = 0;
+			 //k = 0;
+			 System.out.println("p3 : " + p);
+			 p = newP;
 			 if (ro.get(s) == num.get(s))
 			 {
 				k++;	
-				int u;
+				int last;
 				do
 				{	 	 	 	 	 	 	 	 	 // Z3
-					 	 u = depiler(tarj);
-					 	 entarj.set(u, false);
-					 	 empiler(u,pilch);
-					 	 cfc.set(u,k);
-				} while (u != s);
-				 prem.set(k, pilch.get(0));
+					System.out.print("tarj : ");
+					System.out.print("|");
+					for(int i = 0;i < tarj.size();i++){
+						System.out.print(tarj.get(i)  + "|");
+					
+					}
+					System.out.print("\n"); 
+					last = tarj.get(tarj.size()-1);
+					entarj.set(last,false);
+					empiler(last,pilch);
+					cfc.set(last,k);
+					tarj.remove(tarj.size()-1);
+					System.out.println("p : " + p);
+				} while (last != s);
+
+				 prem.add(k, pilch.get(0));
 				 pilch.set(0, 0);
+				 System.out.println("p4 : " + p);
 			}
+
+			System.out.println("---------------TEST----------------");
+			System.out.print("cfc : ");
+			affiche_tab(cfc);
+			System.out.print("\n");
+			System.out.print("num : ");
+			affiche_tab(num);
+			System.out.print("\n");
+			System.out.print("ro : ");
+			affiche_tab(ro);
+			System.out.print("\n");
+			System.out.print("pred : ");
+			affiche_tab(pred);
+			System.out.print("\n");
+			System.out.print("prem : ");
+			affiche_tab(prem);
+			System.out.print("\n");
+			System.out.print("pilch : ");
+			affiche_tab(pilch);
+			System.out.print("\n");
+			System.out.print("tarj : ");
+			System.out.print("|");
+			for(int i = 0;i < tarj.size();i++){
+				System.out.print(tarj.get(i)  + "|");
+			}
+			System.out.print("\n"); 
+			System.out.print("entarj : ");
+			affiche_tab_b(entarj);
+			System.out.print("\n");
+			System.out.println("------------------------------------");
 		}
 	
-	public void fortconnexe(Graphe g, ArrayList<Integer>prem, ArrayList<Integer>pilch, ArrayList<Integer>cfc, ArrayList<Integer>pred)
+	public void fortconnexe(Graphe g)
 	{
 		int n = g.Aps_Get(0);
-		prem = new ArrayList<Integer>(n+1);
-		pilch = new ArrayList<Integer>(n+1);
-		cfc = new ArrayList<Integer>(n+1);
-		pred = new ArrayList<Integer>(n+1);
-		ArrayList<Integer>tarj = new ArrayList<Integer>(n+1);
+		ArrayList<Integer> prem = new ArrayList<Integer>(n+1);
+		prem.add(0,n);
+		ArrayList<Integer> pilch = new ArrayList<Integer>(n+1);
+		for(int i = 0;i <= n;i++){
+			pilch.add(i,0);	
+		}
+		ArrayList<Integer> cfc = new ArrayList<Integer>(n+1);
+		cfc.add(0,n);
+		ArrayList<Integer> pred = new ArrayList<Integer>(n+1);
+		pred.add(0,n);
+		ArrayList<Integer>tarj = new ArrayList<Integer>();
 		ArrayList<Boolean>entarj = new ArrayList<Boolean>(n+1);
+		entarj.add(0,true);
 		ArrayList<Integer>num = new ArrayList<Integer>(n+1);
+		num.add(0,n);
 		ArrayList<Integer>ro = new ArrayList<Integer>(n+1);
+		ro.add(0,n);
 		int p = 0;
 		int k = 0;
 		for (int i = 1; i<=n; i++)
 		{
-			 	 num.set(i, 0);
-			 	 pred.set(i, 0);
-			 	 ro.set(i, 0);
-			 	 entarj.set(i, false);
+			num.add(i, 0);
+			pred.add(i, 0);
+			ro.add(i, 0);
+			entarj.add(i, false);
+			cfc.add(i,i);
 		}
-		pilch.set(0, 0);
-		tarj.set(0, 0);
 		
-		for(int s = 1; s<=g.Aps_Get(0); s++)
-			 	 if (num.get(0) == 0) 
-			 	 {
-			 		traversee(s,p,g,num,ro, entarj, tarj, pred, prem, pilch, cfc);
-			 	 }
+		for(int s = 1; s <= n; s++){
+			if (num.get(s) == 0) 
+			{
+				System.out.println("traverse " + s);
+			 	traversee(s,p,k,g,num,ro, entarj, tarj, pred, prem, pilch, cfc);
+			}
+		}
 		prem.set(0, k);
-	}*/
+
+		System.out.print("cfc : ");
+		affiche_tab(cfc);
+		System.out.print("\n");
+		System.out.print("num : ");
+		affiche_tab(num);
+		System.out.print("\n");
+		System.out.print("ro : ");
+		affiche_tab(ro);
+		System.out.print("\n");
+		System.out.print("pred : ");
+		affiche_tab(pred);
+		System.out.print("\n");
+		System.out.print("prem : ");
+		affiche_tab(prem);
+		System.out.print("\n");
+		System.out.print("pilch : ");
+		affiche_tab(pilch);
+		System.out.print("\n");
+		System.out.print("tarj : ");
+		affiche_tab(tarj);
+		System.out.print("\n");
+		System.out.print("entarj : ");
+		affiche_tab_b(entarj);
+		System.out.print("\n");
+	}
 	public void graph_reduit (ArrayList<Integer>prem,ArrayList<Integer>pilch,ArrayList<Integer>cfc,ArrayList<Integer>fs, 
 			ArrayList<Integer>aps,ArrayList<Integer>fsr, ArrayList<Integer>apsr)
 	{
@@ -657,6 +673,7 @@ public void affiche_tab_b(ArrayList<Boolean> v) {
 		 	 }
 		}
 	}
+
 	public void ordonnancementt( ArrayList<Integer> fp,ArrayList<Integer> app,ArrayList<Integer> d, ArrayList<Integer> fpc, ArrayList<Integer> appc, ArrayList<Integer> lc ){
 		int n = app.get(0);
 		int m = fp.get(0);
