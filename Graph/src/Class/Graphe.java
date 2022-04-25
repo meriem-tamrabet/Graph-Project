@@ -23,7 +23,7 @@ public  class Graphe {
 	 * on peut avoir fs et aps 
 	 * on peut avoir une liste de sommets 
 	 * */
-	public Graphe(int[][] matrice ,boolean est_oriente, boolean avec_Poids    ) {
+	public Graphe(int[][] matrice ,boolean est_oriente, boolean avec_Poids) {
 		int ligne = matrice.length ; 
 		int colonne = matrice[0].length ; 
 		this.matrice = new int[ligne][colonne] ; 

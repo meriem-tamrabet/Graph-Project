@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Sommet {
 	
  
- private  String contenu ;  //peut etre le nom du sommets ex ville , taches .... 
+ private String contenu ;  //peut etre le nom du sommets ex ville , taches .... 
  private Point position ; //pour le dessin apres 
  private int marquee ; // pour savoir le rang 
  private int id ; // le numero de sommets 
