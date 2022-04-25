@@ -1,6 +1,10 @@
 package Class;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
+import Affichage.dessinGraphe;
+import Affichage.dijkstra;
 
 public  class Graphe {
 	
@@ -80,10 +84,19 @@ public  class Graphe {
 	
 	//-------------------Fin CONSTRUCTEUR------------------------
 	
+	public boolean isAvec_Poids() {
+		return avec_Poids;
+	}
+
+	public boolean isEst_oriente() {
+		return est_oriente;
+	}
+	
 	
 	
 	//------- Methods de la matrice  ---------------------------
 	
+
 	public void  Generer_matrice(int n , boolean avec_Poids ){
 	
 		int taille_matrice = n+2 ; //ligne de  0  
@@ -648,5 +661,98 @@ public  class Graphe {
 		matrice_cout =mat ; 
 	}
 	
+	public void algorithme()
+	{
+		Scanner lectureClavier= new Scanner(System.in);
+		byte option = 0;
+		do {
+			System.out.println(" Choisissez un algorithme a appliquer ? ");
+			
+			System.out.println("1. Dantzig  ");
+			System.out.println("2. Dikjstra  ");
+			System.out.println("3. Kruskal   ");
+			System.out.println("4. Ordonnancement   ");
+			System.out.println("5. Prufer codage /decodage   ");
+			System.out.println("6. Rang  ");
+			System.out.println("7. Tarjan  ");		
+			System.out.println("8. Sortie  ");	
+			System.out.println("-----------------------------------------------------------------------");
+
+			System.out.println("VEUILLEZ ENTREZ VOTRE CHOIX: ");
+			option = lectureClavier.nextByte();
+			System.out.println("-----------------------------------------------------------------------");
+			
+			switch (option) {
+			case 1: {	
+				
+				//Dantzig
+				
+				if(!avec_Poids && !est_oriente)
+				{
+					System.out.println("Votre graphe n'est pas compatible avec cet algorithme!");
+				}
+				
+				else {
+
+				Algorithme aDantzig = new Algorithme();
+
+				aDantzig.Dantzig(getMatCout());
+				
+				}
+				
+				break ; 
+			}
+			case 2:	
+			{
+				//dikjstra
+				
+				if(!avec_Poids && !est_oriente)
+				{
+					System.out.println("Votre graphe n'est pas compatible avec cet algorithme!");
+				}
+				afficher();
+				afficher_cout();
+				afficher_fs_aps();
+				Algorithme A_Dikjstra = new Algorithme();
+				int n = Aps_Get(0) ;
+				int m = Fs_Get(0)-n  ;
+				 ArrayList<Integer> predecesseur = new ArrayList<>(n+2) ;
+				 ArrayList<Integer> distance = new ArrayList<Integer>(n+2) ;
+				A_Dikjstra.Dikjstra(1,this,predecesseur,distance) ; 
+				System.out.println("Affichage du pred ");
+				for(int i = 0 ; i < predecesseur.size() ; i++)
+					System.out.print(predecesseur.get(i) +"| ");
+
+				 new dessinGraphe(this) ; 
+				 new dijkstra(this) ; 
+			}
+			
+			case 3:
+			{
+				//Kruskal
+				break;
+			}
+			
+			case 4 :
+			{
+				//Ordonnancement 
+				break;
+			}
+			
+			case 5 : 
+			{
+				//Prufer
+				break;
+			}
+			case 6: 
+				
+			{
+				break;
+			}
+			}
+			
+		}while(option != 8) ; 
+
+	}
 
 }

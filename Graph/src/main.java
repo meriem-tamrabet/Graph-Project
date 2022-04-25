@@ -9,7 +9,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 public class main {
-
+	
 	public static void main(String[] args) {
 
 		 ArrayList<Sommet> liste = new ArrayList<Sommet>();
@@ -23,8 +23,6 @@ public class main {
 			Sommet k = new Sommet("K" , new Point(500, 450) , 1) ;  //sommets 2 et marque 1
 			Sommet L = new Sommet("L" , new Point(100, 450) , 1) ;  //sommets 2 et marque 1
 
-		Graphe Gfinal = null;
-
 		byte choix=0; // on choisit le type byte pour utiliser moins d'espace memoire
 		byte option=0;
 		int affichage =0 ; 
@@ -34,17 +32,15 @@ public class main {
 		do{
 			System.out.println("--------------------------------MENU---------------------------------------");
 		
-			System.out.println("1. Cree un graphe ");
-			System.out.println("2. Algorithmes ");
-			System.out.println("3. Application ");
-
-
-			System.out.println("4. Sortir ");
+			System.out.println("1. cree un graphe ");
+			System.out.println("2. application ");
+			System.out.println("3. sortir ");
 			
 			System.out.println("---------------------------------------------------------------------------");
 
 			System.out.println("VEUILLEZ ENTREZ VOTRE CHOIX: ");
 			choix = lectureClavier.nextByte();
+			
 			System.out.println("-----------------------------------------------------------------------");
 
 
@@ -53,11 +49,10 @@ public class main {
 					do{System.out.println("--------------------------------cree un graphe---------------------------------------");
 
 					System.out.println("1. generer un graphe oriente avec 5 sommets");
-					System.out.println("2. generer un graphe non  oriente avec 5 sommets");
-					//TODO sans poids 
+					System.out.println("2. generer un graphe non  oriente avec 5 sommets"); 
 					System.out.println("3. generer un graphe oriente sans poids");
 					System.out.println("4. generer un graphe non orieente sans poids");
-					System.out.println("5. Sortie");
+					System.out.println("5. sortir");
 					
 					/*
 					System.out.println("5. cree a partir des sommets choisis ");
@@ -105,13 +100,14 @@ public class main {
 						}
 						System.out.println("-----------------------------------------------------------------------");
 						do {
-						System.out.println(" que voulez vous faire  ? ");
+						System.out.println(" que voulez vous faire ? ");
 						
 						System.out.println("1. ajouter un sommet  ");
 						System.out.println("2. ajouter un arc  ");
 						System.out.println("3. supprimer un sommet    ");
 						System.out.println("4. supprimer un arc    ");
-						System.out.println("5. Sortir   ");
+						System.out.println("5. appliquer un algorithme");
+						System.out.println("6. sortir");
 						System.out.println("-----------------------------------------------------------------------");
 
 						System.out.println("VEUILLEZ ENTREZ VOTRE CHOIX: ");
@@ -119,9 +115,10 @@ public class main {
 						System.out.println("-----------------------------------------------------------------------");
 							switch (option) {
 							case 1: {
-								String contenu = "" ;
-								contenu = lectureClavier.nextLine();
-								System.out.println("Veuiller saisir un point :");
+								String contenu = "";
+								System.out.println("entrer le nom du sommet :");
+								contenu = lectureClavier.next();
+								System.out.println("veuiller saisir un point :");
 								int x, y;
 								System.out.print("x : ");
 								x = lectureClavier.nextInt();
@@ -144,6 +141,7 @@ public class main {
 								G.ajouterArc(liste.get(i-1), liste.get(j-1), 5);
 							 break ;
 							case 3: {
+									//supprimer un sommet
 								G.afficher();
 								
 								System.out.println("VEUILLEZ choisir le  sommet( pas de sommets 0 ) : ");
@@ -162,13 +160,17 @@ public class main {
 								j = lectureClavier.nextInt();
 								G.enleverArc(liste.get(i-1), liste.get(j-1));;
 							 break ;
+							case 5 : 
+							{
+								//algorithme a appliquer
+								G.algorithme();
+							}
 							default:
 								System.out.println("Cette option n'existe pas");
 							}
 							
 							G.afficher();
-							Gfinal = G;
-						}while(option!= 5) ; 
+						}while(option!= 6) ; 
 						break ; 
 					case 2 :
 						
@@ -204,7 +206,7 @@ public class main {
 						else {
 							 new dessinGraphe(NonG) ; 
 						}
-						Gfinal = NonG;
+						
 						break ; 
 					case 3 :
 						
@@ -223,7 +225,8 @@ public class main {
 						System.out.println("2. ajouter un arc  ");
 						System.out.println("3. supprimer un sommet    ");
 						System.out.println("4. supprimer un arc    ");
-						System.out.println("5. Sortir   ");
+						System.out.println("5. appliquer un algorithme   ");
+						System.out.println("6. sortir  ");
 						System.out.println("-----------------------------------------------------------------------");
 
 						System.out.println("VEUILLEZ ENTREZ VOTRE CHOIX: ");
@@ -233,9 +236,9 @@ public class main {
 						case 1: {
 							//ajouter sommet
 							String contenu = "" ;
-							System.out.println("Entrez le nom du sommet : ");
-							contenu += lectureClavier.nextLine();
-							System.out.println("Veuiller saisir un point :");
+							System.out.println("entrez le nom du sommet : ");
+							contenu += lectureClavier.next();
+							System.out.println("veuiller saisir un point :");
 							int x, y;
 							System.out.print("x : ");
 							x = lectureClavier.nextInt();
@@ -249,11 +252,11 @@ public class main {
 						}
 						case 2 : {
 							//ajouter arc
-							System.out.println("Veuillez saisir le 1ere sommet( pas de sommets 0 )  : ");
+							System.out.println("veuillez saisir le 1ere sommet( pas de sommets 0 )  : ");
 						
 							int i , j ; 
 							i = lectureClavier.nextInt();
-							System.out.println("Veuillez saisir le 2eme sommet ( pas de sommets 0 ) : ");
+							System.out.println("veuillez saisir le 2eme sommet ( pas de sommets 0 ) : ");
 							j = lectureClavier.nextInt();
 							GsP.ajouterArc(liste.get(i-1), liste.get(j-1), 5);
 							GsP.afficher();
@@ -262,7 +265,7 @@ public class main {
 						case 3: 
 						{
 							//supprimer sommet
-							System.out.println("Veuillez saisir le  sommet( pas de sommets 0 ) : ");
+							System.out.println("veuillez saisir le  sommet( pas de sommets 0 ) : ");
 							int i = lectureClavier.nextInt();
 							liste.remove(i-1) ; 
 							GsP.supprimerSommet(liste.get(i-1));
@@ -273,24 +276,29 @@ public class main {
 						case 4 : 
 						{
 							//supprimer arc
-							System.out.println("Veuillez saisir le 1ere sommet( pas de sommets 0 )  : ");
+							System.out.println("veuillez saisir le 1ere sommet( pas de sommets 0 )  : ");
 							int i,j;
 							i = lectureClavier.nextInt();
-							System.out.println("Veuillez saisir le 2eme sommet ( pas de sommets 0 ) : ");
+							System.out.println("veuillez saisir le 2eme sommet ( pas de sommets 0 ) : ");
 							j = lectureClavier.nextInt();
 							GsP.enleverArc(liste.get(i-1), liste.get(j-1));
 							GsP.afficher();
 						 break ;
 						}
+						case 5 : 
+						{
+							//algorithme
+							
+							GsP.algorithme();
+						}
 						default:{ 
-							System.out.println("Cette option n'existe pas");
+							System.out.println("cette option n'existe pas");
 						}
 						}
 						
-						Gfinal = GsP;
-						Gfinal.afficher();
+						GsP.afficher();
 						
-						}while(option!= 5) ;
+						}while(option!= 6) ;
 						
 						
 					case 4 :
@@ -310,7 +318,8 @@ public class main {
 						System.out.println("2. ajouter un arc  ");
 						System.out.println("3. supprimer un sommet    ");
 						System.out.println("4. supprimer un arc    ");
-						System.out.println("5. Sortir   ");
+						System.out.println("5. appliquer un algorithme");
+						System.out.println("6. sortie  ");
 						System.out.println("-----------------------------------------------------------------------");
 
 						System.out.println("VEUILLEZ ENTREZ VOTRE CHOIX: ");
@@ -320,8 +329,9 @@ public class main {
 						case 1: {
 							//ajouter sommet
 							String contenu = "" ;
-							contenu = lectureClavier.nextLine();
-							System.out.println("Veuiller saisir un point :");
+							System.out.println("entrez le nom du sommet : ");
+							contenu += lectureClavier.next();
+							System.out.println("veuiller saisir un point :");
 							int x, y;
 							System.out.print("x : ");
 							x = lectureClavier.nextInt();
@@ -334,11 +344,11 @@ public class main {
 						}
 						case 2 : {
 							//ajouter arc
-							System.out.println("Veuillez saisir le 1ere sommet( pas de sommets 0 )  : ");
+							System.out.println("veuillez saisir le 1ere sommet( pas de sommets 0 )  : ");
 						
 							int i , j ; 
 							i = lectureClavier.nextInt();
-							System.out.println("Veuillez saisir le 2eme sommet ( pas de sommets 0 ) : ");
+							System.out.println("veuillez saisir le 2eme sommet ( pas de sommets 0 ) : ");
 							j = lectureClavier.nextInt();
 							Gnp.ajouterArc(liste.get(i-1), liste.get(j-1), 5);
 							Gnp.afficher();
@@ -347,7 +357,7 @@ public class main {
 						case 3: 
 						{
 							//supprimer sommet
-							System.out.println("Veuillez saisir le  sommet( pas de sommets 0 ) : ");
+							System.out.println("veuillez saisir le  sommet( pas de sommets 0 ) : ");
 							int i = lectureClavier.nextInt();
 							liste.remove(i-1) ; 
 							Gnp.supprimerSommet(liste.get(i-1));
@@ -358,79 +368,39 @@ public class main {
 						case 4 : 
 						{
 							//supprimer arc
-							System.out.println("Veuillez saisir le 1ere sommet( pas de sommets 0 )  : ");
+							System.out.println("veuillez saisir le 1ere sommet( pas de sommets 0 )  : ");
 							int i,j;
 							i = lectureClavier.nextInt();
-							System.out.println("Veuillez saisir le 2eme sommet ( pas de sommets 0 ) : ");
+							System.out.println("veuillez saisir le 2eme sommet ( pas de sommets 0 ) : ");
 							j = lectureClavier.nextInt();
 							Gnp.enleverArc(liste.get(i-1), liste.get(j-1));
 							Gnp.afficher();
 						 break ;
 						}
+						case 5 : 
+						{
+							Gnp.algorithme();
+						}
 						default:{ 
-							System.out.println("Cette option n'existe pas");
+							System.out.println("cette option n'existe pas");
 						}
 						}
 						
-						Gfinal = Gnp;
-						Gfinal.afficher();
+						Gnp.afficher();
 						
-						}while(option!= 5) ;
+						}while(option!= 6) ;
 						
 					}
 						
 					
 					default:
-						System.out.println("Cette option n'existe pas");
+						System.out.println("cette option n'existe pas");
 					}
 					}while(choix!= 4 ) ; 
 					
 					break ; 
+				
 				case 2 : 
-					do {
-						System.out.println(" Choisissez un algorithme a appliquer ? ");
-						
-						System.out.println("1. Dantzig  ");
-						System.out.println("2. Dijkstra  ");
-						System.out.println("3. Kruskal   ");
-						System.out.println("4. Ordonnancement   ");
-						System.out.println("5. Prufer codage /decodage   ");
-						System.out.println("6. Rang  ");
-						System.out.println("7. Tarjan  ");		
-						System.out.println("8. Sortie  ");	
-						System.out.println("-----------------------------------------------------------------------");
-
-						System.out.println("VEUILLEZ ENTREZ VOTRE CHOIX: ");
-						option = lectureClavier.nextByte();
-						System.out.println("-----------------------------------------------------------------------");
-						
-						switch (option) {
-						case 1: {
-							
-							Graphe gDantzig = Gfinal;
-
-							System.out.println("---------Ajout de sommets ------------") ;
-							gDantzig.ajouterSommet(s);
-							gDantzig.ajouterSommet(t);
-							gDantzig.ajouterSommet(w);
-							gDantzig.ajouterSommet(k);
-						
-					
-							System.out.println("---------Ajout de arc  ------------") ;
-							gDantzig.ajouterArc(s, t, 1);
-							gDantzig.ajouterArc(s, k, 2 );
-							gDantzig.ajouterArc(t, w, 3);
-
-							Algorithme aDantzig = new Algorithme();
-
-							aDantzig.Dantzig(gDantzig.getMatCout());
-							
-							break ; 
-						}
-						}
-						
-					}while(option != 8) ; 
-				case 3 : 
 					
 					//apply a look n feel marche pas sur mac faut enlever le look 
 					try {
@@ -448,7 +418,8 @@ public class main {
 					System.out.println("Cette option n'existe pas");
 
 			}
-		}while(choix!=4);
-
+		}while(choix!=3);
 	}
+	
+
 }

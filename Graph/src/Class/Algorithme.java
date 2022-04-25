@@ -2,6 +2,7 @@ package Class;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 
 public class Algorithme {
@@ -932,6 +933,5 @@ public void affiche_tab_b(ArrayList<Boolean> v) {
     public void Dantzig(){}
     public void Prufer(){}
     */
-
 }
 
