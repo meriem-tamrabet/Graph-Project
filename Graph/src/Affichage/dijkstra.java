@@ -16,7 +16,7 @@ public class dijkstra  extends JFrame{
 	public dijkstra(Graphe G){
 		this.G = G ; 
         setTitle("Drawing a Graph");
-        setSize(600, 600);
+        setSize(1000, 1000);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -25,7 +25,7 @@ public class dijkstra  extends JFrame{
     @Override
     public void paint(Graphics g) {
     	BufferedImage result;
-    	result = new BufferedImage(600, 600, BufferedImage.TYPE_INT_RGB);
+    	result = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);
     //	Graphics2D g2d = (Graphics2D) result.createGraphics(); 
     	Graphics2D g2d = (Graphics2D) g ; 
     	/** Definit une epaisseur de 5 pixels */ 
@@ -45,10 +45,10 @@ public class dijkstra  extends JFrame{
         	int x = s.getPosition().getX(); 
         	int y = s.getPosition().getY() ;
         	g2d.setColor(Color.BLACK); 
-        	g2d.drawOval(x-5, y-5, 50, 50);
+        	g2d.drawOval(x-5, y-5, 30, 30);
         	g2d.setColor(Color.RED); 
         	String str = s.getContenu() ; 
-        	g2d.drawString(str, x+20, y+20);
+        	g2d.drawString(str, x+5, y+7);
         	
         }
         g2d.setColor( Color.blue );
@@ -58,18 +58,19 @@ public class dijkstra  extends JFrame{
        
        for(int i = 1 ; i < predecesseur.size(); i++) {
     	   
-    	   Sommet s =  G.liste_sommets_Get(i) ; 
+    	   	Sommet s =  G.liste_sommets_Get(i-1) ; 
     	   
     	  
     		   //c'est que y'a des successeur 
-    		   Sommet t =  G.liste_sommets_Get(predecesseur.get(i)) ; 
-    		   	int x1 = s.getPosition().getX() +10; 
-           		int y1 = s.getPosition().getY() +10;
-           	 	int x2 = t.getPosition().getX()+10; 
-           		int y2 = t.getPosition().getY()+10 ;
+    	  if(predecesseur.get(i)-1 <0) {
+    		   Sommet t =  G.liste_sommets_Get(predecesseur.get(i)-1) ; 
+    		   	int x1 = s.getPosition().getX() ; 
+           		int y1 = s.getPosition().getY() ;
+           	 	int x2 = t.getPosition().getX(); 
+           		int y2 = t.getPosition().getY() ; 
     		   g2d.drawLine(x1,y1,x2,y2);
-    		  
-    	  
+    	  }
+    	   	
   
        }
        g2d.dispose();

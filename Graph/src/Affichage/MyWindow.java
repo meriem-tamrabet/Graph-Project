@@ -24,7 +24,7 @@ public class MyWindow extends JFrame {
 		super( " Graph "); 
 		// dans le cas ou je ferme la fenetre 
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		this.setSize(new Dimension(600,400));
+		this.setSize(new Dimension(1000,1000));
 		this.setLocationRelativeTo(null);
 
 	      this.setTitle("Mon application ");
