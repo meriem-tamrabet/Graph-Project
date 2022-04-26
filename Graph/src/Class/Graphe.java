@@ -675,7 +675,11 @@ public  class Graphe {
 			System.out.println("5. Prufer codage /decodage   ");
 			System.out.println("6. Rang  ");
 			System.out.println("7. Tarjan  ");		
-			System.out.println("8. Sortie  ");	
+			System.out.println("8. Demi degre interieur  ");	
+			System.out.println("9. Demi degre exterieur  ");
+			System.out.println("10. Calcul des distances ");
+			System.out.println("11. Sortir ");
+			
 			System.out.println("-----------------------------------------------------------------------");
 
 			System.out.println("VEUILLEZ ENTREZ VOTRE CHOIX: ");
@@ -719,10 +723,10 @@ public  class Graphe {
 				 ArrayList<Integer> predecesseur = new ArrayList<>(n+2) ;
 				 ArrayList<Integer> distance = new ArrayList<Integer>(n+2) ;
 				A_Dikjstra.Dikjstra(1,this,predecesseur,distance) ; 
-		/*		System.out.println("Affichage du pred ");
+				/*System.out.println("Affichage du pred ");
 				for(int i = 0 ; i < predecesseur.size() ; i++)
-					System.out.print(predecesseur.get(i) +"| ");
-*/
+					System.out.print(predecesseur.get(i) +"| ");*/
+
 				 new dessinGraphe(this) ; 
 				 new dijkstra(this) ; 
 			}
@@ -747,12 +751,162 @@ public  class Graphe {
 			case 6: 
 				
 			{
+				//Rang
+
+				afficher_fs_aps();
+
+				Algorithme a = new Algorithme();
+
+				ArrayList<Integer> r = a.rang(getFs(), getAps());
+
+				String str = new String();
+				str += "-----------Rang------------\n|";
+				for(Integer i:r){
+					str += i + "|";
+				}
+				str += "\n";
+
+				System.out.println(str);
+				break;
+			}
+			case 7:
+			{
+				//Tarjan
+				System.out.println("ne fonctionne pas encore! veuillez patienter!");
+				break; 
+			}
+			case 8:
+			{
+				//Demi degre interieur
+				
+				afficher_fs_aps();
+
+				Algorithme addi = new Algorithme();
+
+				ArrayList<Integer> ddi = addi.demi_degre_interieur(getFs(), getAps());
+
+				String str1 = new String();
+				str1 += "-----------Demi Degré Intérieur------------\n|";
+				for(Integer i:ddi){
+					str1 += i + "|";
+				}
+				str1 += "\n";
+				System.out.println(str1);
+				break;
+			}
+			case 9:
+			{
+				//Demi degre exterieur 
+				afficher_fs_aps();
+
+				Algorithme adde = new Algorithme();
+
+				ArrayList<Integer> dde = adde.demi_degre_exterieur(getFs(), getAps());
+
+				String str2 = new String();
+				str2 += "-----------Demi Degré Extérieur-----------\n|";
+				for(Integer i:dde){
+					str2 += i + "|";
+				}
+				str2 += "\n";
+
+				System.out.println(str2);
 				break;
 			}
 			}
 			
-		}while(option != 8) ; 
+		}while(option != 10) ; 
 
 	}
+	
+	public void actions(ArrayList<Sommet> liste)
+	{
+		Scanner lectureClavier= new Scanner(System.in);
+		byte option = 0;
+		
+		System.out.println("-----------------------------------------------------------------------");
+		do {
+		System.out.println(" que voulez vous faire  ? ");
+		
+		System.out.println("1. ajouter un sommet  ");
+		System.out.println("2. ajouter un arc  ");
+		System.out.println("3. supprimer un sommet    ");
+		System.out.println("4. supprimer un arc    ");
+		System.out.println("5. appliquer un algorithme   ");
+		System.out.println("6. sortir  ");
+		System.out.println("-----------------------------------------------------------------------");
+
+		System.out.println("VEUILLEZ ENTREZ VOTRE CHOIX: ");
+		option = lectureClavier.nextByte();
+		System.out.println("-----------------------------------------------------------------------");
+		switch (option) {
+		case 1: {
+			//ajouter sommet
+			String contenu = "" ;
+			System.out.println("entrez le nom du sommet : ");
+			contenu += lectureClavier.next();
+			System.out.println("veuiller saisir un point :");
+			int x, y;
+			System.out.print("x : ");
+			x = lectureClavier.nextInt();
+			System.out.print("y : ");
+			y = lectureClavier.nextInt();
+			Point p = new Point(x, y) ; 
+			liste.add(new Sommet(contenu , p , 1)) ; 
+			ajouterSommet(liste.get(liste.size()-1));
+			afficher();
+			break ; 
+		}
+		case 2 : {
+			//ajouter arc
+			System.out.println("veuillez saisir le 1ere sommet( pas de sommets 0 )  : ");
+		
+			int i , j ; 
+			i = lectureClavier.nextInt();
+			System.out.println("veuillez saisir le 2eme sommet ( pas de sommets 0 ) : ");
+			j = lectureClavier.nextInt();
+			ajouterArc(liste.get(i-1), liste.get(j-1), 5);
+			afficher();
+		 break ;
+		}
+		case 3: 
+		{
+			//supprimer sommet
+			System.out.println("veuillez saisir le  sommet( pas de sommets 0 ) : ");
+			int i = lectureClavier.nextInt();
+			liste.remove(i-1) ; 
+			supprimerSommet(liste.get(i-1));
+			afficher();
+			
+			break ; 
+		}
+		case 4 : 
+		{
+			//supprimer arc
+			System.out.println("veuillez saisir le 1ere sommet( pas de sommets 0 )  : ");
+			int i,j;
+			i = lectureClavier.nextInt();
+			System.out.println("veuillez saisir le 2eme sommet ( pas de sommets 0 ) : ");
+			j = lectureClavier.nextInt();
+			enleverArc(liste.get(i-1), liste.get(j-1));
+			afficher();
+		 break ;
+		}
+		case 5 : 
+		{
+			//algorithme
+			
+			algorithme();
+		}
+		default:{ 
+			System.out.println("cette option n'existe pas");
+		}
+		}
+		
+		afficher();
+		
+		}while(option!= 6) ;
+	}
+
 
 }
