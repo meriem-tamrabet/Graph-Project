@@ -11,7 +11,7 @@ public class dessinGraphe  extends JFrame{
 	
 	public dessinGraphe(Graphe G){
 		this.G = G ; 
-        setTitle("Drawing a Graph");
+        setTitle(" Graph");
         setSize(1000, 1000);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

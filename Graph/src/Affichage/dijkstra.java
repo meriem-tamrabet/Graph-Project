@@ -15,7 +15,7 @@ public class dijkstra  extends JFrame{
 	
 	public dijkstra(Graphe G){
 		this.G = G ; 
-        setTitle("Drawing a Graph");
+        setTitle("Dijkstra");
         setSize(1000, 1000);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

@@ -294,6 +294,27 @@ public class main {
 						case 5 : 
 						{
 							//Prufer
+							Graphe gprufer = new Graphe(est_oriente, avec_Poids);
+							gprufer.ajouterSommet(s);
+							gprufer.ajouterSommet(t);
+							gprufer.ajouterSommet(w);
+							gprufer.ajouterSommet(k);
+							gprufer.ajouterArc(s, t, 1);
+							gprufer.ajouterArc(s, k, 2 );
+							gprufer.ajouterArc(t, w, 3);
+
+							gprufer.afficher_fs_aps();
+							int n = gprufer.nombre_sommets() ; 
+							ArrayList<Integer> pref = new ArrayList<Integer>(n-1) ;
+							Algorithme A_prufer = new Algorithme() ; 
+								A_prufer.Prufer_encode(pref, gprufer) ; 
+								
+
+							new dessinGraphe(gprufer) ; 
+							System.out.println("Affichage du pref ");
+							for(int i = 0 ; i < pref.size() ; i++)
+								System.out.print(pref.get(i) +"| ");
+								//new dijkstra(gDikjstra) ; 
 							break;
 						}
 						case 6: 	
@@ -301,14 +322,12 @@ public class main {
 							//Rang
 							Graphe gRang = new Graphe(true,true);
 
-							System.out.println("---------Ajout de sommets ------------") ;
 							gRang.ajouterSommet(s);
 							gRang.ajouterSommet(t);
 							gRang.ajouterSommet(w);
 							gRang.ajouterSommet(k);
 						
 					
-							System.out.println("---------Ajout de arc  ------------") ;
 							gRang.ajouterArc(s, t, 1);
 							gRang.ajouterArc(s, k, 2 );
 							gRang.ajouterArc(t, w, 3);
@@ -359,7 +378,7 @@ public class main {
 							ArrayList<Integer> ddi = addi.demi_degre_interieur(gDdi.getFs(), gDdi.getAps());
 
 							String str1 = new String();
-							str1 += "-----------Demi Degré Intérieur------------\n|";
+							str1 += "-----------Demi Degrï¿½ Intï¿½rieur------------\n|";
 							for(Integer i:ddi){
 								str1 += i + "|";
 							}
@@ -393,7 +412,7 @@ public class main {
 							ArrayList<Integer> dde = adde.demi_degre_exterieur(gDde.getFs(), gDde.getAps());
 
 							String str2 = new String();
-							str2 += "-----------Demi Degré Extérieur-----------\n|";
+							str2 += "-----------Demi Degrï¿½ Extï¿½rieur-----------\n|";
 							for(Integer i:dde){
 								str2 += i + "|";
 							}

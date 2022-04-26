@@ -184,8 +184,9 @@ public void Prufer_decode (ArrayList<Integer> t){
 }
 
 
-void Prufer_encode (ArrayList<Integer> prf, int[][]  mat) {
-	int n = mat[0][0];
+public void Prufer_encode (ArrayList<Integer> prf, Graphe G) {
+	
+	int n = G.Matrice_Get(0, 0);
 	prf = new ArrayList<Integer>(n-1) ; 
     
 	prf.set(0, n-2 ) ;
@@ -193,88 +194,72 @@ void Prufer_encode (ArrayList<Integer> prf, int[][]  mat) {
 	int k = 1;
 	while (k <= n-2)
 	{	int i = 1;
-		for (; mat[i][0] != 1; i++);
+		for (; G.Matrice_Get(i, 0) != 1; i++);
 		int j=1;
-		for (; mat[i][j] != 1; j++);
+		for (; G.Matrice_Get(i, j) != 1; j++);
 		prf.set(k++, j) ;
-		mat[i][j]=0;
-		mat[j][i]=0;
-		mat[i][0]=0;
-		mat[j][0]--;
+		
+		G.Matrice_set(i, j, 0);
+		G.Matrice_set(j, i, 0);
+		G.Matrice_set(i, 0, 0);
+		G.Matrice_set(j, 0, 0);
+	
 	}
 } 
 
 
 public void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , ArrayList<Integer> distance)
 {
-	int ind;  //nombre d'elements qui restent a traiter
+	int ind; 
 	int i, j = s, k, v ;
 	int n = G.Aps_Get(0) ;
 	int m = G.Fs_Get(0)-n  ;
-	//initialisation des tableaux
-	//System.out.print("\n distance : ");
-	//affiche_tab(distance); 
 	
-	//System.out.print("    pred : ");
-	//affiche_tab(predecesseur); 
 		ArrayList<Boolean> inS = new ArrayList<Boolean>(n+2) ; 
-		// sert a dire quels sont les sommets qui restent a traiter inS[i] = 0 ou 1
 		for ( i =0 ; i <= n ; i++) {
 			predecesseur.add(s) ; 
 			inS.add(false) ; 
-			distance.add(G.cout_Get(s, i) ) ; //d[i] = p[s][i];
+			distance.add(G.cout_Get(s, i) ) ; 
 			
 		}
 		distance.set(s, 0) ; 
 		predecesseur.set(s, 0) ; 
-		inS.set(s, true) ; // on supprime le sommets s
+		inS.set(s, true) ;
 		ind = n -1 ; 
 		
 		
 		while(ind > 0) {
-		//	calcule du minimum selon d des sommets de S
 		
 			m = MAXPOIDS;
 			for (i=1;i<=n;i++)
-				if (inS.get(i) == false ) // sommet i est pas marque
+				if (inS.get(i) == false ) 
 				if (distance.get(i) < m)
 				{
 					m = distance.get(i) ;
 					j = i;
 				}
 			
-			//System.out.println("le min est " + m );
 			
 			if (m == MAXPOIDS) return;
-			//je marque le sommets 
-			//System.out.println("je marque le sommets" + j +" psq c'est le min ");
+
 			inS.set(j , true) ;
 			ind--;
-			k = G.Aps_Get(j) ; // k = aps[j];
-			//System.out.println("je récuper add du sommets " + k );
+			k = G.Aps_Get(j) ;
 			
 			while(G.Fs_Get(k) != 0)
 			{   
 				int fs_K = G.Fs_Get(k) ;
-				//System.out.println( k + " a successeur  " + fs_K);
-				if ( inS.get(fs_K ) == false )// if (inS[fs[k]] == 1)
-				{// System.out.println("n'est pas marqu� " + fs_K );
-					v = distance.get(j) + G.cout_Get(j, fs_K) ; // v = d[j]+p[j][fs[k]];
-					//System.out.println(" \n si le successeur n'est pas marquee, son v ==  " + v);
-					//System.out.println(" je test " + v +" plus petit que" + distance.get(fs_K));
+				if ( inS.get(fs_K ) == false )
+				{
+					v = distance.get(j) + G.cout_Get(j, fs_K) ; 
 
-					if (v < distance.get(fs_K))// if (v < d[fs[k]])
+					if (v < distance.get(fs_K))
 					{
-						//System.out.println(" je l'insere " ) ; 
 						
-						distance.set(fs_K , v) ;  // d[fs[k]] = v;
-					 	predecesseur.set(fs_K, j) ; // pr[fs[k]] = j;
-					 //System.out.print("\n distance : ");
-						//affiche_tab(distance); 
-						//System.out.print("    pred : ");
-						//affiche_tab(predecesseur); 
-						//System.out.print("     ins : ");
-						//affiche_tab_b(inS);
+						
+						distance.set(fs_K , v) ; 
+					 	predecesseur.set(fs_K, j) ; 
+					
 					}
 				}
 				k++;

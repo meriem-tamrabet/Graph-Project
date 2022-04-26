@@ -221,10 +221,9 @@ public  class Graphe {
 	 *  **/
 	public  void ajouterArc(Sommet s, Sommet t, int val) {
 		
-		System.out.print(	" sommet s = " + s.getId() ) ; 
-		System.out.println(	" -->  sommet t = " +t.getId() ) ;
 		
-		//TODO METHODE SOMMETS EXISTE 
+		
+	
 		int indiceS = find_position_sommets(s) ; 
 		int indiceT = find_position_sommets(t) ; 
 		if( indiceS== -1  ||  indiceT == -1  )
@@ -241,8 +240,7 @@ public  class Graphe {
 		if( this.avec_Poids)
 		{
 			
-		 //TODO AJOUT LE POIDS 
-			 //System.out.println(" popopopopopopopopopo");
+		
 			 this.matrice_cout[indiceS][indiceT]  = val; 
 			 this.matrice_cout[0][1] = this.matrice[0][1] ; 
 			 if( est_oriente == false )
@@ -265,13 +263,12 @@ public  class Graphe {
 		
 		int[][] mat = new int[matrice.length-1][matrice[0].length-1];
 		
-		System.out.println("position du sommets : " +indiceS ) ;
-		//TODO EXISTE UN SOMMET 
+		
 		if( indiceS== -1   )
 		return ;
-		//mettre d'abords la matrice des cout a jours 
+		
 		 update_supp_s_cout(indiceS) ;
-		// attention ici faut le bon indice c'est a dire -1 
+		
 		listeSommet.remove(indiceS-1) ; 
 		
 		
@@ -339,8 +336,7 @@ public  class Graphe {
 	  * LE CAS OU LE GRAPHE EST PAS ORIENTER EST BIEN TRAITER 
 	  * **/
 	  public  void enleverArc(Sommet s, Sommet t) {
-			System.out.print(	" sommet s = " + s.getId() ) ; 
-			System.out.println(	" -->  sommet t = " +t.getId() ) ;
+			
 			
 			  int indiceS = find_position_sommets(s) ; 
 				int indiceT = find_position_sommets(t) ;
@@ -745,7 +741,9 @@ public  class Graphe {
 			
 			case 5 : 
 			{
-				//Prufer
+				Algorithme aprufer= new Algorithme();
+
+				//aprufer.p(getMatCout());
 				break;
 			}
 			case 6: 
@@ -786,7 +784,7 @@ public  class Graphe {
 				ArrayList<Integer> ddi = addi.demi_degre_interieur(getFs(), getAps());
 
 				String str1 = new String();
-				str1 += "-----------Demi Degré Intérieur------------\n|";
+				str1 += "-----------Demi Degrï¿½ Intï¿½rieur------------\n|";
 				for(Integer i:ddi){
 					str1 += i + "|";
 				}
@@ -804,7 +802,7 @@ public  class Graphe {
 				ArrayList<Integer> dde = adde.demi_degre_exterieur(getFs(), getAps());
 
 				String str2 = new String();
-				str2 += "-----------Demi Degré Extérieur-----------\n|";
+				str2 += "-----------Demi Degrï¿½ Extï¿½rieur-----------\n|";
 				for(Integer i:dde){
 					str2 += i + "|";
 				}
