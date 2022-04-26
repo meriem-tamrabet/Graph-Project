@@ -204,73 +204,6 @@ void Prufer_encode (ArrayList<Integer> prf, int[][]  mat) {
 	}
 } 
 
-/*
- * 	int ind;  nombre d'elements qui restent a traiter 
-	int i, j = 0, k, v ;
-	int n = G.Aps_Get(0) ;
-	int m = G.Fs_Get(0)-n  ;
-	//initialisation des tableaux
-	//predecesseur = new ArrayList<>(n+1) ; predecesseur.set(0, n) ; 
-	//distance = new ArrayList<Integer>(n+1) ;  distance.set(0, n) ; 
-	ArrayList<Boolean> inS = new ArrayList<Boolean>(n+1) ;  sert
-	a dire quels sont les sommets qui restent a traiter inS[i] = 0 ou 1
-	
-	System.out.println(" etape initialisation ");
-	 initialisation des tableaux d, pr et inS
-	for (i = 1;i <= n; i++)
-	{	
-		//System.out.println(" p[s][i] "+ s+" "+i+" :  " + G.cout_Get(s, i) );
-
-		//distance.set(i, G.cout_Get(s, i) ) ;//d[i] = p[s][i];
-		//inS.set(i, true) ; // inS[i] = 1;
-		//predecesseur.set(i, -1) ; //pr[i] = -1;
-		System.out.println(" etape initialisation ");
-
-      }
-	System.out.println(" fin etape initialisation ");
-
-	distance.set(s, 0) ; 
-	predecesseur.set(s, 0) ; 
-	inS.set(s, false) ; /* on supprime le sommets
-	ind = n -1 ; 
-	while(ind > 0) {
-		/* calcule du minimum selon d des sommets de S
-		
-		
-		m = MAXPOIDS;
-		for (i=1;i<=n;i++)
-			if (inS.get(i) == true)
-			if (distance.get(i) < m)
-			{
-			m = distance.get(i) ;
-			j = i;
-			}
-		if (m == MAXPOIDS) return;
-		//je marque le sommets 
-		inS.set(j , false) ;
-		ind--;
-		k = G.Aps_Get(j) ; // k = aps[j];
-		while(G.Fs_Get(k) != 0)
-		{ int fs_K = G.Fs_Get(k) ; 
-			if ( inS.get(fs_K ) == true )// if (inS[fs[k]] == 1)
-			{
-				v = distance.get(j) + G.cout_Get(j, fs_K) ; // v = d[j]+p[j][fs[k]];
-				if (v < distance.get(fs_K))// if (v < d[fs[k]])
-				{
-					distance.set(fs_K , v) ;  // d[fs[k]] = v;
-				 	predecesseur.set(fs_K, j) ; // pr[fs[k]] = j;
-				}
-			}
-			k++;
-			
-		}
-	}
-	 String str = "\n distance : |";
-
-      for( i = 1;i < distance.size();i++){
-          str += distance.get(i) + "|";
-      }
-	*/
 
 public void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , ArrayList<Integer> distance)
 {
@@ -279,11 +212,11 @@ public void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , Arr
 	int n = G.Aps_Get(0) ;
 	int m = G.Fs_Get(0)-n  ;
 	//initialisation des tableaux
-	System.out.print("\n distance : ");
-	affiche_tab(distance); 
+	//System.out.print("\n distance : ");
+	//affiche_tab(distance); 
 	
-	System.out.print("    pred : ");
-	affiche_tab(predecesseur); 
+	//System.out.print("    pred : ");
+	//affiche_tab(predecesseur); 
 		ArrayList<Boolean> inS = new ArrayList<Boolean>(n+2) ; 
 		// sert a dire quels sont les sommets qui restent a traiter inS[i] = 0 ou 1
 		for ( i =0 ; i <= n ; i++) {
@@ -296,12 +229,7 @@ public void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , Arr
 		predecesseur.set(s, 0) ; 
 		inS.set(s, true) ; // on supprime le sommets s
 		ind = n -1 ; 
-		System.out.print("\n distance : ");
-		affiche_tab(distance); 
-		System.out.print("    pred : ");
-		affiche_tab(predecesseur); 
-		System.out.print("     ins : ");
-		affiche_tab_b(inS);
+		
 		
 		while(ind > 0) {
 		//	calcule du minimum selon d des sommets de S
@@ -315,38 +243,38 @@ public void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , Arr
 					j = i;
 				}
 			
-			System.out.println("le min est " + m );
+			//System.out.println("le min est " + m );
 			
 			if (m == MAXPOIDS) return;
 			//je marque le sommets 
-			System.out.println("je marque le sommets" + j +" psq c'est le min ");
+			//System.out.println("je marque le sommets" + j +" psq c'est le min ");
 			inS.set(j , true) ;
 			ind--;
 			k = G.Aps_Get(j) ; // k = aps[j];
-			System.out.println("je récuper add du sommets " + k );
+			//System.out.println("je récuper add du sommets " + k );
 			
 			while(G.Fs_Get(k) != 0)
 			{   
 				int fs_K = G.Fs_Get(k) ;
-				System.out.println( k + " a successeur  " + fs_K);
+				//System.out.println( k + " a successeur  " + fs_K);
 				if ( inS.get(fs_K ) == false )// if (inS[fs[k]] == 1)
-				{ System.out.println("n'est pas marqu� " + fs_K );
+				{// System.out.println("n'est pas marqu� " + fs_K );
 					v = distance.get(j) + G.cout_Get(j, fs_K) ; // v = d[j]+p[j][fs[k]];
-					System.out.println(" \n si le successeur n'est pas marquee, son v ==  " + v);
-					System.out.println(" je test " + v +" plus petit que" + distance.get(fs_K));
+					//System.out.println(" \n si le successeur n'est pas marquee, son v ==  " + v);
+					//System.out.println(" je test " + v +" plus petit que" + distance.get(fs_K));
 
 					if (v < distance.get(fs_K))// if (v < d[fs[k]])
 					{
-						System.out.println(" je l'insere " ) ; 
+						//System.out.println(" je l'insere " ) ; 
 						
 						distance.set(fs_K , v) ;  // d[fs[k]] = v;
 					 	predecesseur.set(fs_K, j) ; // pr[fs[k]] = j;
-					 	System.out.print("\n distance : ");
-						affiche_tab(distance); 
-						System.out.print("    pred : ");
-						affiche_tab(predecesseur); 
-						System.out.print("     ins : ");
-						affiche_tab_b(inS);
+					 //System.out.print("\n distance : ");
+						//affiche_tab(distance); 
+						//System.out.print("    pred : ");
+						//affiche_tab(predecesseur); 
+						//System.out.print("     ins : ");
+						//affiche_tab_b(inS);
 					}
 				}
 				k++;
@@ -354,22 +282,16 @@ public void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , Arr
 			}
 			
 			
-		 	System.out.print("\n distance : ");
-			affiche_tab(distance); 
+		 	
 			
-			System.out.print("    pred : ");
-			affiche_tab(predecesseur); 
-			System.out.print("     ins : ");
-			affiche_tab_b(inS);
-			/*System.out.print("\n distance : ");
-			affiche_tab(distance); 
-			
-			System.out.print("\n pred : ");
-			affiche_tab(predecesseur); 
-			System.out.print("\n ins : ");
-			affiche_tab_b(inS); */
 		}
-		System.out.println("fonito pipo ");
+		System.out.print("\n distance : ");
+		affiche_tab(distance); 
+		
+		System.out.print("    pred : ");
+		affiche_tab(predecesseur); 
+		System.out.print("     ins : ");
+		affiche_tab_b(inS);
 }
 public void affiche_tab(ArrayList<Integer> v) {
 	System.out.print("|");

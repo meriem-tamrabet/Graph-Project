@@ -55,22 +55,20 @@ public class dijkstra  extends JFrame{
         //dessin des arc par rapport a fs et aps youppi 
         
        int Num_Sommet = 0 ; 
-       
+  
        for(int i = 1 ; i < predecesseur.size(); i++) {
-    	   
-    	   	Sommet s =  G.liste_sommets_Get(i-1) ; 
-    	   
-    	  
-    		   //c'est que y'a des successeur 
-    	  if(predecesseur.get(i)-1 <0) {
-    		   Sommet t =  G.liste_sommets_Get(predecesseur.get(i)-1) ; 
-    		   	int x1 = s.getPosition().getX() ; 
+    	   if ( predecesseur.get(i) != 0 ) {
+    		   Sommet s =  G.liste_sommets_Get(predecesseur.get(i) -1 ) ; 
+    		   Sommet t =  G.liste_sommets_Get(i-1) ;
+    		 	int x1 = s.getPosition().getX() ; 
            		int y1 = s.getPosition().getY() ;
            	 	int x2 = t.getPosition().getX(); 
            		int y2 = t.getPosition().getY() ; 
     		   g2d.drawLine(x1,y1,x2,y2);
-    	  }
+    	   }
     	   	
+    	   
+		
   
        }
        g2d.dispose();

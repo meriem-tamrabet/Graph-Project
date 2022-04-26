@@ -719,10 +719,10 @@ public  class Graphe {
 				 ArrayList<Integer> predecesseur = new ArrayList<>(n+2) ;
 				 ArrayList<Integer> distance = new ArrayList<Integer>(n+2) ;
 				A_Dikjstra.Dikjstra(1,this,predecesseur,distance) ; 
-				System.out.println("Affichage du pred ");
+		/*		System.out.println("Affichage du pred ");
 				for(int i = 0 ; i < predecesseur.size() ; i++)
 					System.out.print(predecesseur.get(i) +"| ");
-
+*/
 				 new dessinGraphe(this) ; 
 				 new dijkstra(this) ; 
 			}
