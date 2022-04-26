@@ -811,9 +811,15 @@ public  class Graphe {
 				System.out.println(str2);
 				break;
 			}
+			case 10: 
+			{
+				//calcul des distances
+				
+				break;
+			}
 			}
 			
-		}while(option != 10) ; 
+		}while(option != 11) ; 
 
 	}
 	
@@ -831,7 +837,8 @@ public  class Graphe {
 		System.out.println("3. supprimer un sommet    ");
 		System.out.println("4. supprimer un arc    ");
 		System.out.println("5. appliquer un algorithme   ");
-		System.out.println("6. sortir  ");
+		System.out.println("6. affichage graphique  ");
+		System.out.println("7. sortir ");
 		System.out.println("-----------------------------------------------------------------------");
 
 		System.out.println("VEUILLEZ ENTREZ VOTRE CHOIX: ");
@@ -863,7 +870,15 @@ public  class Graphe {
 			i = lectureClavier.nextInt();
 			System.out.println("veuillez saisir le 2eme sommet ( pas de sommets 0 ) : ");
 			j = lectureClavier.nextInt();
-			ajouterArc(liste.get(i-1), liste.get(j-1), 5);
+			int p;
+			if(avec_Poids == true)
+			{
+				System.out.println("entrez le poids de votre nouvel arc : ");
+				p = lectureClavier.nextInt();
+				ajouterArc(liste.get(i-1), liste.get(j-1), p);
+			}
+			else
+				ajouterArc(liste.get(i-1), liste.get(j-1), 5);
 			afficher();
 		 break ;
 		}
@@ -896,6 +911,11 @@ public  class Graphe {
 			
 			algorithme();
 		}
+		case 6:
+		{
+			new dessinGraphe(this);
+			break;
+		}
 		default:{ 
 			System.out.println("cette option n'existe pas");
 		}
@@ -903,7 +923,7 @@ public  class Graphe {
 		
 		afficher();
 		
-		}while(option!= 6) ;
+		}while(option!= 7) ;
 	}
 
 

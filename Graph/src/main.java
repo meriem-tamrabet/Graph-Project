@@ -53,7 +53,9 @@ public class main {
 					System.out.println("2. generer un graphe non  oriente avec 5 sommets"); 
 					System.out.println("3. generer un graphe oriente sans poids");
 					System.out.println("4. generer un graphe non orieente sans poids");
-					System.out.println("5. sortir");
+					System.out.println("5. generer un graphe oriente avec poids");
+					System.out.println("6. generer un graphe non oriente avec poids");
+					System.out.println("7. sortir");
 					
 					/*
 					System.out.println("5. cree a partir des sommets choisis ");
@@ -129,7 +131,7 @@ public class main {
 
 						System.out.println("VEUILLEZ ENTREZ VOTRE CHOIX: ");
 						affichage = lectureClavier.nextInt();
-						if(affichage==0) {
+						if(affichage==1) {
 							NonG.afficher();
 						}
 						else {
@@ -161,12 +163,31 @@ public class main {
 						Gnp.actions(liste);
 						
 					}
+					
+					case 5: 
+					{
+						//genere un graphe oriente avec poids
+						avec_Poids = true;
+						est_oriente = true;
+						Graphe Gop = new Graphe(est_oriente, avec_Poids);
 						
+						Gop.actions(liste);
+					}
+					case 6: 
+					{
+						//genere un graphe non oriente avec poids 
+						
+						avec_Poids = true; 
+						est_oriente = true;
+						Graphe GnP = new Graphe (est_oriente, avec_Poids);
+						
+						GnP.actions(liste);
+					}
 					
 					default:
 						System.out.println("cette option n'existe pas");
 					}
-					}while(choix!= 4 ) ; 
+					}while(choix!= 7) ; 
 					
 					break ; 
 				
