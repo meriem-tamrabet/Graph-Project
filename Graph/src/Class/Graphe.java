@@ -1,6 +1,14 @@
 package Class;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 import Affichage.dessinGraphe;
@@ -482,6 +490,12 @@ public  class Graphe {
 	}
 	
 	  public String toString(){
+		  String Total = "Grphe " ; 
+		  if( est_oriente)
+			  Total += "Orienté" ; 
+		  else  Total += "Non Orienté" ; 
+		  if(avec_Poids)
+			  Total += " Contient des poids" ; 
 	        String str = "--------fs & aps ---------- \n";
 	        str += "FS : |";
 	        for(int i = 1;i < fs.size();i++){
@@ -502,7 +516,10 @@ public  class Graphe {
 				Smatrice += "|\n " ; 
 			}
 			String ListeSommets = "\n ------Liste des sommets------ \n " ;
-		       return   str ;
+			for(int i = 1;i < listeSommet.size();i++){
+				ListeSommets += getListeSommetElem(i).toString()  + "|";
+	        }
+		       return   Total+"\n " + str + Smatrice + ListeSommets;
 	    }
 	  
 	  
@@ -563,7 +580,22 @@ public  class Graphe {
 		mat [0][0] --;
 		matrice_cout =mat ; 
 	}
-	
+//--------------------------sauvgarde/charger-----------------------------
+	public void sauvgarde() {
+		  PrintWriter printWriter = null;
+	        
+	        {
+	            try {
+	                printWriter = new PrintWriter("writerFile.txt");
+	            } catch (FileNotFoundException e) {
+	                System.out.println("Unable to locate the fileName: " + e.getMessage());
+	            }
+	            Objects.requireNonNull(printWriter).println(toString());
+	            printWriter.close();
+	        }
+	    
+		  
+	}
 	public void menu_algorithme()
 	{
 		Scanner lectureClavier= new Scanner(System.in);

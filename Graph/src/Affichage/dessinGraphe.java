@@ -30,8 +30,8 @@ public class dessinGraphe  extends JFrame{
     	//g2d.setFont(new Font("Serif",Font.PLAIN,12)); 
     	
     	
-        for(int i = 0 ; i < G.nombre_sommets(); i++) {
-        	Sommet s = G.liste_sommets_Get(i)  ; 
+        for(int i = 0 ; i < G.nombre_sommets_aps(); i++) {
+        	Sommet s = G.getListeSommetElem(i)  ; 
         	int x = s.getPosition().getX(); 
         	int y = s.getPosition().getY() ;
         	g2d.setColor(Color.BLACK);
@@ -45,11 +45,11 @@ public class dessinGraphe  extends JFrame{
         
        int Num_Sommet = 0 ; 
       
-       for(int i = 1 ; i < G.Fs_Get(0)+1; i++) {
-    	   Sommet s =  G.liste_sommets_Get(Num_Sommet) ; 
+       for(int i = 1 ; i < G.getFsElem(0)+1; i++) {
+    	   Sommet s =  G.getListeSommetElem(Num_Sommet) ; 
     	   
-    	   while(G.Fs_Get(i)!= 0 ) {
-    		   Sommet t =  G.liste_sommets_Get(G.Fs_Get(i)-1) ; 
+    	   while(G.getFsElem(i)!= 0 ) {
+    		   Sommet t =  G.getListeSommetElem(G.getFsElem(i)-1) ; 
     		   	int x1 = s.getPosition().getX() ; 
            		int y1 = s.getPosition().getY() ;
            	 	int x2 = t.getPosition().getX() ; 

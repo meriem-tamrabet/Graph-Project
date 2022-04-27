@@ -82,7 +82,9 @@ public Sommet( String contenu, Point position, int marquee  ) {
 	public int getId() {
 		return id;
 	}
-
+public Sommet getSommet() {
+	return this ; 
+}
 //---------- Setters -----------------------
 
 	/**
@@ -139,7 +141,7 @@ public Sommet( String contenu, Point position, int marquee  ) {
 	 * @return String
 	 */
 	public String toString(  ) {
-		return contenu+ " " ;
+		return contenu+ " ( " + position.getX() +","+position.getY() +")" ;
 	}
 
 }

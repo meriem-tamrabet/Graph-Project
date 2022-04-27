@@ -33,15 +33,15 @@ public class dijkstra  extends JFrame{
 
     	//g2d.setFont(new Font("Serif",Font.PLAIN,12)); 
 		Algorithme A_Dikjstra = new Algorithme();
-    	int n =G.Aps_Get(0) ;
-		int m = G.Fs_Get(0)-n  ;
+    	int n =G.getApsElem(0) ;
+		int m = G.getFsElem(0)-n  ;
 		 ArrayList<Integer> predecesseur = new ArrayList<>(n+2) ;
 		 ArrayList<Integer> distance = new ArrayList<Integer>(n+2) ;
-		A_Dikjstra.Dikjstra(1,G,predecesseur,distance) ; 
+		A_Dikjstra.Dijkstra(1,G,predecesseur,distance) ; 
 
     	
-        for(int i = 0 ; i < G.nombre_sommets(); i++) {
-        	Sommet s = G.liste_sommets_Get(i)  ; 
+        for(int i = 0 ; i < G.nombre_sommets_aps(); i++) {
+        	Sommet s = G.getListeSommetElem(i)  ; 
         	int x = s.getPosition().getX(); 
         	int y = s.getPosition().getY() ;
         	g2d.setColor(Color.BLACK); 
@@ -57,8 +57,8 @@ public class dijkstra  extends JFrame{
   
        for(int i = 1 ; i < predecesseur.size(); i++) {
     	   if ( predecesseur.get(i) != 0 ) {
-    		   Sommet s =  G.liste_sommets_Get(predecesseur.get(i) -1 ) ; 
-    		   Sommet t =  G.liste_sommets_Get(i-1) ;
+    		   Sommet s =  G.getListeSommetElem(predecesseur.get(i) -1 ) ; 
+    		   Sommet t =  G.getListeSommetElem(i-1) ;
     		 	int x1 = s.getPosition().getX() ; 
            		int y1 = s.getPosition().getY() ;
            	 	int x2 = t.getPosition().getX(); 

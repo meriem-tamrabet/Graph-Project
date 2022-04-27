@@ -90,7 +90,9 @@ public class main {
 						affichage = lectureClavier.nextInt();
 						if(affichage==1) {
 							G.afficher_fs_aps();
-							
+							System.out.println("Save   ");
+
+							G.sauvgarde();
 						}
 						else {
 							 new dessinGraphe(G) ; 
@@ -480,6 +482,7 @@ public class main {
 
 			}
 		}while(choix!=4);
+		
 	}
 	
 
