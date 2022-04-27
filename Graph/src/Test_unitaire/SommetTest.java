@@ -11,13 +11,6 @@ import org.junit.Test;
 import Class.Point;
 
 class SommetTest {
-/*
- * 
- * 
- private  String contenu ; 
- private Point position ;
- private int marquee ; */
-	
  
 	void ConstructeurTest()
 	{

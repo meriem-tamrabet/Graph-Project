@@ -52,7 +52,6 @@ public class dijkstra  extends JFrame{
         	
         }
         g2d.setColor( Color.blue );
-        //dessin des arc par rapport a fs et aps youppi 
         
        int Num_Sommet = 0 ; 
   
@@ -66,10 +65,6 @@ public class dijkstra  extends JFrame{
            		int y2 = t.getPosition().getY() ; 
     		   g2d.drawLine(x1,y1,x2,y2);
     	   }
-    	   	
-    	   
-		
-  
        }
        g2d.dispose();
 

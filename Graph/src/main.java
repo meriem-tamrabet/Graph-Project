@@ -17,18 +17,16 @@ public class main {
 		Scanner lectureClavier= new Scanner(System.in);
 		 boolean avec_Poids = true ; 
 		 boolean est_oriente = true  ; 
-			Sommet s = new Sommet("S",new Point(100, 200) , 1) ; //sommets 0 et marque 1
-			Sommet t = new Sommet("T" , new Point(400, 260) , 1) ;  //sommets 1 et marque 1
-			Sommet w = new Sommet("P", new Point(100, 500) , 1) ;  //sommets 2 et marque 1
-			Sommet k = new Sommet("K" , new Point(500, 450) , 1) ;  //sommets 2 et marque 1
-			Sommet L = new Sommet("L" , new Point(100, 450) , 1) ;  //sommets 2 et marque 1
+			Sommet s = new Sommet("S",new Point(100, 200) , 1) ;
+			Sommet t = new Sommet("T" , new Point(400, 260) , 1) ;  
+			Sommet w = new Sommet("P", new Point(100, 500) , 1) ;  
+			Sommet k = new Sommet("K" , new Point(500, 450) , 1) ;  
+			Sommet L = new Sommet("L" , new Point(100, 450) , 1) ;  
 
-		byte choix=0; // on choisit le type byte pour utiliser moins d'espace memoire
+		byte choix=0;
 		byte option=0;
 		int affichage =0 ; 
 
-		//On utilise la boucle do...while, elle permet d'entrer et d'exécuter au moins une fois la boucle
-		// avant la saisie du choix de l'utilisateur.
 		do{
 			System.out.println("--------------------------------MENU---------------------------------------");
 		
@@ -47,6 +45,7 @@ public class main {
 
 			switch (choix){
 				case 1:
+				{
 					do{System.out.println("--------------------------------cree un graphe---------------------------------------");
 
 					System.out.println("1. generer un graphe oriente avec 5 sommets");
@@ -57,28 +56,22 @@ public class main {
 					System.out.println("6. generer un graphe non oriente avec poids");
 					System.out.println("7. sortir");
 					
-					/*
-					System.out.println("5. cree a partir des sommets choisis ");
-					System.out.println("6. cree a partir de l'application  ");
-					System.out.println("7. Retour ");*/
-
 					System.out.println("---------------------------------------------------------------------------");
 
 					System.out.println("VEUILLEZ ENTREZ VOTRE CHOIX: ");
 					choix = lectureClavier.nextByte();
 					switch (choix) {
 					case 1: 
-					
-						Graphe G = new Graphe( est_oriente , avec_Poids  ) ;
-
-						// ajout des sommets
+					{	//generer un graphe oriente avec 5 sommets
+						Graphe G = new Graphe( est_oriente , avec_Poids);
 						
 						G.ajouterSommet(s);
 						G.ajouterSommet(t);
 						G.ajouterSommet(w);
 						G.ajouterSommet(k);
+						
 						liste.add(s) ; liste.add(t) ; liste.add(w) ; liste.add(k) ; 
-						//ajout arc entre s et t ==> 5
+						
 						G.ajouterArc(s, t, 1);
 						G.ajouterArc(s, k, 2 );
 						G.ajouterArc(t, k, 3);
@@ -86,6 +79,7 @@ public class main {
 						G.ajouterArc(w, w, 5);
 						G.ajouterArc(k, t, 5);
 						G.ajouterArc(k, k, 5);
+						
 						System.out.println(" quel type d'affichage voulez vous ? ");
 						System.out.println("1. Console   ");
 						System.out.println("2. Graphique  ");
@@ -103,19 +97,17 @@ public class main {
 						}
 						G.actions(liste);
 						break ; 
+					}
 					case 2 :
-						
+					{	//generer un graphe non oriente avec 5 sommets
 						est_oriente = false;
 						Graphe NonG = new Graphe( est_oriente , avec_Poids  ) ;
 
-						// ajout des sommets
-						
 						NonG.ajouterSommet(s);
 						NonG.ajouterSommet(t);
 						NonG.ajouterSommet(w);
 						NonG.ajouterSommet(k);
-						
-						//ajout arc entre s et t ==> 5
+
 						NonG.ajouterArc(s, t, 1);
 						NonG.ajouterArc(s, k, 2 );
 						NonG.ajouterArc(t, k, 3);
@@ -123,6 +115,7 @@ public class main {
 						NonG.ajouterArc(w, w, 5);
 						NonG.ajouterArc(k, t, 5);
 						NonG.ajouterArc(k, k, 5);
+						
 						System.out.println(" quel type d'affichage voulez vous ? ");
 						System.out.println("1. Console ");
 						System.out.println("2. Graphique  ");
@@ -139,29 +132,28 @@ public class main {
 						}
 						
 						break ; 
+					}
 					case 3 :
-						
-						
+					{	
 						//genere un graphe oriente sans poids
 						
-						
-						avec_Poids = false; // sans poids
+						avec_Poids = false; 
+						est_oriente = true; 
 						Graphe GsP = new Graphe( est_oriente , avec_Poids  ) ;
 						
 						GsP.actions(liste);
-						
-						
+						break;
+					}	
 					case 4 :
-					{
-						
+					{	
 						//genere un graphe non oriente sans poids
 						
-						avec_Poids = false; // sans poids
-						est_oriente = false; //non oriente
+						avec_Poids = false; 
+						est_oriente = false; 
 						Graphe Gnp= new Graphe( est_oriente , avec_Poids  ) ;
 						
 						Gnp.actions(liste);
-						
+						break;
 					}
 					
 					case 5: 
@@ -172,6 +164,7 @@ public class main {
 						Graphe Gop = new Graphe(est_oriente, avec_Poids);
 						
 						Gop.actions(liste);
+						break;
 					}
 					case 6: 
 					{
@@ -182,6 +175,7 @@ public class main {
 						Graphe GnP = new Graphe (est_oriente, avec_Poids);
 						
 						GnP.actions(liste);
+						break;
 					}
 					
 					default:
@@ -190,9 +184,9 @@ public class main {
 					}while(choix!= 7) ; 
 					
 					break ; 
-				
+				}
 				case 2 : 
-					
+				{	
 					//exemple d algorithme
 					
 					byte algo = 0;
@@ -452,27 +446,24 @@ public class main {
 						}
 						
 					}while(algo != 11)  ; 
-					
+				}	
 				case 3 : 
-					//apply a look n feel marche pas sur mac faut enlever le look 
+				{
 					try {
 						UIManager.setLookAndFeel(new NimbusLookAndFeel());
 					} catch (UnsupportedLookAndFeelException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 						
-						//Start my window 
-					Graphe G = new Graphe( est_oriente , avec_Poids  ) ;
-
-					// ajout des sommets
+					Graphe G = new Graphe( est_oriente , avec_Poids  );
 					
 					G.ajouterSommet(s);
 					G.ajouterSommet(t);
 					G.ajouterSommet(w);
 					G.ajouterSommet(k);
+					
 					liste.add(s) ; liste.add(t) ; liste.add(w) ; liste.add(k) ; 
-					//ajout arc entre s et t ==> 5
+
 					G.ajouterArc(s, t, 1);
 					G.ajouterArc(s, k, 2 );
 					G.ajouterArc(t, k, 3);
@@ -480,9 +471,10 @@ public class main {
 					G.ajouterArc(w, w, 5);
 					G.ajouterArc(k, t, 5);
 					G.ajouterArc(k, k, 5);
-						MyWindow Fenetre = new MyWindow(G) ; 
-						Fenetre.setVisible(true) ;
-						break ; 
+					MyWindow Fenetre = new MyWindow(G) ; 
+					Fenetre.setVisible(true) ;
+					break ; 
+				}
 				default:
 					System.out.println("Cette option n'existe pas");
 

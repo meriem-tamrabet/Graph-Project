@@ -5,16 +5,16 @@ import java.util.ArrayList;
 public class Sommet {
 	
  
- private String contenu ;  //peut etre le nom du sommets ex ville , taches .... 
- private Point position ; //pour le dessin apres 
- private int marquee ; // pour savoir le rang 
- private int id ; // le numero de sommets 
+ private String contenu ;  
+ private Point position ; 
+ private int marquee ; 
+ private int id ; 
  private static int compteur = 0 ; 
- //private ArrayList<Int> listPoids = new ArrayList<Int>();
+ 
 //---------- Constructors------------------------------
 
 	/**
-	 * Constructeur de sommmet à 3 paramètres
+	 * Constructeur de sommmet a 3 parametres
  	 * @param contenu  String
 	 * @param position Point
 	 * @param marquee int
@@ -31,7 +31,7 @@ public Sommet( String contenu, Point position, int marquee  ) {
 }
 
 	/**
-	 * Constructeur Sommet à deux paramètre, position null par défaut
+	 * Constructeur Sommet a 2 parametres, position null par defaut
 	 * @param contenu
 	 * @param marquee
 	 */
@@ -41,16 +41,14 @@ public Sommet( String contenu, Point position, int marquee  ) {
 	}
 
 	/**
-	 * Constrcuteur par défaut
+	 * Constrcuteur par defaut
 	 */
 	public Sommet( ) {
 	this("",null, 0);
 }
 
-//---------- End of constructors-----------------------
 
-
-//---------- Getter ----------------------------------
+//---------- Getters ----------------------------------
 
 	/**
 	 * Recupere la position du Sommet
@@ -61,7 +59,7 @@ public Sommet( String contenu, Point position, int marquee  ) {
 }
 
 	/**
-	 * récupere le contenu du sommet
+	 * recupere le contenu du sommet
 	 * @return contenu
 	 */
 	public String getContenu() {
@@ -70,7 +68,7 @@ public Sommet( String contenu, Point position, int marquee  ) {
 
 
 	/**
-	 * recupere le numero du sommet marquée
+	 * recupere le numero du sommet marquee
 	 * @return marquee
 	 */
 	public int getMarquee() {
@@ -79,18 +77,16 @@ public Sommet( String contenu, Point position, int marquee  ) {
 
 	/**
 	 * recupere l'identifiant du sommet
-	 * @return id
+	 * @return id 
 	 */
 	public int getId() {
 		return id;
 	}
-//public ArrayList<Int> getListPoids() { return listPoids; }
 
-//---------- End of GETTER-----------------------
-//---------- Setter -----------------------
+//---------- Setters -----------------------
 
 	/**
-	 * Permet de modfier le contenu du sommet
+	 * modfie le contenu du sommet
 	 * @param contenu
 	 */
 	public void setContenu(String contenu) {
@@ -98,7 +94,7 @@ public Sommet( String contenu, Point position, int marquee  ) {
 	}
 
 	/**
-	 * permet de modifier la position du sommet
+	 * modifie la position du sommet
 	 * @param position
 	 */
 	public void ChangePosition(Point position) {
@@ -107,22 +103,21 @@ public Sommet( String contenu, Point position, int marquee  ) {
 
 
 	/**
-	 * permet de modifier le numero du sommet marquée
+	 * modifier le numero du sommet marquee
 	 * @param marquee
 	 */
 	public void setMarquee(int marquee) {
 		this.marquee = marquee;
 	}
 
-
-//---------- End of Setter-----------------------
-//---------- Methods  -----------------------
+//---------- Methodes  -----------------------
 
 	/**
-	 * vérifie si deux sommets sont identiques :
-	 * il compare que les deux sommets possèdent la même référence mémoire et sont donc en fait le même sommet.
-	 * @param o
-	 * @return vrai si  deux sommets sont identiques, faux sinon
+	 * verifie que deux sommets sont identiques :
+	 * compare se les deux sommets possedent la meme reference memoire et sont donc en fait le meme sommet
+	 * ou qu ils ont les memes valeurs 
+	 * @param o 
+	 * @return vrai si  deux sommets sont identiques ou egaux, faux sinon 
 	 */
 	public boolean equals( Object o) {
 		Sommet s = (Sommet) o ;
@@ -132,8 +127,8 @@ public Sommet( String contenu, Point position, int marquee  ) {
 
 
 	/**
-	 * représente un sommet par son contenu
-	 * @return retourn une chaine de caractère qui représente le sommet
+	 * represente un sommet par son contenu
+	 * @return une chaine de caractere qui represente le sommet
 	 */
 	public String toString(  ) {
 		return contenu+ " " ;

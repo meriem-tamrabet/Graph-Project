@@ -20,13 +20,10 @@ public  class Graphe {
 	private boolean est_oriente ;
 	
 	private int valeur_interdite = 999 ; 
+	
+	
 	//-------------------CONSTRUCTEUR------------------------
-	/*
-	 * on peut constuir un graphe vide et on ajoute des sommets
-	 * on peut avoir deja la matrice 
-	 * on peut avoir fs et aps 
-	 * on peut avoir une liste de sommets 
-	 * */
+	
 	public Graphe(int[][] matrice ,boolean est_oriente, boolean avec_Poids) {
 		int ligne = matrice.length ; 
 		int colonne = matrice[0].length ; 
@@ -40,14 +37,11 @@ public  class Graphe {
 		}
 		this.avec_Poids = avec_Poids; 
 		this.est_oriente = est_oriente; 
-		this.listeSommet.add(null) ; // la case 0 vide 
-		// matrcie to fs 
-		
+		this.listeSommet.add(null) ; 	
 	}
 
 	public Graphe(ArrayList<Integer> aps ,ArrayList<Integer> fs, boolean est_oriente) {
-		//this fs ; 
-		//fs to matrice
+		
 		int tailleFs = fs.size();
 		int tailleAps = aps.size();
 
@@ -62,8 +56,7 @@ public  class Graphe {
 			this.aps.add(i,aps.get(i));
 		}
 
-		this.listeSommet.add(null);// la premiere case (0) est vide,
-		//la taille de fs y est stocké
+		this.listeSommet.add(null);
 
 		this.est_oriente = est_oriente;
 		this.avec_Poids=false;
@@ -72,8 +65,6 @@ public  class Graphe {
 
 	}
 
-
-	//constructeur par defaut a ne pas toucher !
 	public Graphe( boolean est_oriente, boolean avec_poids) {
 		this.est_oriente = est_oriente ; 
 		this.avec_Poids = avec_poids ; 
@@ -81,25 +72,12 @@ public  class Graphe {
 		 Matrice_to_fs_aps() ;
 	}
 	
-	
-	//-------------------Fin CONSTRUCTEUR------------------------
-	
-	public boolean isAvec_Poids() {
-		return avec_Poids;
-	}
-
-	public boolean isEst_oriente() {
-		return est_oriente;
-	}
-	
-	
-	
-	//------- Methods de la matrice  ---------------------------
+	//------- Methodes de la matrice  ---------------------------
 	
 
 	public void  Generer_matrice(int n , boolean avec_Poids ){
 	
-		int taille_matrice = n+2 ; //ligne de  0  
+		int taille_matrice = n+2 ; 
 		this.matrice = new int[taille_matrice][taille_matrice] ; 
 		 
 		this.matrice[0][0] = n ; 
@@ -125,7 +103,7 @@ public  class Graphe {
 	}
 	public void  Generer_m_cout(int n ){
 		
-		int taille_matrice = n+2 ; //ligne de  0  
+		int taille_matrice = n+2 ;
 		
 		this.matrice_cout = new int[taille_matrice][taille_matrice] ;
 		
@@ -152,12 +130,12 @@ public  class Graphe {
 
 	public void genere_fsAps(int n){
 
-		int tailleFs= n+1; // +1 pour la case 0
+		int tailleFs= n+1; 
 		int tailleAps= n+1;
 		this.fs = new ArrayList<Integer>(tailleFs);
 		this.aps = new ArrayList<Integer>(tailleAps);
 
-		this.fs.add(0,n); // n+m mais m =0
+		this.fs.add(0,n);
 		this.aps.add(0,n);
 
 		int val =0;
@@ -171,59 +149,41 @@ public  class Graphe {
 
 	}
 	
-	  //----------------------------fin methode Graphe ---------------------------------------
-	
 	public void ajouterSommet(Sommet s) {
 		int taille = nombre_sommets() +1  ; 
 		taille++ ;
 		listeSommet.add(s) ; 
 		
-
 		int[][] N_matrice = new int[taille ][taille] ; 
-		//recopier tt 
 		for( int i = 0 ; i< taille -1   ; i++ ) {
 			for(int j = 0 ; j< taille-1  ; j++)
 			{
 				 N_matrice [i][j] =  matrice[i][j] ; 
 			}
 		}
-		 N_matrice [0][0] ++; 
+		N_matrice [0][0] ++; 
 		matrice =N_matrice ; 
 		
-		
-		
 		if(this.avec_Poids == true )
-			{update_ajout_s_cout();
-			
+			{
+				update_ajout_s_cout();
 			}
 		
 		Matrice_to_fs_aps();
 
 	}
-	/**
-	 * PERMET DE SAVOIR LA NUM DE SOMMETS EXEMPLE LE PREMIER LE DEUXIEME ... 
-	 * LE PREMIER SOMMETS EST DANS LA CASE 0, AFIN DE FACILITER LA TACHE ON A FAIT UN +1 POUR AVOIR LA
-	 * BONNE NUMEROTATION 
-	 * **/
+
 	public int find_position_sommets(Sommet s)
 	{
 		int i = 0 ; 
 		while (! listeSommet.get(i).equals(s))
 			i++; 
 		
-		return(i<listeSommet.size() ? i+1 : -1 ) ; 
-		// i+1 car on commence a ajouter dans la case 0 et donc 
-		//l'�quvalent pou rmes sommets c'est toujours +1 sauf que pour supprimer dans ce tableau faudra fair -1 
+		return(i<listeSommet.size() ? i+1 : -1 ) ;  
 	}
-	/**
-	 * AJOUTER UN ARC 
-	 * ON TESTE SI LES SOMMETS EXISTE  BIEN
-	 *  **/
+
 	public  void ajouterArc(Sommet s, Sommet t, int val) {
 		
-		
-		
-	
 		int indiceS = find_position_sommets(s) ; 
 		int indiceT = find_position_sommets(t) ; 
 		if( indiceS== -1  ||  indiceT == -1  )
@@ -239,39 +199,25 @@ public  class Graphe {
 		
 		if( this.avec_Poids)
 		{
-			
-		
 			 this.matrice_cout[indiceS][indiceT]  = val; 
 			 this.matrice_cout[0][1] = this.matrice[0][1] ; 
 			 if( est_oriente == false )
 				 matrice_cout[indiceT][indiceS]  = val ; 
-	
-		}
-		 
-		
+		}	
 		Matrice_to_fs_aps();
 	}
 	
-	/**
-	 * PERMETS DE SUPPRIMER UN SOMMETS 
-	 * **/
+	
 	public void supprimerSommet(Sommet s)
 	{
 		int indiceS = find_position_sommets(s) ; 
-		
-		
-		
 		int[][] mat = new int[matrice.length-1][matrice[0].length-1];
-		
 		
 		if( indiceS== -1   )
 		return ;
 		
-		 update_supp_s_cout(indiceS) ;
-		
+		update_supp_s_cout(indiceS) ;
 		listeSommet.remove(indiceS-1) ; 
-		
-		
 		
 		for(int i=0; i<indiceS; ++i)
 		{
@@ -295,27 +241,19 @@ public  class Graphe {
 				mat[i-1][j-1] = matrice[i][j];
 			}
 		}
-		mat [0][0] --;
-		//colone ? 
+		mat [0][0] --; 
 		matrice = mat;
 		matrice[0][1]  = update_arc() ; 
 		matrice_cout[0][1] = matrice[0][1]  ; 
 		
 		//TODO mettre ajours si le graphe est orienter faut enlever de sommet t a sommets s 
 		
-		
-
 		Matrice_to_fs_aps();
-		// mettre a jours le nombre d'arc 
+		//TODO mettre a jours le nombre d'arc 
 	
 		//TODO METTRE A JOURS MATRICE COUT
 	}
-	
-	
-	
-	
-	/**
-	 * SI UN ARC EXISTE ENTRE S ET T **/
+
 	 public boolean existeArc(Sommet s,Sommet t){
 		  int indiceS = find_position_sommets(s) ; 
 			int indiceT = find_position_sommets(t) ;
@@ -331,10 +269,7 @@ public  class Graphe {
 	       
 
 	    }
-	 /**
-	  * ENLEVER UN ARC ENTRE S ET T 
-	  * LE CAS OU LE GRAPHE EST PAS ORIENTER EST BIEN TRAITER 
-	  * **/
+
 	  public  void enleverArc(Sommet s, Sommet t) {
 			
 			
@@ -354,13 +289,9 @@ public  class Graphe {
 				}
 			Matrice_to_fs_aps();
 		}
-//----------------------------fin methode Graphe ---------------------------------------
 
-	  //TODO fs et aps to matrice 
-	/**
-	 * GENERER FS ET APS A PARTIR D4UNE MATRICE
-	 * 
-	 * **/
+	//---------------methodes FS APS matrice------------------------------
+	  
 	public void  Matrice_to_fs_aps() {
 		int n = nombre_sommets() ;
 		int m = nombre_de_arc()  ; 
@@ -370,37 +301,31 @@ public  class Graphe {
 		
 		if(n >0 )
 		{
-			aps.add(0,n); // aps 
-			fs.add(0,n+m) ; //fs
+			aps.add(0,n); 
+			fs.add(0,n+m) ; 
 			int k = 1 ;
 			for( int i = 1 ; i <= n ; i++) {
-				aps.add(i, k ); //aps
+				aps.add(i, k ); 
 				for( int j = 1 ; j <= n; j++) {
 					if(matrice[i][j] != 0)
 					{
-						fs.add(k,j) ;  // fs[k] = j ;
+						fs.add(k,j) ;
 						++k ;
 					}
 				}
-				fs.add(k,0) ; ;//fs
+				fs.add(k,0) ; 
 				++k ;
 			}
 		}
 		
 	}
 	
-//---------------methodes FS et APS ------------------------------
 	public void fs_apsToMatrice(){
 		int n = nombreSommetsAps();
 		this.matrice = new int[n+1][n+1];
+		this.matrice[0][0] = n; 
+		this.matrice[0][1] = nombreArcFs(); 
 
-		//Nombre de sommets
-		this.matrice[0][0] = n; // premiere case de la matrice= nb sommets
-
-		//Nombre d'arcs
-		this.matrice[0][1] = nombreArcFs(); // premiere ligne colone 1= nb arc
-
-		//Matrice initialisée à 0
 		for(int i = 1;i <= n;i++){
 			for(int j = 1;j <= n;j++){
 				this.matrice[i][j] = 0;
@@ -412,13 +337,18 @@ public  class Graphe {
 				this.matrice[i][fs.get(k)] = 1;
 			}
 		}
-
-
 	}
-//---------------Fin methodes FS et APS ------------------------------
-//------- Fin Methods ---------------------------
-//------------------------------Getter -------------------
 
+//------------------------------Getters-----------------------------------------
+
+	public boolean isAvec_Poids() {
+		return avec_Poids;
+	}
+
+	public boolean isEst_oriente() {
+		return est_oriente;
+	}
+	
 	public  int Fs_Get(int i) {
 		return fs.get(i ) ; 
 	}
@@ -451,9 +381,9 @@ public  class Graphe {
 			i++ ; 
 			co++ ; 
 		}
-		return co ; 
-		
+		return co ; 	
 	}
+	
 	public int update_arc() {
 		int co = 0 ; 
 		for(int i = 0 ; i < matrice[0].length ; i++) {
@@ -468,7 +398,6 @@ public  class Graphe {
 		return matrice[0][0] ; 
 	}
 
-
 	public int nombreSommetsAps(){
 		return aps.get(0);
 	}
@@ -477,35 +406,30 @@ public  class Graphe {
 		return fs.get(0)-nombreSommetsAps();
 	}
 	
-	
-	/**
-	 * nOMBRE D ARC  **/
 	public int nombre_de_arc() {
 		return matrice[0][1] ; 
 		}
 	
-	//----------------------------fin getter -----------------------------------
-	//---------------Setter ---------------------------------
+	//------------------------------------Setters ---------------------------------
 	public  void  Fs_set(int i, int val ) {
 	 fs.set(i,val ) ; 
 	}
+	
 	public  void  Aps_set(int i, int val) {
 	 aps.set(i,val ) ; 
 	}
+	
 	public  void Matrice_set(int i,int j, int val ) {
 	 matrice[i][j] = val ; 
 	}
+	
 	public  void cout_set(int i,int j , int val) {
 	 matrice_cout[i][j] = val  ;
-	
 	}
-	//------------------fin setter ----------------------------------
 	
-	
-	//-------  Methods affichage  ---------------------------
+	//----------------------------  Methodes affichage  ---------------------------
 	public void affiche_successeur(int indiceS)
-	{
-		
+	{	
 		System.out.print("successeur de "+  indiceS + "|");
 			int i = aps.get(indiceS) ; 
 			while((i < fs.size()) && (fs.get(i)!=0) ) {
@@ -514,19 +438,18 @@ public  class Graphe {
 				
 			}
 			System.out.println();
-	
 	}
-	/**
-	 * AFFICHAGE D UN GRAPHE A REVOIR POUR SAVOIR QUOI AFFICHER EXACTEMENT **/
+	
 	public void afficher()
 	{
 		if( est_oriente )
-		System.out.print(" votre graphe est orient� \n "  ); 
+		System.out.print(" votre graphe est oriente \n "  ); 
 		System.out.print(this.toString()  ); 
 		
 	}
+	
 	public void afficher_fs_aps() {
-		  String str = "--------fs & aps ---------- \n";
+		  String str = "-------------------- fs & aps ------------------- \n";
 
 	        str += "FS : |";
 	        for(int i = 1;i < fs.size();i++){
@@ -540,12 +463,12 @@ public  class Graphe {
 	        }
 	        System.out.println(str); 
 	}
+	
 	public void afficher_cout()
 	{
 		System.out.print(" cout  \n "  ); 
 		
-		String Smatrice = "--------matrice ---------- \n " ;
-		 
+		String Smatrice = "-------------------matrice --------------------- \n " ;
 		
 		for( int i = 0 ; i< matrice_cout.length ; i++ ) {
 			Smatrice += "| " ; 
@@ -553,28 +476,23 @@ public  class Graphe {
 			{
 				Smatrice += this.matrice_cout[i][j] + "\t" ;
 			}
-			Smatrice += "|\n " ; 
-			
+			Smatrice += "|\n " ; 	
 		}
 		System.out.print(Smatrice  ); 
 	}
+	
 	  public String toString(){
 	        String str = "--------fs & aps ---------- \n";
-
 	        str += "FS : |";
 	        for(int i = 1;i < fs.size();i++){
 	            str += fs.get(i) + "|";
 	        }
-	        
 	        str += "\nAPS : |";
-
 	        for(int i = 1;i < aps.size();i++){
 	            str += aps.get(i) + "|";
 	        }
-	        
 	    	String Smatrice = "--------matrice ---------- \n " ;
-			 
-			
+
 			for( int i = 0 ; i< matrice.length ; i++ ) {
 				Smatrice += "|" + "\t" ; 
 				for(int j = 0 ; j< matrice[i].length ; j++)
@@ -584,33 +502,24 @@ public  class Graphe {
 				Smatrice += "|\n " ; 
 			}
 			String ListeSommets = "\n ------Liste des sommets------ \n " ;
-			/*for(int i = 0;i < listeSommet.size();i++){
-				ListeSommets += listeSommet.get(i).toString() + "|";
-	        }*/
-	        
-			// return str + "\n" + Smatrice ;
 		       return   str ;
-
-			//return Smatrice + ListeSommets+".|.|\n";
 	    }
-	 // --------------------------- methode cout ----------------------------- 
+	  
+	  
+	 // --------------------------- Methode cout ----------------------------- 
 	public void update_ajout_s_cout() {
-		
-		
 		int taille = nombre_sommets()   ; 
 		taille++ ;
-		
 		int[][] N_matrice = new int[taille ][taille] ; 
 		
-		//recopier tt 
 		for( int i = 0 ; i< taille -1   ; i++ ) {
 			for(int j = 0 ; j< taille-1  ; j++)
 			{
 				 N_matrice [i][j] =  this.matrice_cout[i][j] ; 
 			}
 		}
-		
 		int indice = find_position_sommets(listeSommet.get(listeSommet.size()-1 )) ; 
+		
 		for(int j = 0 ; j< taille  ; j++)
 		{
 			 N_matrice [indice][j] = valeur_interdite ; 
@@ -626,8 +535,6 @@ public  class Graphe {
 	public void update_supp_s_cout( int indiceS ) {
 		int[][] mat = new int[matrice_cout.length-1][matrice_cout[0].length-1];
 		
-		
-		 
 		if( indiceS== -1   )
 		return ;
 		
@@ -691,15 +598,10 @@ public  class Graphe {
 				{
 					System.out.println("votre graphe n'est pas compatible avec cet algorithme!");
 				}
-				
 				else {
-
-				Algorithme aDantzig = new Algorithme();
-
-				aDantzig.Dantzig(getMatCout());
-				
+					Algorithme aDantzig = new Algorithme();
+					aDantzig.Dantzig(getMatCout());
 				}
-				
 				break ; 
 			}
 			case 2:	
@@ -708,7 +610,7 @@ public  class Graphe {
 				
 				if(!avec_Poids && !est_oriente)
 				{
-					System.out.println("Votre graphe n'est pas compatible avec cet algorithme!");
+					System.out.println("votre graphe n'est pas compatible avec cet algorithme!");
 				}
 				else {
 					
@@ -721,13 +623,11 @@ public  class Graphe {
 				 ArrayList<Integer> predecesseur = new ArrayList<>(n+2) ;
 				 ArrayList<Integer> distance = new ArrayList<Integer>(n+2) ;
 				A_Dikjstra.Dikjstra(1,this,predecesseur,distance) ; 
-				/*System.out.println("Affichage du pred ");
-				for(int i = 0 ; i < predecesseur.size() ; i++)
-					System.out.print(predecesseur.get(i) +"| ");*/
 
 				 new dessinGraphe(this) ; 
 				 new dijkstra(this) ; 
 				}
+				break;
 			}
 			
 			case 3:
@@ -753,8 +653,6 @@ public  class Graphe {
 				{
 					Algorithme aprufer= new Algorithme();
 				}
-
-				//aprufer.p(getMatCout());
 				break;
 			}
 			case 6: 
@@ -800,8 +698,7 @@ public  class Graphe {
 					System.out.println("votre graphe n'est pas compatible avec cet algorithme! ");
 				}
 				else
-				{
-					
+				{	
 				afficher_fs_aps();
 
 				Algorithme addi = new Algorithme();
@@ -916,7 +813,7 @@ public  class Graphe {
 			else
 				ajouterArc(liste.get(i-1), liste.get(j-1), 0);
 			afficher();
-		 break ;
+			break ;
 		}
 		case 3: 
 		{
@@ -926,7 +823,6 @@ public  class Graphe {
 			liste.remove(i-1) ; 
 			supprimerSommet(liste.get(i-1));
 			afficher();
-			
 			break ; 
 		}
 		case 4 : 
@@ -939,13 +835,14 @@ public  class Graphe {
 			j = lectureClavier.nextInt();
 			enleverArc(liste.get(i-1), liste.get(j-1));
 			afficher();
-		 break ;
+			break ;
 		}
 		case 5 : 
 		{
 			//algorithme
 			
 			algorithme();
+			break;
 		}
 		case 6:
 		{

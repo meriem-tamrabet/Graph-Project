@@ -42,7 +42,6 @@ public class dessinGraphe  extends JFrame{
         	
         }
         g2d.setColor( Color.blue );
-        //dessin des arc par rapport a fs et aps youppi 
         
        int Num_Sommet = 0 ; 
       
@@ -50,34 +49,11 @@ public class dessinGraphe  extends JFrame{
     	   Sommet s =  G.liste_sommets_Get(Num_Sommet) ; 
     	   
     	   while(G.Fs_Get(i)!= 0 ) {
-    		   //c'est que y'a des successeur 
     		   Sommet t =  G.liste_sommets_Get(G.Fs_Get(i)-1) ; 
     		   	int x1 = s.getPosition().getX() ; 
            		int y1 = s.getPosition().getY() ;
            	 	int x2 = t.getPosition().getX() ; 
            		int y2 = t.getPosition().getY() ;
-           		/*	if(x1> x2 ) //je trace a gauche donc sommet depart recule
-           		{
-           			x1 -= 15 ; 
-           			x2 += 15 ; 
-           		}
-           		else {
-               		// je trace adroit 
-               			x1 += 15 ; 
-               			x2 += 15 ;
-               		}
-           		
-           	
-           		if(y1> y2 ) //je trace a haut 
-           		{
-           			y1 -= 15 ; 
-           			y2 += 15 ; 
-           		}
-           		else {
-           		// je trace en bas  
-           			y1 += 15 ; 
-           			y2 -= 15 ; 
-           		}*/
            			
     		   g2d.drawLine(x1,y1,x2,y2);
     		   i++; 
