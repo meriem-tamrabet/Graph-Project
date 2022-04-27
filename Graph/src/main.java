@@ -463,7 +463,24 @@ public class main {
 					}
 						
 						//Start my window 
-						MyWindow Fenetre = new MyWindow() ; 
+					Graphe G = new Graphe( est_oriente , avec_Poids  ) ;
+
+					// ajout des sommets
+					
+					G.ajouterSommet(s);
+					G.ajouterSommet(t);
+					G.ajouterSommet(w);
+					G.ajouterSommet(k);
+					liste.add(s) ; liste.add(t) ; liste.add(w) ; liste.add(k) ; 
+					//ajout arc entre s et t ==> 5
+					G.ajouterArc(s, t, 1);
+					G.ajouterArc(s, k, 2 );
+					G.ajouterArc(t, k, 3);
+					G.ajouterArc(w, t, 5);
+					G.ajouterArc(w, w, 5);
+					G.ajouterArc(k, t, 5);
+					G.ajouterArc(k, k, 5);
+						MyWindow Fenetre = new MyWindow(G) ; 
 						Fenetre.setVisible(true) ;
 						break ; 
 				default:
