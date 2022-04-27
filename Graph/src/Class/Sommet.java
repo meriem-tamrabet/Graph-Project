@@ -14,7 +14,7 @@ public class Sommet {
 //---------- Constructors------------------------------
 
 	/**
-	 * Constructeur de sommmet a 3 parametres
+	 * @brief Constructeur Sommet a 3 parametres
  	 * @param contenu  String
 	 * @param position Point
 	 * @param marquee int
@@ -31,9 +31,9 @@ public Sommet( String contenu, Point position, int marquee  ) {
 }
 
 	/**
-	 * Constructeur Sommet a 2 parametres, position null par defaut
-	 * @param contenu
-	 * @param marquee
+	 * @brief Constructeur Sommet a 2 parametres, position null par defaut
+	 * @param contenu String
+	 * @param marquee int
 	 */
 	public Sommet( String contenu,  int marquee  ) {
 		this(contenu,null, marquee);
@@ -41,7 +41,7 @@ public Sommet( String contenu, Point position, int marquee  ) {
 	}
 
 	/**
-	 * Constrcuteur par defaut
+	 * @brief Constrcuteur par defaut
 	 */
 	public Sommet( ) {
 	this("",null, 0);
@@ -51,7 +51,7 @@ public Sommet( String contenu, Point position, int marquee  ) {
 //---------- Getters ----------------------------------
 
 	/**
-	 * Recupere la position du Sommet
+	 * @brief Recupere la position du Sommet
 	 * @return position
 	 */
 	public Point getPosition() {
@@ -59,7 +59,7 @@ public Sommet( String contenu, Point position, int marquee  ) {
 }
 
 	/**
-	 * recupere le contenu du sommet
+	 * @brief Recupere le contenu du sommet
 	 * @return contenu
 	 */
 	public String getContenu() {
@@ -68,7 +68,7 @@ public Sommet( String contenu, Point position, int marquee  ) {
 
 
 	/**
-	 * recupere le numero du sommet marquee
+	 * @brief Recupere le numero du sommet marquee
 	 * @return marquee
 	 */
 	public int getMarquee() {
@@ -76,7 +76,7 @@ public Sommet( String contenu, Point position, int marquee  ) {
 }
 
 	/**
-	 * recupere l'identifiant du sommet
+	 * @brief Recupere l'identifiant du sommet
 	 * @return id 
 	 */
 	public int getId() {
@@ -86,7 +86,7 @@ public Sommet( String contenu, Point position, int marquee  ) {
 //---------- Setters -----------------------
 
 	/**
-	 * modfie le contenu du sommet
+	 * @brief Modifie le contenu du sommet
 	 * @param contenu
 	 */
 	public void setContenu(String contenu) {
@@ -94,7 +94,7 @@ public Sommet( String contenu, Point position, int marquee  ) {
 	}
 
 	/**
-	 * modifie la position du sommet
+	 * @brief Modifie la position du sommet
 	 * @param position
 	 */
 	public void ChangePosition(Point position) {
@@ -103,7 +103,7 @@ public Sommet( String contenu, Point position, int marquee  ) {
 
 
 	/**
-	 * modifier le numero du sommet marquee
+	 * @brief Modifie le numero du sommet marquee
 	 * @param marquee
 	 */
 	public void setMarquee(int marquee) {
@@ -113,22 +113,30 @@ public Sommet( String contenu, Point position, int marquee  ) {
 //---------- Methodes  -----------------------
 
 	/**
-	 * verifie que deux sommets sont identiques :
-	 * compare se les deux sommets possedent la meme reference memoire et sont donc en fait le meme sommet
-	 * ou qu ils ont les memes valeurs 
-	 * @param o 
-	 * @return vrai si  deux sommets sont identiques ou egaux, faux sinon 
+	 * @brief Surcharge de l'operateur equals vérifiant que deux sommets sont identiques
+	 * @param o Object
+	 * @return true si deux sommets sont identiques, false sinon 
 	 */
 	public boolean equals( Object o) {
+
+		if(this == o)
+			return true;
+		
+		if(o == null)
+			return false;
+		
+		if(this.getClass() != o.getClass())
+			return false;
+
 		Sommet s = (Sommet) o ;
 	
-		return s.contenu == this.contenu ;
+		return s.contenu == this.contenu;
 	}
 
 
 	/**
-	 * represente un sommet par son contenu
-	 * @return une chaine de caractere qui represente le sommet
+	 * @brief Affiche le contenu du sommet
+	 * @return String
 	 */
 	public String toString(  ) {
 		return contenu+ " " ;

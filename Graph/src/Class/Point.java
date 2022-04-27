@@ -7,7 +7,7 @@ public class Point {
 //------------------------ constructeurs-----------------------
 
 	/**
-	 * Constructeur a 2 parametres
+	 * @brief Constructeur a 2 parametres
 	 * @param x
 	 * @param y
 	 */
@@ -20,7 +20,7 @@ public class Point {
 //-------------------------Getters ----------------------------
 
 	/**
-	 * recupere la coordonnee x du point
+	 * @brief Recupere la coordonnee x du point
 	 * @return x
 	 */
 	public int getX() {
@@ -28,7 +28,7 @@ public class Point {
 	}
 
 	/**
-	 * recupere la coordonnee y du point
+	 * @brief Recupere la coordonnee y du point
 	 * @return y
 	 */
 	public int getY() {
@@ -39,7 +39,7 @@ public class Point {
 //-----------------------Setters--------------------------------
 
 	/**
-	 * Modifie la coordonee y du point
+	 * @brief Modifie la coordonnee y du point
 	 * @param y
 	 */
 	public void setY(int y) {
@@ -47,7 +47,7 @@ public class Point {
 	}
 
 	/**
-	 * Modifie la coordonnee x du point
+	 * @brief Modifie la coordonnee x du point
 	 * @param x
 	 */
 	public void setX(int x) {
@@ -58,8 +58,8 @@ public class Point {
 //-------------------- Methodes  -----------------------
 
 	/**
-	 * Represente un point sous forme de chaine de caracteres
-	 * @return chaine de caractere qui represente les coordonees d'un point
+	 * @brief Affiche un point
+	 * @return String
 	 */
 	public String toString(){
 		return "(" + x + ", " + y + ")"; 
@@ -67,7 +67,7 @@ public class Point {
 
 
 	/**
-	 * Modifie emplacement d'un point a (x,y)
+	 * @brief Deplace un point
 	 * @param x
 	 * @param y
 	 */
@@ -78,7 +78,7 @@ public class Point {
 
 
 	/**
-	 * translation d'un point a (x,y)
+	 * @brief Translate un point
 	 * @param x
 	 * @param y
 	 */
@@ -88,8 +88,8 @@ public class Point {
 	}
 
 	/**
-	 * Lit un point entree par l'utilisateur
-	 * @param s permet de lire ce que l'utilisateur entre au clavier
+	 * @brief Lit un point
+	 * @param s Scanner lisant l'entree clavier
 	 */
 	public void read(Scanner s){
 
@@ -105,7 +105,7 @@ public class Point {
 //TODO imprimer dans fichier
 
 	/**
-	 * affiche un point
+	 * @biref Affiche un point sur la sortie standard
 	 */
 	public void print(){
 
@@ -119,14 +119,22 @@ public class Point {
 
 
 	/**
-	 * verifie si deux points sont identiques :
-	 * compare si les deux points possedent la meme reference memoire et sont donc en fait le meme point
-	 * ou si leur valeur de x et y sont les memes
-	 * @param obj
-	 * @return vrai si deux points identiques ou egaux , faux sinon
+	 * @brief Surcharge de la methode equals verifiant l'égalité de deux points
+	 * @param obj Object
+	 * @return true si deux points sont identiques, false sinon
 	 */
 	@Override
 	public boolean equals(Object obj) {
+
+		if(this == obj)
+			return true;
+		
+		if(obj == null)
+			return false;
+		
+		if(this.getClass() != obj.getClass())
+			return false;
+
 		Point p = (Point) obj ; 
 		return p.x ==this.x && p.y ==this.y;
 	}

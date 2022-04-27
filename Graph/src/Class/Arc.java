@@ -10,11 +10,11 @@ public class Arc {
 	private boolean oriente;
 
 	/**
-	 * Constructeur Arc 4 parametres
-	 * @param s1 sommet de depart
-	 * @param s2 sommet d'arrivee
-	 * @param poids
-	 * @param oriente vrai si oriente faux sinon
+	 * @brief Constructeur Arc avec 4 parametres
+	 * @param s1 Sommet de depart
+	 * @param s2 Sommet d'arrivee
+	 * @param poids Poids de l'arc
+	 * @param oriente true si oriente, false sinon
 	 */
 	public Arc(Sommet s1, Sommet s2, int poids, boolean oriente)
 	{
@@ -26,10 +26,10 @@ public class Arc {
 
 
 	/**
-	 * Constructeur 3 parametres, oriente par defaut
-	 * @param s1 sommet de depart
-	 * @param s2 sommet de d'arrivee
-	 * @param poids sommet de depart
+	 * @brief Constructeur avec 3 parametres, oriente par defaut
+	 * @param s1 Sommet de depart
+	 * @param s2 Sommet de d'arrivee
+	 * @param poids Poids de l'arc
 	 */
 	public Arc(Sommet s1, Sommet s2, int poids)
 	{
@@ -39,10 +39,10 @@ public class Arc {
 
 
 	/**
-	 * Constructeur 3 parametres sans poids
-	 * @param s1 sommet de depart
-	 * @param s2 sommet de d'arrivee
-	 * @param oriente
+	 * @brief Constructeur avec 3 parametres sans poids
+	 * @param s1 Sommet de depart
+	 * @param s2 Sommet de d'arrivee
+	 * @param oriente true si oriente, false sinon
 	 */
 	public Arc(Sommet s1, Sommet s2, boolean oriente)
 	{
@@ -52,9 +52,9 @@ public class Arc {
 
 
 	/**
-	 * Constructeur 2 parametres, sans poids et oriente par defaut
-	 * @param s1 sommet de depart
-	 * @param s2 sommet de d'arrivee
+	 * @brief Constructeur avec 2 parametres, sans poids et oriente par defaut
+	 * @param s1 Sommet de depart
+	 * @param s2 Sommet de d'arrivee
 	 */
 	public Arc(Sommet s1, Sommet s2)
 	{
@@ -67,7 +67,7 @@ public class Arc {
 	 */
 
 	/**
-	 * Recupere le poids de l'arc
+	 * @brief Recupere le poids de l'arc
 	 * @return poids
 	 */
 	public int getPoids() {
@@ -76,7 +76,7 @@ public class Arc {
 
 
 	/**
-	 * Recupere le sommet de depart
+	 * @brief Recupere le sommet de depart
 	 * @return s1 (sommet de depart)
 	 */
 	public Sommet getS1() {
@@ -85,16 +85,16 @@ public class Arc {
 
 
 	/**
-	 * Recupere le sommet de d'arrivee
-	 * @return s2 (sommet  d'arrivee)
+	 * @brief Recupere le sommet d'arrivee
+	 * @return s2 (sommet d'arrivee)
 	 */
 	public Sommet getS2() {
 		return s2;
 	}
 
 	/**
-	 * Retourne vrai si l'arc est oriente, faux sinon
-	 * @return oriente
+	 * @brief Test de l'orientation de l'arc
+	 * @return true si l'arc est oriente, false sinon
 	 */
 	public boolean isOriente() {
 		return oriente;
@@ -106,8 +106,8 @@ public class Arc {
 	 */
 
 	/**
-	 * Modifie le poids de l'arc
-	 * @param poids le nouveau poid de l'arc
+	 * @brief Modifie le poids de l'arc
+	 * @param poids Nouveau poids de l'arc
 	 */
 	public void setPoids(int poids) {
 		this.poids = poids;
@@ -115,8 +115,8 @@ public class Arc {
 
 
 	/**
-	 * Modifie le sommet de depart
-	 * @param s1 le nouveau sommet de depart
+	 * @brief Modifie le sommet de depart
+	 * @param s1 Nouveau sommet de depart
 	 */
 	public void setS1(Sommet s1) {
 		this.s1 = s1;
@@ -124,16 +124,16 @@ public class Arc {
 
 
 	/**
-	 * Modifie le sommet d'arrivee
-	 * @param s2 le nouveau sommet d'arrivee
+	 * @brief Modifie le sommet d'arrivee
+	 * @param s2 Nouveau sommet d'arrivee
 	 */
 	public void setS2(Sommet s2) {
 		this.s2 = s2;
 	}
 
 	/**
-	 * Modifie l'orientation de l'arc
-	 * @param oriente
+	 * @brief Modifie l'orientation de l'arc
+	 * @param oriente Nouvelle orientation
 	 */
 	public void setOriente(boolean oriente) {
 		this.oriente = oriente;
@@ -145,11 +145,9 @@ public class Arc {
 	}
 
 	/**
-	 * verifie que deux arcs sont identiques :
-	 * compare si les deux arcs possedent la meme reference memoire et sont donc en fait le meme arc
-	 * ou qu ils ont les memes valeurs
-	 * @param obj
-	 * @return vrai si arcs identiques ou egaux, faux sinon
+	 * @brief Surcharge de l'operateur equals vérifiant que deux ars sont identiques
+	 * @param obj Object
+	 * @return true si les arcs sont identiques, false sinon
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -165,8 +163,8 @@ public class Arc {
 	}
 
 	/**
-	 * Affiche un arc selon sont cas oriente ou non
-	 * @return une chaine de caractere qui represente l'arc oriente ou non oriente
+	 * @brief Affiche un arc
+	 * @return String
 	 */
 	public String toString()
 	{

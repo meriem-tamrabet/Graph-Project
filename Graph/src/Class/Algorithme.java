@@ -6,328 +6,342 @@ import java.util.Scanner;
 
 
 public class Algorithme {
- int MAXPOIDS =100 ; 
-public  ArrayList<Integer> demi_degre_interieur   (ArrayList<Integer> FS, ArrayList<Integer> APS)
-{
-	int n = APS.get(0);
 
-	ArrayList<Integer> ddi = new ArrayList<>(n+1);
+	private int MAXPOIDS =100 ;
 
-	ddi.add(0, n);
+	public  ArrayList<Integer> demi_degre_interieur   (ArrayList<Integer> FS, ArrayList<Integer> APS)
+	{
+		int n = APS.get(0);
 
-	for(int s = 1;s <= n;s++){
-		ddi.add(s, 0);
-	}
+		ArrayList<Integer> ddi = new ArrayList<>(n+1);
 
-	for(int k = 1;k < FS.get(0);k++){
-		if(FS.get(k) != 0){
-			ddi.set(FS.get(k),ddi.get(FS.get(k))+1); 
+		ddi.add(0, n);
+
+		for(int s = 1;s <= n;s++){
+			ddi.add(s, 0);
 		}
+
+		for(int k = 1;k < FS.get(0);k++){
+			if(FS.get(k) != 0){
+				ddi.set(FS.get(k),ddi.get(FS.get(k))+1); 
+			}
+		}
+
+		return ddi ; 
 	}
 
-	return ddi ; 
-}
+	public  ArrayList<Integer> demi_degre_exterieur  (ArrayList<Integer> FS, ArrayList<Integer> APS)
+	{
+		int n = APS.get(0);
 
-public  ArrayList<Integer> demi_degre_exterieur  (ArrayList<Integer> FS, ArrayList<Integer> APS)
-{
-	int n = APS.get(0);
+		ArrayList<Integer> dde = new ArrayList<>(n+1);
 
-	ArrayList<Integer> dde = new ArrayList<>(n+1);
+		dde.add(0, n);
 
-	dde.add(0, n);
+		for(int s = 1;s < n;s++){
+			dde.add(s, APS.get(s+1) - APS.get(s) - 1);
+		}
 
-	for(int s = 1;s < n;s++){
-		dde.add(s, APS.get(s+1) - APS.get(s) - 1);
+		dde.add(n,FS.get(0)-APS.get(n));
+
+		return dde ; 
 	}
 
-	dde.add(n,FS.get(0)-APS.get(n));
+	public int[] descente_largeur (int r, ArrayList<Integer> fs, ArrayList<Integer> aps)
+	{
+		int n = aps.get(0);
 
-	return dde ; 
-}
+		int i = 0, j = 1, k = 0, ifin, s, t,it;
 
-public int[] descente_largeur (int r, ArrayList<Integer> fs, ArrayList<Integer> aps)
-{
-	int n = aps.get(0);
+		int[] fil = new int[n+1];
+		fil[0] = n;
+		fil[1] = r;
 
-	int i = 0, j = 1, k = 0, ifin, s, t,it;
+		int[] dist = new int[n+1];
+		dist[0] = n;
+		
+		for(int h = 1;h <= n;h++){
+			dist[h] = -1;
+		}
 
-	int[] fil = new int[n+1];
-	fil[0] = n;
-	fil[1] = r;
+		dist[r] = 0;
 
-	int[] dist = new int[n+1];
-	dist[0] = n;
-	
-	for(int h = 1;h <= n;h++){
-		dist[h] = -1;
-	}
+		while(i < j){
+			k++;
+			ifin = j;
 
-	dist[r] = 0;
+			while(i < ifin){
+				i++;
+				s = fil[i];
+				it = aps.get(s);
+				t = fs.get(it);
 
-	while(i < j){
-		k++;
-		ifin = j;
-
-		while(i < ifin){
-			i++;
-			s = fil[i];
-			it = aps.get(s);
-			t = fs.get(it);
-
-			while(t > 0){
-				if(dist[t] == -1){
-					j++;
-					fil[j] = t;
-					dist[t] = k;
+				while(t > 0){
+					if(dist[t] == -1){
+						j++;
+						fil[j] = t;
+						dist[t] = k;
+					}
+					t = fs.get(++it);
 				}
-				t = fs.get(++it);
+			}
+			
+		}
+		
+		return dist;
+	
+	}
+
+	public void calcul_distance(Graphe g) {
+		int n = g.getApsElem(0);
+		
+		int[][] Mat_dist = new int[n+1][n+1];
+		Mat_dist[0][0] = n;
+		
+		for(int i = 0;i < n;i++) {
+			for(int j = 0;j < n;j++) {
+				Mat_dist[i][j] = 0;
 			}
 		}
 		
-	}
-	
-	return dist;
- 
-}
-
-public void calcul_distance(Graphe g) {
-	int n = g.Aps_Get(0);
-	
-	int[][] Mat_dist = new int[n+1][n+1];
-	Mat_dist[0][0] = n;
-	
-	for(int i = 0;i < n;i++) {
-		for(int j = 0;j < n;j++) {
-			Mat_dist[i][j] = 0;
+		for(int i = 1;i <= n;i++) {
+			Mat_dist[i] = descente_largeur(i,g.getFs(),g.getAps());
 		}
-	}
-	
-	for(int i = 1;i <= n;i++) {
-		Mat_dist[i] = descente_largeur(i,g.getFs(),g.getAps());
-	}
-	
-	String str = "";
-	str += "------------Matrice des distances-------------\n";
-	for(int a = 0;a < Mat_dist.length;a++){
-		str += "| ";
-		for(int b = 0;b < Mat_dist[a].length;b++){
-			str += Mat_dist[a][b] + "\t";
+		
+		String str = "";
+		str += "------------Matrice des distances-------------\n";
+		for(int a = 0;a < Mat_dist.length;a++){
+			str += "| ";
+			for(int b = 0;b < Mat_dist[a].length;b++){
+				str += Mat_dist[a][b] + "\t";
+			}
+			str += "|\n";
 		}
-		str += "|\n";
-	}
-	System.out.println(str);
-	
-}
-
-public void empiler(int x,ArrayList<Integer> pilch){
-	pilch.set(x,pilch.get(0));
-	pilch.set(0,x);
-}
-
-public ArrayList<Integer> rang(ArrayList<Integer> FS, ArrayList<Integer> APS){
-	int n = APS.get(0);
-	int m = FS.get(0);
-	int s, k, h, t;
-
-	ArrayList<Integer> rang = new ArrayList<>(n+1);
-	ArrayList<Integer> pilch = new ArrayList<>(n+1);
-	ArrayList<Integer> prem = new ArrayList<>(n+1);
-
-	ArrayList<Integer> ddi = demi_degre_interieur(FS, APS);
-
-	for(int i = 0;i <= n;i++){
-		pilch.add(i,0);	
-	}
-	rang.add(0,n);
-
-	for(s = 1;s <= n;s++){
-		rang.add(s,-1);
-		if(ddi.get(s) == 0)
-			empiler(s,pilch);
+		System.out.println(str);
+		
 	}
 
-	k = -1;
-	s = pilch.get(0);
-	prem.add(0,s);
+	public void empiler(int x,ArrayList<Integer> pilch){
+		pilch.set(x,pilch.get(0));
+		pilch.set(0,x);
+	}
 
-	while(pilch.get(0) > 0){
-		k++;
-		pilch.set(0,0);
+	public ArrayList<Integer> rang(ArrayList<Integer> FS, ArrayList<Integer> APS){
+		int n = APS.get(0);
+		int m = FS.get(0);
+		int s, k, h, t;
 
-		while(s > 0){
-			rang.set(s,k);
-			h = APS.get(s);
-			t = FS.get(h);
+		ArrayList<Integer> rang = new ArrayList<>(n+1);
+		ArrayList<Integer> pilch = new ArrayList<>(n+1);
+		ArrayList<Integer> prem = new ArrayList<>(n+1);
 
-			while(t > 0){
-				ddi.set(t,ddi.get(t)-1);
-				if(ddi.get(t) == 0){
-					empiler(t, pilch);
+		ArrayList<Integer> ddi = demi_degre_interieur(FS, APS);
+
+		for(int i = 0;i <= n;i++){
+			pilch.add(i,0);	
+		}
+		rang.add(0,n);
+
+		for(s = 1;s <= n;s++){
+			rang.add(s,-1);
+			if(ddi.get(s) == 0)
+				empiler(s,pilch);
+		}
+
+		k = -1;
+		s = pilch.get(0);
+		prem.add(0,s);
+
+		while(pilch.get(0) > 0){
+			k++;
+			pilch.set(0,0);
+
+			while(s > 0){
+				rang.set(s,k);
+				h = APS.get(s);
+				t = FS.get(h);
+
+				while(t > 0){
+					ddi.set(t,ddi.get(t)-1);
+					if(ddi.get(t) == 0){
+						empiler(t, pilch);
+					}
+
+					h++;
+					t = FS.get(h);
 				}
 
-				h++;
-				t = FS.get(h);
+				s = pilch.get(s);
 			}
 
-			s = pilch.get(s);
+			s = pilch.get(0);
+			prem.add(k+1,s);
 		}
 
-		s = pilch.get(0);
-		prem.add(k+1,s);
+		return rang;
 	}
 
-	return rang;
-}
 
 
 
-
-public void Prufer_decode (ArrayList<Integer> t){
-	int m = t.get(0), n = m+2;
-	ArrayList<Integer> s = new ArrayList<Integer>(n+1);
-	for (int i = 1; i <= n; i++) 
-	{
-		s.set(i, 0);
-	}
-	for (int i = 1; i <= m; i++) 
-	{
-		s.set(t.get(i), s.get(t.get(i))+1);
-	}
-	for (int k = 1; k <= m; k++)
-	{
+	public void Prufer_decode (ArrayList<Integer> t){
+		int m = t.get(0), n = m+2;
+		ArrayList<Integer> s = new ArrayList<Integer>(n+1);
+		for (int i = 1; i <= n; i++) 
+		{
+			s.set(i, 0);
+		}
+		for (int i = 1; i <= m; i++) 
+		{
+			s.set(t.get(i), s.get(t.get(i))+1);
+		}
+		for (int k = 1; k <= m; k++)
+		{
+			for (int i = 1; i <= n; i++)
+			{
+				if (s.get(i) == 0)
+				{
+					System.out.println('['+Integer.valueOf(t.get(k))+' '+Integer.valueOf(i)+']');
+					s.set(t.get(k), s.get(t.get(k))+1);
+					s.set(i, -1);
+					break;
+				}
+			}
+		}
+		System.out.print("[ ");
 		for (int i = 1; i <= n; i++)
 		{
-			if (s.get(i) == 0)
-			{
-				System.out.println('['+Integer.valueOf(t.get(k))+' '+Integer.valueOf(i)+']');
-				s.set(t.get(k), s.get(t.get(k))+1);
-				s.set(i, -1);
-				break;
-			}
+			if ( s.get(i) == 0 )
+				System.out.print(Integer.valueOf(i) + " ");
 		}
+		System.out.print(" ]");
 	}
-	System.out.print("[ ");
-	for (int i = 1; i <= n; i++)
+
+
+	public void Prufer_encode (ArrayList<Integer> prf, Graphe G) {
+		
+		int n = G.getMatriceElem(0, 0);
+		prf = new ArrayList<Integer>(n-1) ; 
+		
+		prf.set(0, n-2 ) ;
+
+		int k = 1;
+		while (k <= n-2)
+		{	int i = 1;
+			for (; G.getMatriceElem(i, 0) != 1; i++);
+			int j=1;
+			for (; G.getMatriceElem(i, j) != 1; j++);
+			prf.set(k++, j) ;
+			
+			G.setMatriceElem(i, j, 0);
+			G.setMatriceElem(j, i, 0);
+			G.setMatriceElem(i, 0, 0);
+			G.setMatriceElem(j, 0, 0);
+		
+		}
+	} 
+
+
+	public void Dijkstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , ArrayList<Integer> distance)
 	{
-		if ( s.get(i) == 0 )
-			System.out.print(Integer.valueOf(i) + " ");
-	}
-	System.out.print(" ]");
-}
-
-
-public void Prufer_encode (ArrayList<Integer> prf, Graphe G) {
-	
-	int n = G.Matrice_Get(0, 0);
-	prf = new ArrayList<Integer>(n-1) ; 
-    
-	prf.set(0, n-2 ) ;
-
-	int k = 1;
-	while (k <= n-2)
-	{	int i = 1;
-		for (; G.Matrice_Get(i, 0) != 1; i++);
-		int j=1;
-		for (; G.Matrice_Get(i, j) != 1; j++);
-		prf.set(k++, j) ;
+		int ind; 
+		int i, j = s, k, v ;
+		int n = G.getApsElem(0) ;
+		int m = G.getFsElem(0)-n  ;
 		
-		G.Matrice_set(i, j, 0);
-		G.Matrice_set(j, i, 0);
-		G.Matrice_set(i, 0, 0);
-		G.Matrice_set(j, 0, 0);
-	
-	}
-} 
-
-
-public void Dikjstra( int  s , Graphe G ,  ArrayList<Integer> predecesseur , ArrayList<Integer> distance)
-{
-	int ind; 
-	int i, j = s, k, v ;
-	int n = G.Aps_Get(0) ;
-	int m = G.Fs_Get(0)-n  ;
-	
-		ArrayList<Boolean> inS = new ArrayList<Boolean>(n+2) ; 
-		for ( i =0 ; i <= n ; i++) {
-			predecesseur.add(s) ; 
-			inS.add(false) ; 
-			distance.add(G.cout_Get(s, i) ) ; 
-			
-		}
-		distance.set(s, 0) ; 
-		predecesseur.set(s, 0) ; 
-		inS.set(s, true) ;
-		ind = n -1 ; 
-		
-		
-		while(ind > 0) {
-		
-			m = MAXPOIDS;
-			for (i=1;i<=n;i++)
-				if (inS.get(i) == false ) 
-				if (distance.get(i) < m)
-				{
-					m = distance.get(i) ;
-					j = i;
-				}
-			
-			
-			if (m == MAXPOIDS) return;
-
-			inS.set(j , true) ;
-			ind--;
-			k = G.Aps_Get(j) ;
-			
-			while(G.Fs_Get(k) != 0)
-			{   
-				int fs_K = G.Fs_Get(k) ;
-				if ( inS.get(fs_K ) == false )
-				{
-					v = distance.get(j) + G.cout_Get(j, fs_K) ; 
-
-					if (v < distance.get(fs_K))
-					{
-						
-						
-						distance.set(fs_K , v) ; 
-					 	predecesseur.set(fs_K, j) ; 
-					
-					}
-				}
-				k++;
+			ArrayList<Boolean> inS = new ArrayList<Boolean>(n+2) ; 
+			for ( i =0 ; i <= n ; i++) {
+				predecesseur.add(s) ; 
+				inS.add(false) ; 
+				distance.add(G.getCout(s, i) ) ; 
 				
 			}
+			distance.set(s, 0) ; 
+			predecesseur.set(s, 0) ; 
+			inS.set(s, true) ;
+			ind = n -1 ; 
 			
 			
-		 	
+			while(ind > 0) {
 			
-		}
-		System.out.print("\n distance : ");
-		affiche_tab(distance); 
+				m = MAXPOIDS;
+				for (i=1;i<=n;i++)
+					if (inS.get(i) == false ) 
+					if (distance.get(i) < m)
+					{
+						m = distance.get(i) ;
+						j = i;
+					}
+				
+				
+				if (m == MAXPOIDS) return;
+
+				inS.set(j , true) ;
+				ind--;
+				k = G.getApsElem(j) ;
+				
+				while(G.getFsElem(k) != 0)
+				{   
+					int fs_K = G.getFsElem(k) ;
+					if ( inS.get(fs_K ) == false )
+					{
+						v = distance.get(j) + G.getCout(j, fs_K) ; 
+
+						if (v < distance.get(fs_K))
+						{
+							
+							
+							distance.set(fs_K , v) ; 
+							predecesseur.set(fs_K, j) ; 
+						
+						}
+					}
+					k++;
+					
+				}
+				
+				
+				
+				
+			}
+			System.out.print("\n distance : ");
+			affiche_tab(distance); 
+			
+			System.out.print("    pred : ");
+			affiche_tab(predecesseur); 
+			System.out.print("     ins : ");
+			affiche_tab_b(inS);
+	}
+
+	public void affiche_tab(ArrayList<Integer> v) {
+		System.out.print("|");
+		for(int i = 1;i < v.size();i++){
+			System.out.print(v.get(i)  + "|");
 		
-		System.out.print("    pred : ");
-		affiche_tab(predecesseur); 
-		System.out.print("     ins : ");
-		affiche_tab_b(inS);
-}
+		}
+	}
 
-public void affiche_tab(ArrayList<Integer> v) {
-	System.out.print("|");
-	for(int i = 1;i < v.size();i++){
-		System.out.print(v.get(i)  + "|");
-      
-    }
-}
-
-public void affiche_tab_b(ArrayList<Boolean> v) {
-	System.out.print("|");
-	for(int i = 1;i < v.size();i++){
-		System.out.print(v.get(i)  + "|");
-      
-    }
-}
+	public void affiche_tab_b(ArrayList<Boolean> v) {
+		System.out.print("|");
+		for(int i = 1;i < v.size();i++){
+			System.out.print(v.get(i)  + "|");
+		
+		}
+	}
 
 	public void Dantzig(int[][] c){
+
+		String str = "";
+		str += "------------Dantzig : Matrice initiale-------------\n";
+		for(int a = 0;a < c.length;a++){
+			str += "| ";
+			for(int b = 0;b < c[a].length;b++){
+				str += c[a][b] + "\t";
+			}
+			str += "|\n";
+		}
+		System.out.println(str);
+
 		int n = (c[0][0]);
         int i,j,k;
         int x;
@@ -335,7 +349,7 @@ public void affiche_tab_b(ArrayList<Boolean> v) {
         for(k = 1;k < n;k++){
             for(i = 1;i <= k;i++){
                 for(j = 1;j <= k;j++){
-                    if((x = c[i][j] + c[j][k+1]) < c[i][k+1]){
+                    if((x = c[i][j] + c[j][k+1]) < c[i][k+1]){	
                         c[i][k+1] = x;
                     }
 
@@ -360,8 +374,8 @@ public void affiche_tab_b(ArrayList<Boolean> v) {
 
 		//Affichage
 
-		String str = "";
-		str += "------------Dantzig : Matrice des couts-------------\n";
+		str = "";
+		str += "------------Dantzig : Matrice finale-------------\n";
 		for(int a = 0;a < c.length;a++){
 			str += "| ";
 			for(int b = 0;b < c[a].length;b++){
@@ -373,29 +387,23 @@ public void affiche_tab_b(ArrayList<Boolean> v) {
 	}
 	
 	//---------------------------Tarjan-------------------------------------
-	private int newP;
-	public void traversee(int s, int p,int k, Graphe g, ArrayList<Integer>num, ArrayList<Integer>ro,
+
+	public void traverse(int s, int p,int k, Graphe g, ArrayList<Integer>num, ArrayList<Integer>ro,
 			ArrayList<Boolean>entarj, ArrayList<Integer>tarj,
 			ArrayList<Integer>pred, ArrayList<Integer>prem,
 			ArrayList<Integer>pilch, ArrayList<Integer>cfc)
 		{
 			 int t;
 			p++;
-			 System.out.println("p1 : " + p);
 			 num.set(s, p); 
 			 ro.set(s, p);	 	 // numérote s et initialise ro[s]
 			 tarj.add(s);
-			 System.out.println("tarj.add(s) : " + s);
 			 entarj.set(s, true);
-			 for (int r=g.Aps_Get(s); (t=g.Fs_Get(r)) != 0 ; r++)
-			 { 	//System.out.println("t : " + t);
-				if (num.get(t) == 0)	 	 	 // si t n'est pas encore numéroté
+			 for (int r=g.getApsElem(s); (t=g.getFsElem(r)) != 0 ; r++)
+			 { 	
+				if (num.get(t) == 0)	 	 	 
 			 	{ 	pred.set(t, s);
-					System.out.println("traverse bis " + t);
-					System.out.println("p2 : " + p);
-			 		traversee(t,p,k, g, num, ro, entarj, tarj, pred, prem, pilch, cfc);
-					System.out.println("ptrav : " + p);
-					newP = p;
+			 		traverse(t,p,k, g, num, ro, entarj, tarj, pred, prem, pilch, cfc);
 			 		if (ro.get(t) < ro.get(s)) 
 			 			ro.set(s, ro.get(t)) ;	 	 	 // Z1
 			 	}
@@ -404,9 +412,7 @@ public void affiche_tab_b(ArrayList<Boolean> v) {
 			 		ro.set(s, num.get(t));// Z2
 			 	}
 			}
-			 //k = 0;
-			 System.out.println("p3 : " + p);
-			 p = newP;
+
 			 if (ro.get(s) == num.get(s))
 			 {
 				k++;	
@@ -425,15 +431,13 @@ public void affiche_tab_b(ArrayList<Boolean> v) {
 					empiler(last,pilch);
 					cfc.set(last,k);
 					tarj.remove(tarj.size()-1);
-					System.out.println("p : " + p);
 				} while (last != s);
 
 				 prem.add(k, pilch.get(0));
 				 pilch.set(0, 0);
-				 System.out.println("p4 : " + p);
 			}
 
-			System.out.println("---------------TEST----------------");
+			System.out.println("---------------Affichage intermediaire----------------");
 			System.out.print("cfc : ");
 			affiche_tab(cfc);
 			System.out.print("\n");
@@ -464,9 +468,9 @@ public void affiche_tab_b(ArrayList<Boolean> v) {
 			System.out.println("------------------------------------");
 		}
 	
-	public void fortconnexe(Graphe g)
+	public void Tarjan(Graphe g)
 	{
-		int n = g.Aps_Get(0);
+		int n = g.getApsElem(0);
 		ArrayList<Integer> prem = new ArrayList<Integer>(n+1);
 		prem.add(0,n);
 		ArrayList<Integer> pilch = new ArrayList<Integer>(n+1);
@@ -499,7 +503,7 @@ public void affiche_tab_b(ArrayList<Boolean> v) {
 			if (num.get(s) == 0) 
 			{
 				System.out.println("traverse " + s);
-			 	traversee(s,p,k,g,num,ro, entarj, tarj, pred, prem, pilch, cfc);
+			 	traverse(s,p,k,g,num,ro, entarj, tarj, pred, prem, pilch, cfc);
 			}
 		}
 		prem.set(0, k);
@@ -529,7 +533,8 @@ public void affiche_tab_b(ArrayList<Boolean> v) {
 		affiche_tab_b(entarj);
 		System.out.print("\n");
 	}
-	public void graph_reduit (ArrayList<Integer>prem,ArrayList<Integer>pilch,ArrayList<Integer>cfc,ArrayList<Integer>fs, 
+
+	public void graphe_reduit (ArrayList<Integer>prem,ArrayList<Integer>pilch,ArrayList<Integer>cfc,ArrayList<Integer>fs, 
 			ArrayList<Integer>aps,ArrayList<Integer>fsr, ArrayList<Integer>apsr)
 	{
 		int s, kr=1, nbc=prem.get(0);

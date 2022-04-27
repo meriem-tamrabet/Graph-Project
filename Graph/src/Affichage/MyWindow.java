@@ -46,9 +46,9 @@ public class MyWindow extends JFrame {
 	      pane2.setBounds(50,200,600,100);
 	      pane3.setBounds(50,300,600,200);
 	      pane4.setBounds(50,400,600,200);
-	      JCheckBox oriente =  new JCheckBox(" est orienté ") ; 
+	      JCheckBox oriente =  new JCheckBox(" est oriente ") ; 
 	      JCheckBox Poids =  new JCheckBox(" Avec poids ") ;
-	      JButton Cree_Graphe  = new JButton("Crée un graphe  ") ; 
+	      JButton Cree_Graphe  = new JButton("Cree un graphe  ") ; 
 	      
 	     
 	      
@@ -81,8 +81,8 @@ public class MyWindow extends JFrame {
 	              
 	          }
 	      });
-	      JTextField depart =  new JTextField("Départ") ; 
-	      JTextField arrivée =  new JTextField("Arrivée") ;
+	      JTextField depart =  new JTextField("Depart") ; 
+	      JTextField arrivee =  new JTextField("Arrivee") ;
 	      JTextField poid_arc =  new JTextField("Poid d'arc ") ;
 	      JButton Ajout_Arc  = new JButton("Ajouter arc  ") ;
 	      JButton Sup_Arc  = new JButton("Suprimer arc   ") ;
@@ -95,7 +95,7 @@ public class MyWindow extends JFrame {
 	      pane2.add(Num) ;
 	      pane2.add(Sup_Sommet) ;
 	      pane2.add(depart) ;
-	      pane2.add(arrivée) ;
+	      pane2.add(arrivee) ;
 	      pane2.add(poid_arc) ;
 	     ;
 	      pane2.add(Ajout_Arc) ;
@@ -103,7 +103,7 @@ public class MyWindow extends JFrame {
 	          public void actionPerformed(ActionEvent e){
 	              
 	              int x = Integer.parseInt(depart.getText()) ; 
-	              int y = Integer.parseInt(arrivée.getText()) ;
+	              int y = Integer.parseInt(arrivee.getText()) ;
 	              Sommet S = G.liste_sommets_Get(x) ; 
 	              Sommet t = G.liste_sommets_Get(y) ; 
 	              int val = Integer.parseInt(poid_arc.getText()) ;
@@ -115,7 +115,7 @@ public class MyWindow extends JFrame {
 	          public void actionPerformed(ActionEvent e){
 	              
 	              int x = Integer.parseInt(depart.getText()) ; 
-	              int y = Integer.parseInt(arrivée.getText()) ;
+	              int y = Integer.parseInt(arrivee.getText()) ;
 	              Sommet S = G.liste_sommets_Get(x) ; 
 	              Sommet t = G.liste_sommets_Get(y) ; 
 	             
@@ -145,9 +145,9 @@ public class MyWindow extends JFrame {
 	        model.addElement("Demi degre exterieur");
 	        model.addElement("Calcul des distances");
 	 
-	        //créer la liste des langages
+	        //creer la liste des langages
 	        JList<String> algo  = new JList<>(model);
-	      //Spécifier la position et la taille du JPanel
+	      //Specifier la position et la taille du JPanel
 	     
 	      
 	      pane3.add(algo) ; 

@@ -125,7 +125,7 @@ public class main {
 						System.out.println("VEUILLEZ ENTREZ VOTRE CHOIX: ");
 						affichage = lectureClavier.nextInt();
 						if(affichage==1) {
-							NonG.afficher();
+							NonG.afficher_matrice();
 						}
 						else {
 							 new dessinGraphe(NonG) ; 
@@ -276,15 +276,15 @@ public class main {
 							gDikjstra.ajouterArc(s7, s3, 1);
 							gDikjstra.ajouterArc(s7, s6, 3);
 
-							gDikjstra.afficher();
+							gDikjstra.afficher_matrice();
 							gDikjstra.afficher_cout();
 							gDikjstra.afficher_fs_aps();
 							Algorithme A_Dikjstra = new Algorithme();
-							int n =gDikjstra.Aps_Get(0) ;
-							int m = gDikjstra.Fs_Get(0)-n  ;
+							int n =gDikjstra.getApsElem(0) ;
+							int m = gDikjstra.getFsElem(0)-n  ;
 							 ArrayList<Integer> predecesseur = new ArrayList<>(n+2) ;
 							 ArrayList<Integer> distance = new ArrayList<Integer>(n+2) ;
-							A_Dikjstra.Dikjstra(1,gDikjstra,predecesseur,distance) ; 
+							A_Dikjstra.Dijkstra(1,gDikjstra,predecesseur,distance) ; 
 							System.out.println("Affichage du pred ");
 							for(int i = 0 ; i < predecesseur.size() ; i++)
 								System.out.print(predecesseur.get(i) +"| ");
@@ -319,7 +319,7 @@ public class main {
 							gprufer.ajouterArc(t, w, 3);
 
 							gprufer.afficher_fs_aps();
-							int n = gprufer.nombre_sommets() ; 
+							int n = gprufer.nombre_sommets_matrice() ; 
 							ArrayList<Integer> pref = new ArrayList<Integer>(n-1) ;
 							Algorithme A_prufer = new Algorithme() ; 
 								A_prufer.Prufer_encode(pref, gprufer) ; 
@@ -366,7 +366,7 @@ public class main {
 						case 7: 
 						{
 							//Tarjan 
-							System.out.println("ne fonction pas encore! veuillez patienter! ");
+							System.out.println("ne fonctionne pas encore! veuillez patienter! ");
 							break;
 						}
 						case 8 : 
