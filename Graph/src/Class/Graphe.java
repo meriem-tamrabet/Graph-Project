@@ -689,7 +689,7 @@ public  class Graphe {
 				
 				if(!avec_Poids && !est_oriente)
 				{
-					System.out.println("Votre graphe n'est pas compatible avec cet algorithme!");
+					System.out.println("votre graphe n'est pas compatible avec cet algorithme!");
 				}
 				
 				else {
@@ -710,6 +710,8 @@ public  class Graphe {
 				{
 					System.out.println("Votre graphe n'est pas compatible avec cet algorithme!");
 				}
+				else {
+					
 				afficher();
 				afficher_cout();
 				afficher_fs_aps();
@@ -725,6 +727,7 @@ public  class Graphe {
 
 				 new dessinGraphe(this) ; 
 				 new dijkstra(this) ; 
+				}
 			}
 			
 			case 3:
@@ -741,7 +744,15 @@ public  class Graphe {
 			
 			case 5 : 
 			{
-				Algorithme aprufer= new Algorithme();
+				//Prufer
+				if(est_oriente == true)
+				{
+					System.out.println("votre graphe n'est pas compatible avec cet algorithme! ");
+				}
+				else 
+				{
+					Algorithme aprufer= new Algorithme();
+				}
 
 				//aprufer.p(getMatCout());
 				break;
@@ -750,6 +761,12 @@ public  class Graphe {
 				
 			{
 				//Rang
+				if(est_oriente == false)
+				{
+					System.out.println("votre graphe n'est pas compatible avec cet algorithme! ");
+				}
+				else 
+				{
 
 				afficher_fs_aps();
 
@@ -765,18 +782,26 @@ public  class Graphe {
 				str += "\n";
 
 				System.out.println(str);
+				}
 				break;
 			}
 			case 7:
 			{
 				//Tarjan
-				System.out.println("ne fonctionne pas encore! veuillez patienter!");
+				System.out.println("desole cet algorithme ne fonctionne pas :(");
 				break; 
 			}
 			case 8:
 			{
 				//Demi degre interieur
 				
+				if(est_oriente == false)
+				{
+					System.out.println("votre graphe n'est pas compatible avec cet algorithme! ");
+				}
+				else
+				{
+					
 				afficher_fs_aps();
 
 				Algorithme addi = new Algorithme();
@@ -790,11 +815,18 @@ public  class Graphe {
 				}
 				str1 += "\n";
 				System.out.println(str1);
+				}
 				break;
 			}
 			case 9:
 			{
 				//Demi degre exterieur 
+				if(est_oriente == false)
+				{
+					System.out.println("votre graphe n'est pas compatible avec cet algorithme! ");
+				}
+				else
+				{
 				afficher_fs_aps();
 
 				Algorithme adde = new Algorithme();
@@ -809,11 +841,15 @@ public  class Graphe {
 				str2 += "\n";
 
 				System.out.println(str2);
+				}
 				break;
 			}
 			case 10: 
 			{
 				//calcul des distances
+				
+				Algorithme aDistance = new Algorithme();
+				aDistance.calcul_distance(this);
 				
 				break;
 			}
@@ -878,7 +914,7 @@ public  class Graphe {
 				ajouterArc(liste.get(i-1), liste.get(j-1), p);
 			}
 			else
-				ajouterArc(liste.get(i-1), liste.get(j-1), 5);
+				ajouterArc(liste.get(i-1), liste.get(j-1), 0);
 			afficher();
 		 break ;
 		}
@@ -913,6 +949,7 @@ public  class Graphe {
 		}
 		case 6:
 		{
+			//affichage graphique
 			new dessinGraphe(this);
 			break;
 		}

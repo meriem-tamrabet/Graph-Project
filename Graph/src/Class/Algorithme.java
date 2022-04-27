@@ -45,23 +45,24 @@ public  ArrayList<Integer> demi_degre_exterieur  (ArrayList<Integer> FS, ArrayLi
 	return dde ; 
 }
 
-ArrayList<Integer> descente_largeur       (int r, ArrayList<Integer> fs, ArrayList<Integer> aps)
+public int[] descente_largeur (int r, ArrayList<Integer> fs, ArrayList<Integer> aps)
 {
 	int n = aps.get(0);
 
 	int i = 0, j = 1, k = 0, ifin, s, t,it;
 
-	ArrayList<Integer> fil = new ArrayList<>(n+1);
-	fil.add(0,n);
-	fil.add(1,r);
+	int[] fil = new int[n+1];
+	fil[0] = n;
+	fil[1] = r;
 
-	ArrayList<Integer> dist = new ArrayList<>(n+1);
-
+	int[] dist = new int[n+1];
+	dist[0] = n;
+	
 	for(int h = 1;h <= n;h++){
-		dist.add(h, -1);
+		dist[h] = -1;
 	}
 
-	dist.set(r,0);
+	dist[r] = 0;
 
 	while(i < j){
 		k++;
@@ -69,22 +70,53 @@ ArrayList<Integer> descente_largeur       (int r, ArrayList<Integer> fs, ArrayLi
 
 		while(i < ifin){
 			i++;
-			s = fil.get(i);
+			s = fil[i];
 			it = aps.get(s);
 			t = fs.get(it);
 
 			while(t > 0){
-				if(dist.get(t) == -1){
+				if(dist[t] == -1){
 					j++;
-					fil.add(j,t);
-					dist.set(t,k);
+					fil[j] = t;
+					dist[t] = k;
 				}
 				t = fs.get(++it);
 			}
 		}
+		
 	}
+	
+	return dist;
+ 
+}
 
-	return dist ; 
+public void calcul_distance(Graphe g) {
+	int n = g.Aps_Get(0);
+	
+	int[][] Mat_dist = new int[n+1][n+1];
+	Mat_dist[0][0] = n;
+	
+	for(int i = 0;i < n;i++) {
+		for(int j = 0;j < n;j++) {
+			Mat_dist[i][j] = 0;
+		}
+	}
+	
+	for(int i = 1;i <= n;i++) {
+		Mat_dist[i] = descente_largeur(i,g.getFs(),g.getAps());
+	}
+	
+	String str = "";
+	str += "------------Matrice des distances-------------\n";
+	for(int a = 0;a < Mat_dist.length;a++){
+		str += "| ";
+		for(int b = 0;b < Mat_dist[a].length;b++){
+			str += Mat_dist[a][b] + "\t";
+		}
+		str += "|\n";
+	}
+	System.out.println(str);
+	
 }
 
 public void empiler(int x,ArrayList<Integer> pilch){
