@@ -33,9 +33,7 @@ public class MyWindow extends JFrame {
 	}
 	public MyWindow( Graphe G ) {
 		this.G = G ; 
-		
-		
-		// dans le cas ou je ferme la fenetre 
+
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setSize(new Dimension(800,800));
 		this.setLocationRelativeTo(null);
@@ -98,7 +96,6 @@ public class MyWindow extends JFrame {
 	      pane2.add(Y) ;
 	      
 	      pane2.add(Ajout_Sommet) ;
-	      // 3 eme 
 	      
 	      JButton Sup_Sommet  = new JButton("Suprimer sommet   ") ;
 	      JTextField Num =  new JTextField("Num") ; Num.setSize(10, 10);; 
@@ -113,7 +110,6 @@ public class MyWindow extends JFrame {
 	      }); 
 	      panel_Supp.add(Num) ;
 	      panel_Supp.add(Sup_Sommet) ;
-	      // 4eme 
 	      JTextField depart =  new JTextField("Depart") ; 
 	      depart.setSize(10, 10);
 	      JTextField arrivee =  new JTextField("Arrivee") ;
@@ -154,12 +150,10 @@ public class MyWindow extends JFrame {
 	      });
 	      panelA_Ajout.add(Sup_Arc) ; 
 	    
-	      //
 	      JButton Dessin  = new JButton("Dessin du graphe    ") ;
 	      Dessin.addActionListener(new ActionListener(){
 	          public void actionPerformed(ActionEvent e){
 	             new dessinGraphe(G) ; 
-	             // new Draw(G) ; 
 	          }
 	      });
 	      DefaultListModel<String> model = new DefaultListModel<>();
@@ -174,9 +168,7 @@ public class MyWindow extends JFrame {
 	        model.addElement("Demi degre exterieur");
 	        model.addElement("Calcul des distances");
 	 
-	        //creer la liste des langages
 	        JList<String> algo  = new JList<>(model);
-	      //Specifier la position et la taille du JPanel
 	        JButton charger  = new JButton("Charger  ") ;
 	        JButton Sauvgarder  = new JButton("Sauvgarder  ") ;
 	        Sauvgarder.addActionListener(new ActionListener(){
@@ -196,11 +188,8 @@ public class MyWindow extends JFrame {
 	      this.add(panel_Supp) ; 
 	      this.add(panelA_Ajout) ; 
 	      this.add(pane3) ; 
-	      
-	       this.add(pane4) ; 
-	      
-	   
-			
+	      this.add(pane4) ; 
+		
 }
 	 
 }

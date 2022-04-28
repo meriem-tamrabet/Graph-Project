@@ -31,7 +31,7 @@ public class main {
 			System.out.println("--------------------------------MENU---------------------------------------");
 		
 			System.out.println("1. cree un graphe ");
-			System.out.println("2. Exemple d'algorithme  ");
+			System.out.println("2. exemple d'algorithme  ");
 			System.out.println("3. application ");
 			System.out.println("4. sortir ");
 			
@@ -331,7 +331,7 @@ public class main {
 							System.out.println("Affichage du pref ");
 							for(int i = 0 ; i < pref.size() ; i++)
 								System.out.print(pref.get(i) +"| ");
-								//new dijkstra(gDikjstra) ; 
+						 
 							break;
 						}
 						case 6: 	
@@ -368,7 +368,7 @@ public class main {
 						case 7: 
 						{
 							//Tarjan 
-							System.out.println("ne fonctionne pas encore! veuillez patienter! ");
+							System.out.println("desole cet algorithme ne fonctionne pas...  ");
 							break;
 						}
 						case 8 : 
@@ -395,7 +395,7 @@ public class main {
 							ArrayList<Integer> ddi = addi.demi_degre_interieur(gDdi.getFs(), gDdi.getAps());
 
 							String str1 = new String();
-							str1 += "-----------Demi Degr� Int�rieur------------\n|";
+							str1 += "-----------Demi Degre Interieur------------\n|";
 							for(Integer i:ddi){
 								str1 += i + "|";
 							}
@@ -429,7 +429,7 @@ public class main {
 							ArrayList<Integer> dde = adde.demi_degre_exterieur(gDde.getFs(), gDde.getAps());
 
 							String str2 = new String();
-							str2 += "-----------Demi Degr� Ext�rieur-----------\n|";
+							str2 += "-----------Demi Degre Exterieur-----------\n|";
 							for(Integer i:dde){
 								str2 += i + "|";
 							}
@@ -442,6 +442,25 @@ public class main {
 						case 10: 
 						{
 							//Calcul de distance
+							
+							Graphe gdist = new Graphe(true,true);
+
+							System.out.println("---------Ajout de sommets ------------") ;
+							gdist.ajouterSommet(s);
+							gdist.ajouterSommet(t);
+							gdist.ajouterSommet(w);
+							gdist.ajouterSommet(k);
+						
+					
+							System.out.println("---------Ajout de arc  ------------") ;
+							gdist.ajouterArc(s, t, 1);
+							gdist.ajouterArc(s, k, 2 );
+							gdist.ajouterArc(t, w, 3);
+
+							gdist.afficher_fs_aps();
+
+							Algorithme distance = new Algorithme();
+							distance.calcul_distance(gdist);
 							
 							break;
 						}

@@ -22,13 +22,7 @@ public class dessinGraphe  extends JFrame{
     public void paint(Graphics g) {
     	BufferedImage result;
     	result = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);
-    	//Graphics2D g2d = (Graphics2D) result.createGraphics(); 
-    	Graphics2D g2d = (Graphics2D) g ; 
-    	/** Definit une epaisseur de 5 pixels */ 
-    	// g2d.setStroke(new BasicStroke( 5.0f ));
-    	
-    	//g2d.setFont(new Font("Serif",Font.PLAIN,12)); 
-    	
+    	Graphics2D g2d = (Graphics2D) g ;  
     	
         for(int i = 0 ; i < G.nombre_sommets_aps(); i++) {
         	Sommet s = G.getListeSommetElem(i)  ; 

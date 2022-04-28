@@ -91,7 +91,6 @@ public  class Graphe {
 		this.matrice[0][0] = n ; 
 
 		int val = 0  ; 
-	//TODO Ameliorer le remplisage 
 		if( n> 0 )
 			this.matrice[0][1] = 0 ;
 		
@@ -117,16 +116,12 @@ public  class Graphe {
 		
 		this.matrice_cout[0][0] = n ; 
 
-		
-	//TODO Ameliorer le remplisage 
 		if( n> 0 )
 			this.matrice_cout[0][1] = 0 ;
 		
 		for( int i = 2 ; i< taille_matrice ; i++ )
 			this.matrice_cout[0][i] = valeur_interdite ;
-		
-	
-		
+
 		for( int i = 1 ; i<taille_matrice ; i++ ) {
 			for(int j = 0 ; j<taille_matrice ; j++)
 			{ 
@@ -254,12 +249,8 @@ public  class Graphe {
 		matrice[0][1]  = miseAJourArc() ; 
 		matrice_cout[0][1] = matrice[0][1]  ; 
 		
-		//TODO mettre ajours si le graphe est orienter faut enlever de sommet t a sommets s 
-		
 		Matrice_to_fs_aps();
-		//TODO mettre a jours le nombre d'arc 
-	
-		//TODO METTRE A JOURS MATRICE COUT
+		
 	}
 
 	public boolean existeArc(Sommet s,Sommet t){
@@ -492,8 +483,8 @@ public  class Graphe {
 	  public String toString(){
 		  String Total = "Grphe " ; 
 		  if( est_oriente)
-			  Total += "Orienté" ; 
-		  else  Total += "Non Orienté" ; 
+			  Total += "Oriente" ; 
+		  else  Total += "Non Oriente" ; 
 		  if(avec_Poids)
 			  Total += " Contient des poids" ; 
 	        String str = "--------fs & aps ---------- \n";
@@ -601,7 +592,7 @@ public  class Graphe {
 		Scanner lectureClavier= new Scanner(System.in);
 		byte option = 0;
 		do {
-			System.out.println(" Choisissez un menu_algorithme a appliquer ? ");
+			System.out.println(" Choisissez un algorithme a appliquer ? ");
 			
 			System.out.println("1. Dantzig  ");
 			System.out.println("2. Dikjstra  ");
@@ -628,7 +619,7 @@ public  class Graphe {
 				
 				if(!avec_Poids && !est_oriente)
 				{
-					System.out.println("votre graphe n'est pas compatible avec cet menu_algorithme!");
+					System.out.println("votre graphe n'est pas compatible avec cet algorithme!");
 				}
 				else {
 					Algorithme aDantzig = new Algorithme();
@@ -642,7 +633,7 @@ public  class Graphe {
 				
 				if(!avec_Poids && !est_oriente)
 				{
-					System.out.println("votre graphe n'est pas compatible avec cet menu_algorithme!");
+					System.out.println("votre graphe n'est pas compatible avec cet algorithme!");
 				}
 				else {
 					
@@ -679,7 +670,7 @@ public  class Graphe {
 				//Prufer
 				if(est_oriente == true)
 				{
-					System.out.println("votre graphe n'est pas compatible avec cet menu_algorithme! ");
+					System.out.println("votre graphe n'est pas compatible avec cet algorithme! ");
 				}
 				else 
 				{
@@ -693,7 +684,7 @@ public  class Graphe {
 				//Rang
 				if(est_oriente == false)
 				{
-					System.out.println("votre graphe n'est pas compatible avec cet menu_algorithme! ");
+					System.out.println("votre graphe n'est pas compatible avec cet algorithme! ");
 				}
 				else 
 				{
@@ -718,7 +709,7 @@ public  class Graphe {
 			case 7:
 			{
 				//Tarjan
-				System.out.println("desole cet menu_algorithme ne fonctionne pas :(");
+				System.out.println("desole cet algorithme ne fonctionne pas :(");
 				break; 
 			}
 			case 8:
@@ -727,7 +718,7 @@ public  class Graphe {
 				
 				if(est_oriente == false)
 				{
-					System.out.println("votre graphe n'est pas compatible avec cet menu_algorithme! ");
+					System.out.println("votre graphe n'est pas compatible avec cet algorithme! ");
 				}
 				else
 				{	
@@ -738,7 +729,7 @@ public  class Graphe {
 				ArrayList<Integer> ddi = addi.demi_degre_interieur(getFs(), getAps());
 
 				String str1 = new String();
-				str1 += "-----------Demi Degr� Int�rieur------------\n|";
+				str1 += "-----------Demi Degre Interieur------------\n|";
 				for(Integer i:ddi){
 					str1 += i + "|";
 				}
@@ -752,7 +743,7 @@ public  class Graphe {
 				//Demi degre exterieur 
 				if(est_oriente == false)
 				{
-					System.out.println("votre graphe n'est pas compatible avec cet menu_algorithme! ");
+					System.out.println("votre graphe n'est pas compatible avec cet algorithme! ");
 				}
 				else
 				{
@@ -763,7 +754,7 @@ public  class Graphe {
 				ArrayList<Integer> dde = adde.demi_degre_exterieur(getFs(), getAps());
 
 				String str2 = new String();
-				str2 += "-----------Demi Degr� Ext�rieur-----------\n|";
+				str2 += "-----------Demi Degre Exterieur-----------\n|";
 				for(Integer i:dde){
 					str2 += i + "|";
 				}
@@ -801,7 +792,7 @@ public  class Graphe {
 		System.out.println("2. ajouter un arc  ");
 		System.out.println("3. supprimer un sommet    ");
 		System.out.println("4. supprimer un arc    ");
-		System.out.println("5. appliquer un menu_algorithme   ");
+		System.out.println("5. appliquer un algorithme   ");
 		System.out.println("6. affichage graphique  ");
 		System.out.println("7. sortir ");
 		System.out.println("-----------------------------------------------------------------------");
@@ -871,7 +862,7 @@ public  class Graphe {
 		}
 		case 5 : 
 		{
-			//menu_algorithme
+			//algorithme
 			
 			menu_algorithme();
 			break;

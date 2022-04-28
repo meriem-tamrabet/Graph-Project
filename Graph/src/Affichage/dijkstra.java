@@ -26,12 +26,8 @@ public class dijkstra  extends JFrame{
     public void paint(Graphics g) {
     	BufferedImage result;
     	result = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);
-    //	Graphics2D g2d = (Graphics2D) result.createGraphics(); 
     	Graphics2D g2d = (Graphics2D) g ; 
-    	/** Definit une epaisseur de 5 pixels */ 
-    	//g2d.setStroke(new BasicStroke( 5.0f ));
 
-    	//g2d.setFont(new Font("Serif",Font.PLAIN,12)); 
 		Algorithme A_Dikjstra = new Algorithme();
     	int n =G.getApsElem(0) ;
 		int m = G.getFsElem(0)-n  ;

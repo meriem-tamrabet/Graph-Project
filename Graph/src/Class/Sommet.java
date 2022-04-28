@@ -115,7 +115,7 @@ public Sommet getSommet() {
 //---------- Methodes  -----------------------
 
 	/**
-	 * @brief Surcharge de l'operateur equals vérifiant que deux sommets sont identiques
+	 * @brief Surcharge de l'operateur equals verifiant que deux sommets sont identiques
 	 * @param o Object
 	 * @return true si deux sommets sont identiques, false sinon 
 	 */

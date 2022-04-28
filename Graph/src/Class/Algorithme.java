@@ -12,70 +12,54 @@ public class Algorithme {
 	public  ArrayList<Integer> demi_degre_interieur   (ArrayList<Integer> FS, ArrayList<Integer> APS)
 	{
 		int n = APS.get(0);
-
 		ArrayList<Integer> ddi = new ArrayList<>(n+1);
-
 		ddi.add(0, n);
-
+		
 		for(int s = 1;s <= n;s++){
 			ddi.add(s, 0);
 		}
-
 		for(int k = 1;k < FS.get(0);k++){
 			if(FS.get(k) != 0){
 				ddi.set(FS.get(k),ddi.get(FS.get(k))+1); 
 			}
 		}
-
 		return ddi ; 
 	}
 
 	public  ArrayList<Integer> demi_degre_exterieur  (ArrayList<Integer> FS, ArrayList<Integer> APS)
 	{
 		int n = APS.get(0);
-
 		ArrayList<Integer> dde = new ArrayList<>(n+1);
-
 		dde.add(0, n);
-
 		for(int s = 1;s < n;s++){
 			dde.add(s, APS.get(s+1) - APS.get(s) - 1);
 		}
-
 		dde.add(n,FS.get(0)-APS.get(n));
-
 		return dde ; 
 	}
 
 	public int[] descente_largeur (int r, ArrayList<Integer> fs, ArrayList<Integer> aps)
 	{
 		int n = aps.get(0);
-
 		int i = 0, j = 1, k = 0, ifin, s, t,it;
-
 		int[] fil = new int[n+1];
 		fil[0] = n;
 		fil[1] = r;
-
 		int[] dist = new int[n+1];
 		dist[0] = n;
 		
 		for(int h = 1;h <= n;h++){
 			dist[h] = -1;
 		}
-
 		dist[r] = 0;
-
 		while(i < j){
 			k++;
 			ifin = j;
-
 			while(i < ifin){
 				i++;
 				s = fil[i];
 				it = aps.get(s);
 				t = fs.get(it);
-
 				while(t > 0){
 					if(dist[t] == -1){
 						j++;
@@ -84,10 +68,8 @@ public class Algorithme {
 					}
 					t = fs.get(++it);
 				}
-			}
-			
+			}	
 		}
-		
 		return dist;
 	
 	}
@@ -110,9 +92,9 @@ public class Algorithme {
 		
 		String str = "";
 		str += "------------Matrice des distances-------------\n";
-		for(int a = 0;a < Mat_dist.length;a++){
+		for(int a = 1;a < Mat_dist.length;a++){
 			str += "| ";
-			for(int b = 0;b < Mat_dist[a].length;b++){
+			for(int b = 1;b < Mat_dist[a].length;b++){
 				str += Mat_dist[a][b] + "\t";
 			}
 			str += "|\n";
@@ -141,17 +123,14 @@ public class Algorithme {
 			pilch.add(i,0);	
 		}
 		rang.add(0,n);
-
 		for(s = 1;s <= n;s++){
 			rang.add(s,-1);
 			if(ddi.get(s) == 0)
 				empiler(s,pilch);
 		}
-
 		k = -1;
 		s = pilch.get(0);
 		prem.add(0,s);
-
 		while(pilch.get(0) > 0){
 			k++;
 			pilch.set(0,0);
@@ -254,16 +233,12 @@ public class Algorithme {
 				predecesseur.add(s) ; 
 				inS.add(false) ; 
 				distance.add(G.getCout(s, i) ) ; 
-				
 			}
 			distance.set(s, 0) ; 
 			predecesseur.set(s, 0) ; 
 			inS.set(s, true) ;
 			ind = n -1 ; 
-			
-			
 			while(ind > 0) {
-			
 				m = MAXPOIDS;
 				for (i=1;i<=n;i++)
 					if (inS.get(i) == false ) 
@@ -272,8 +247,6 @@ public class Algorithme {
 						m = distance.get(i) ;
 						j = i;
 					}
-				
-				
 				if (m == MAXPOIDS) return;
 
 				inS.set(j , true) ;
@@ -289,19 +262,12 @@ public class Algorithme {
 
 						if (v < distance.get(fs_K))
 						{
-							
-							
 							distance.set(fs_K , v) ; 
 							predecesseur.set(fs_K, j) ; 
-						
 						}
 					}
 					k++;
-					
-				}
-				
-				
-				
+				}	
 				
 			}
 			System.out.print("\n distance : ");
@@ -372,8 +338,6 @@ public class Algorithme {
             }
         }
 
-		//Affichage
-
 		str = "";
 		str += "------------Dantzig : Matrice finale-------------\n";
 		for(int a = 0;a < c.length;a++){
@@ -396,7 +360,7 @@ public class Algorithme {
 			 int t;
 			p++;
 			 num.set(s, p); 
-			 ro.set(s, p);	 	 // numérote s et initialise ro[s]
+			 ro.set(s, p);	 	
 			 tarj.add(s);
 			 entarj.set(s, true);
 			 for (int r=g.getApsElem(s); (t=g.getFsElem(r)) != 0 ; r++)
@@ -405,11 +369,11 @@ public class Algorithme {
 			 	{ 	pred.set(t, s);
 			 		traverse(t,p,k, g, num, ro, entarj, tarj, pred, prem, pilch, cfc);
 			 		if (ro.get(t) < ro.get(s)) 
-			 			ro.set(s, ro.get(t)) ;	 	 	 // Z1
+			 			ro.set(s, ro.get(t)) ;	 	 	 
 			 	}
 			 	else
 			 	{ if ((num.get(t) < ro.get(s)) && entarj.get(t)) 
-			 		ro.set(s, num.get(t));// Z2
+			 		ro.set(s, num.get(t));
 			 	}
 			}
 
@@ -418,7 +382,7 @@ public class Algorithme {
 				k++;	
 				int last;
 				do
-				{	 	 	 	 	 	 	 	 	 // Z3
+				{	 	 	 	 	 	 	 	 	 
 					System.out.print("tarj : ");
 					System.out.print("|");
 					for(int i = 0;i < tarj.size();i++){
@@ -587,11 +551,11 @@ public class Algorithme {
 	}
 	public void edition_bases(ArrayList<Integer>prem, ArrayList<Integer>pilch, ArrayList<Integer>br)
 	{
-		int nb = br.get(0); // Nombre de CFC de l�unique base du graphe r�duit
-		ArrayList<Integer>Base = new ArrayList<Integer>(nb+1); // pile qui m�morise les sommets des bases du graphe initial
+		int nb = br.get(0);
+		ArrayList<Integer>Base = new ArrayList<Integer>(nb+1);
 		Base.set(0, nb);
 		int p = 1;
-		int som = prem.get(br.get(1)); // premier sommet de la premi�re CFC
+		int som = prem.get(br.get(1)); 
 		while (p >= 1)
 		{
 		 	 if ((p<= nb) && (som != 0))
@@ -601,8 +565,6 @@ public class Algorithme {
 		 	 	 if (p <= nb)
 		 	 	 	 som = prem.get(br.get(p));
 		 	 	 else
-					// Affiche le contenu du tableau Base contenant les
-		 	 	 	 	 	 //sommets d�une base du graphe initial
 		 	 	 {
 		 	 		String str = "";
 		 			str += "------------Tarjan : edition des bases-------------\n";
@@ -661,7 +623,6 @@ public class Algorithme {
 		}
 		fpc.set(0,kc);
 
-		//TODO faire affichage
 	}
 
 	public void fusionner(int i, int j, ArrayList<Integer> prem, ArrayList<Integer> pilch, ArrayList<Integer> cfc, ArrayList<Integer> nbElem){
@@ -682,17 +643,6 @@ public class Algorithme {
 		prem.set(i,j);
 		nbElem.add(i,j);
 	}
-
-	/*public void kruskal(Graphe g, Graphe t,ArrayList<Integer> prem, ArrayList<Integer> pilch, ArrayList<Integer> cfc, ArrayList<Integer> nbElem){
-		int n= g.nombre_sommets()-1;
-		int x,y;
-		int i=0,j =0;
-		t = new ArrayList<>(n-1);
-	}
-	
-	 */
-
-
 
 
 }

@@ -101,8 +101,6 @@ public class Point {
 		int ny = scan.nextInt();
 		this.setY(ny);
 	}
-	
-//TODO imprimer dans fichier
 
 	/**
 	 * @biref Affiche un point sur la sortie standard
@@ -119,7 +117,7 @@ public class Point {
 
 
 	/**
-	 * @brief Surcharge de la methode equals verifiant l'égalité de deux points
+	 * @brief Surcharge de la methode equals verifiant l'egalite de deux points
 	 * @param obj Object
 	 * @return true si deux points sont identiques, false sinon
 	 */

@@ -145,7 +145,7 @@ public class Arc {
 	}
 
 	/**
-	 * @brief Surcharge de l'operateur equals vérifiant que deux ars sont identiques
+	 * @brief Surcharge de l'operateur equals verifiant que deux ars sont identiques
 	 * @param obj Object
 	 * @return true si les arcs sont identiques, false sinon
 	 */
