@@ -244,13 +244,13 @@ public class main {
 
 							Graphe gDikjstra = new Graphe(avec_Poids,est_oriente);
 							// -------------- Sommet --------------
-							Sommet s1 = new Sommet("1",new Point(100, 400) , 1) ; //sommets 0 et marque 1
-							Sommet s2 = new Sommet("2" , new Point(400, 300) , 1) ;  //sommets 1 et marque 1
-							Sommet s3 = new Sommet("3", new Point(400, 600) , 1) ;  //sommets 2 et marque 1
-							Sommet s4 = new Sommet("4" , new Point(700, 400) , 1) ;  //sommets 2 et marque 1
-							Sommet s5 = new Sommet("5" , new Point(700, 100) , 1) ;  //sommets 2 et marque 1
-							Sommet s6 = new Sommet("6" , new Point(700, 700) , 1) ;  //sommets 2 et marque 1
-							Sommet s7 = new Sommet("7" , new Point(100, 700) , 1) ;  //sommets 2 et marque 1
+							Sommet s1 = new Sommet("Reims",new Point(100, 400) , 1) ; //sommets 0 et marque 1
+							Sommet s2 = new Sommet("Nice" , new Point(400, 300) , 1) ;  //sommets 1 et marque 1
+							Sommet s3 = new Sommet("Paris", new Point(400, 600) , 1) ;  //sommets 2 et marque 1
+							Sommet s4 = new Sommet("Brest" , new Point(700, 400) , 1) ;  //sommets 2 et marque 1
+							Sommet s5 = new Sommet("Tours" , new Point(700, 100) , 1) ;  //sommets 2 et marque 1
+							Sommet s6 = new Sommet("Lille" , new Point(700, 700) , 1) ;  //sommets 2 et marque 1
+							Sommet s7 = new Sommet("Lyon" , new Point(100, 700) , 1) ;  //sommets 2 et marque 1
 
 							System.out.println("---------Ajout de sommets ------------") ;
 							gDikjstra.ajouterSommet(s1);

@@ -35,7 +35,7 @@ public class dessinGraphe  extends JFrame{
         	int x = s.getPosition().getX(); 
         	int y = s.getPosition().getY() ;
         	g2d.setColor(Color.BLACK);
-        	g2d.drawOval(x-5, y-5, 30, 30);
+        	g2d.drawOval(x-5, y-10, 50, 50);
         	g2d.setColor(Color.RED); 
         	String str = s.getContenu() ; 
         	g2d.drawString(str, x+5, y+7);
