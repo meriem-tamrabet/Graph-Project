@@ -843,8 +843,8 @@ public  class Graphe {
 			//supprimer sommet
 			System.out.println("veuillez saisir le  sommet( pas de sommets 0 ) : ");
 			int i = lectureClavier.nextInt();
-			liste.remove(i-1) ; 
 			supprimerSommet(liste.get(i-1));
+			liste.remove(i-1) ; 
 			afficher_matrice();
 			break ; 
 		}
